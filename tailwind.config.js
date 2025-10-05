@@ -8,6 +8,7 @@ export default {
     extend: {
       colors: {
         netflixRed: '#E50914',
+        netflixRedBright: '#FF0000',
         netflixDark: '#141414',
         netflixGray: '#333333',
         netflixLightGray: '#666666',

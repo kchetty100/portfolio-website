@@ -1,24 +1,30 @@
 import React from 'react';
-import { FaReact, FaJs, FaNodeJs, FaJava, FaDocker, FaAws } from 'react-icons/fa';
-import { SiRubyonrails, SiPhp, SiSpring, SiKubernetes, SiNetlify, SiHeroku, SiGooglecloud } from 'react-icons/si';
+import { FaReact, FaJs, FaNodeJs, FaJava, FaDocker, FaAws, FaHtml5, FaCss3Alt, FaArrowLeft } from 'react-icons/fa';
+import { SiRubyonrails, SiPhp, SiSpring, SiKubernetes, SiNetlify, SiHeroku, SiGooglecloud, SiMysql, SiPostgresql, SiTypescript, SiDocker } from 'react-icons/si';
 
-const SkillsSimple = () => {
+const SkillsSimple = ({ onBack, onHome }) => {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Navigation Bar */}
-      <nav className="fixed top-0 w-full z-50 bg-black/95 backdrop-blur-sm border-b border-gray-800">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <span className="text-2xl font-bold text-white">KEEGAN</span>
-              <span className="text-2xl font-bold text-netflixRed">CHETTY</span>
+      <nav className="fixed top-0 w-full z-50 bg-black">
+        <div className="px-6 py-4">
+          <div className="flex items-center">
+            <div className="flex items-center mr-12">
+              <button 
+                onClick={onHome} 
+                className="text-3xl font-bold text-netflixRed tracking-tight font-netflix text-arc-effect hover:text-red-400 transition-colors cursor-pointer"
+              >
+                KEEGAN CHETTY
+              </button>
             </div>
-            <div className="hidden md:flex space-x-8">
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">Home</a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">Professional</a>
-              <a href="#" className="text-white font-medium">Skills</a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">Projects</a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">Hire Me</a>
+            <div className="flex space-x-8">
+              <button onClick={onBack} className="text-white font-bold text-lg hover:text-gray-300 transition-colors flex items-center space-x-2">
+                <FaArrowLeft />
+                <span>Back</span>
+              </button>
+              <a href="#" className="text-white font-bold text-lg">Skills</a>
+              <a href="#" className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</a>
+              <a href="#" className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Hire Me</a>
             </div>
           </div>
         </div>
@@ -28,15 +34,67 @@ const SkillsSimple = () => {
       <div className="pt-20 px-6 py-12">
         <div className="max-w-7xl mx-auto">
           
+          {/* Frontend Section */}
+          <div className="mb-16">
+            <div className="text-center mb-8">
+              <h2 className="text-4xl font-bold text-white relative inline-block">
+                Frontend
+                <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-netflixRed"></div>
+              </h2>
+            </div>
+            <div className="flex justify-center gap-6 flex-wrap">
+              {/* HTML&CSS */}
+              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 skill-card-hover group w-48">
+                <div className="flex flex-col items-center text-center">
+                  <div className="flex space-x-1 mb-3 group-hover:scale-110 transition-transform">
+                    <FaHtml5 className="text-netflixRed text-2xl" />
+                    <FaCss3Alt className="text-netflixRed text-2xl" />
+                  </div>
+                  <h3 className="text-white font-bold text-lg mb-1">HTML&CSS</h3>
+                  <p className="text-gray-400 text-sm">Web Markup and Styling</p>
+                </div>
+              </div>
+
+              {/* JavaScript */}
+              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 skill-card-hover group w-48">
+                <div className="flex flex-col items-center text-center">
+                  <FaJs className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-white font-bold text-lg mb-1">JavaScript</h3>
+                  <p className="text-gray-400 text-sm">Scripting Language</p>
+                </div>
+              </div>
+
+              {/* TypeScript */}
+              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 skill-card-hover group w-48">
+                <div className="flex flex-col items-center text-center">
+                  <SiTypescript className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-white font-bold text-lg mb-1">TypeScript</h3>
+                  <p className="text-gray-400 text-sm">Type-safe JavaScript</p>
+                </div>
+              </div>
+
+              {/* React */}
+              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 skill-card-hover group w-48">
+                <div className="flex flex-col items-center text-center">
+                  <FaReact className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-white font-bold text-lg mb-1">React</h3>
+                  <p className="text-gray-400 text-sm">Frontend Framework</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Backend Section */}
           <div className="mb-16">
-            <h2 className="text-4xl font-bold text-white mb-8 relative">
-              Backend
-              <div className="absolute bottom-0 left-0 w-24 h-1 bg-netflixRed"></div>
-            </h2>
+            <div className="text-center mb-8">
+              <h2 className="text-4xl font-bold text-white relative inline-block">
+                Backend
+                <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-netflixRed"></div>
+              </h2>
+            </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
               {/* Ruby on Rails */}
-              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-colors group">
+              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 skill-card-hover group">
                 <div className="flex flex-col items-center text-center">
                   <SiRubyonrails className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
                   <h3 className="text-white font-bold text-lg mb-1">Ruby on Rails</h3>
@@ -45,7 +103,7 @@ const SkillsSimple = () => {
               </div>
 
               {/* PHP */}
-              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-colors group">
+              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 skill-card-hover group">
                 <div className="flex flex-col items-center text-center">
                   <SiPhp className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
                   <h3 className="text-white font-bold text-lg mb-1">PHP</h3>
@@ -54,7 +112,7 @@ const SkillsSimple = () => {
               </div>
 
               {/* Java */}
-              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-colors group">
+              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 skill-card-hover group">
                 <div className="flex flex-col items-center text-center">
                   <FaJava className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
                   <h3 className="text-white font-bold text-lg mb-1">Java</h3>
@@ -63,7 +121,7 @@ const SkillsSimple = () => {
               </div>
 
               {/* SpringBoot */}
-              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-colors group">
+              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 skill-card-hover group">
                 <div className="flex flex-col items-center text-center">
                   <SiSpring className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
                   <h3 className="text-white font-bold text-lg mb-1">SpringBoot</h3>
@@ -72,7 +130,7 @@ const SkillsSimple = () => {
               </div>
 
               {/* Node.js */}
-              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-colors group">
+              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 skill-card-hover group">
                 <div className="flex flex-col items-center text-center">
                   <FaNodeJs className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
                   <h3 className="text-white font-bold text-lg mb-1">Node.js</h3>
@@ -84,13 +142,15 @@ const SkillsSimple = () => {
 
           {/* Cloud & DevOps Section */}
           <div className="mb-16">
-            <h2 className="text-4xl font-bold text-white mb-8 relative">
-              Cloud & DevOps
-              <div className="absolute bottom-0 left-0 w-32 h-1 bg-netflixRed"></div>
-            </h2>
+            <div className="text-center mb-8">
+              <h2 className="text-4xl font-bold text-white relative inline-block">
+                Cloud & DevOps
+                <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-netflixRed"></div>
+              </h2>
+            </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
               {/* CI/CD */}
-              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-colors group">
+              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 skill-card-hover group">
                 <div className="flex flex-col items-center text-center">
                   <div className="w-12 h-12 bg-netflixRed rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                     <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -103,7 +163,7 @@ const SkillsSimple = () => {
               </div>
 
               {/* Netlify */}
-              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-colors group">
+              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 skill-card-hover group">
                 <div className="flex flex-col items-center text-center">
                   <SiNetlify className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
                   <h3 className="text-white font-bold text-lg mb-1">Netlify</h3>
@@ -112,7 +172,7 @@ const SkillsSimple = () => {
               </div>
 
               {/* Heroku */}
-              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-colors group">
+              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 skill-card-hover group">
                 <div className="flex flex-col items-center text-center">
                   <SiHeroku className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
                   <h3 className="text-white font-bold text-lg mb-1">Heroku</h3>
@@ -121,7 +181,7 @@ const SkillsSimple = () => {
               </div>
 
               {/* Kubernetes */}
-              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-colors group">
+              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 skill-card-hover group">
                 <div className="flex flex-col items-center text-center">
                   <SiKubernetes className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
                   <h3 className="text-white font-bold text-lg mb-1">Kubernetes</h3>
@@ -130,7 +190,7 @@ const SkillsSimple = () => {
               </div>
 
               {/* Docker */}
-              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-colors group">
+              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 skill-card-hover group">
                 <div className="flex flex-col items-center text-center">
                   <FaDocker className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
                   <h3 className="text-white font-bold text-lg mb-1">Docker</h3>
@@ -139,7 +199,7 @@ const SkillsSimple = () => {
               </div>
 
               {/* GCP */}
-              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-colors group">
+              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 skill-card-hover group">
                 <div className="flex flex-col items-center text-center">
                   <SiGooglecloud className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
                   <h3 className="text-white font-bold text-lg mb-1">GCP</h3>
@@ -150,11 +210,74 @@ const SkillsSimple = () => {
 
             {/* AWS - positioned below CI/CD */}
             <div className="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-colors group">
+              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 skill-card-hover group">
                 <div className="flex flex-col items-center text-center">
                   <FaAws className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
                   <h3 className="text-white font-bold text-lg mb-1">AWS</h3>
                   <p className="text-gray-400 text-sm">Cloud Platform</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Databases Section */}
+          <div className="mb-16">
+            <div className="text-center mb-8">
+              <h2 className="text-4xl font-bold text-white relative inline-block">
+                Databases
+                <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-netflixRed"></div>
+              </h2>
+            </div>
+            <div className="flex justify-center gap-6">
+              {/* MySQL */}
+              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 skill-card-hover group w-48">
+                <div className="flex flex-col items-center text-center">
+                  <SiMysql className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-white font-bold text-lg mb-1">MySQL</h3>
+                  <p className="text-gray-400 text-sm">Relational Database</p>
+                </div>
+              </div>
+
+              {/* PostgreSQL */}
+              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 skill-card-hover group w-48">
+                <div className="flex flex-col items-center text-center">
+                  <SiPostgresql className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-white font-bold text-lg mb-1">PostgreSQL</h3>
+                  <p className="text-gray-400 text-sm">Relational Database</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          {/* Other Tools & Practices Section */}
+          <div className="mb-16">
+            <div className="text-center mb-8">
+              <h2 className="text-4xl font-bold text-white relative inline-block">
+                Other Tools & Practices
+                <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-netflixRed"></div>
+              </h2>
+            </div>
+            <div className="flex justify-center gap-6">
+              {/* Dockerization */}
+              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 skill-card-hover group w-48">
+                <div className="flex flex-col items-center text-center">
+                  <SiDocker className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-white font-bold text-lg mb-1">Dockerization</h3>
+                  <p className="text-gray-400 text-sm">Container Management</p>
+                </div>
+              </div>
+
+              {/* Agile */}
+              <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 skill-card-hover group w-48">
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-12 h-12 bg-netflixRed rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <h3 className="text-white font-bold text-lg mb-1">Agile</h3>
+                  <p className="text-gray-400 text-sm">Development Methodology</p>
                 </div>
               </div>
             </div>

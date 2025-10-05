@@ -1,11 +1,11 @@
 import React from 'react';
-import SkillsSimple from './pages/SkillsSimple';
+import LandingPage from './pages/LandingPage';
 import './index.css';
 
 function App() {
   return (
     <div className="App">
-      <SkillsSimple />
+      <LandingPage />
     </div>
   );
 }

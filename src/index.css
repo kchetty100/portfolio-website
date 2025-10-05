@@ -12,12 +12,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #E50914;
+  background: #666666;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #B20710;
+  background: #888888;
 }
 
 /* Smooth scrolling */
@@ -45,15 +45,26 @@ html {
 /* Netflix-inspired animations */
 @keyframes netflixGlow {
   0%, 100% {
-    box-shadow: 0 0 5px rgba(229, 9, 20, 0.3);
+    box-shadow: 0 0 8px rgba(255, 0, 0, 0.4), 0 0 16px rgba(255, 0, 0, 0.2);
   }
   50% {
-    box-shadow: 0 0 20px rgba(229, 9, 20, 0.6), 0 0 30px rgba(229, 9, 20, 0.4);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 0, 0, 0.4), 0 0 60px rgba(255, 0, 0, 0.2);
   }
 }
 
 .netflix-glow {
-  animation: netflixGlow 2s ease-in-out infinite;
+  animation: netflixGlow 1.5s ease-in-out infinite;
+}
+
+/* Enhanced hover effects for skill cards */
+.skill-card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skill-card-hover:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.6), 0 0 50px rgba(255, 0, 0, 0.3), 0 0 75px rgba(255, 0, 0, 0.1);
+  border: 1px solid rgba(255, 0, 0, 0.3);
 }
 
 /* Custom focus styles */
@@ -103,4 +114,31 @@ html {
 ::-moz-selection {
   background-color: #E50914;
   color: white;
+}
+
+/* Custom class for subtle text arc effect */
+.text-arc-effect {
+  display: inline-block;
+  transform: perspective(300px) rotateX(3deg) translateY(-2px);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Netflix-style profile hover effects */
+.profile-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.profile-hover:hover {
+  transform: scale(1.1);
+  box-shadow: 0 20px 40px rgba(229, 9, 20, 0.3);
+}
+
+/* Fluffy texture animation */
+@keyframes fluffy {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.fluffy-animation {
+  animation: fluffy 3s ease-in-out infinite;
 }
