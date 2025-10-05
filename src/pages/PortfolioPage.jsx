@@ -49,28 +49,23 @@ const PortfolioPage = ({ onBack }) => {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Navigation Bar */}
-      <nav className="fixed top-0 w-full z-50 bg-black/95 backdrop-blur-sm border-b border-gray-800">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-8">
+      <nav className="fixed top-0 w-full z-50 bg-black">
+        <div className="px-6 py-4">
+          <div className="flex items-center">
+            <div className="flex items-center mr-12">
               <button 
                 onClick={() => setCurrentView('home')} 
-                className="text-2xl font-bold text-netflixRed hover:text-red-400 transition-colors cursor-pointer"
+                className="text-3xl font-bold text-netflixRed tracking-tight font-netflix text-arc-effect hover:text-red-400 transition-colors cursor-pointer"
               >
                 KEEGAN CHETTY
               </button>
-              <div className="hidden md:flex space-x-6">
-                <button onClick={() => setCurrentView('portfolio')} className="text-gray-300 hover:text-white transition-colors">Home</button>
-                <button className="text-white font-medium">Professional</button>
-                <button onClick={() => setCurrentView('skills')} className="text-gray-300 hover:text-white transition-colors">Skills</button>
-                <button className="text-gray-300 hover:text-white transition-colors">Projects</button>
-                <button className="text-gray-300 hover:text-white transition-colors">Hire Me</button>
-              </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
-                <FaUser className="text-white text-sm" />
-              </div>
+            <div className="flex space-x-8">
+              <button onClick={onBack} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
+              <button className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Professional</button>
+              <button onClick={() => setCurrentView('skills')} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Skills</button>
+              <button className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</button>
+              <button className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Hire Me</button>
             </div>
           </div>
         </div>
