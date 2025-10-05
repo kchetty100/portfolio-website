@@ -4,6 +4,7 @@ import SkillsSimple from './SkillsSimple';
 
 const RecruiterPage = ({ onBack }) => {
   const [currentView, setCurrentView] = useState('recruiter');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const topPicks = [
     { title: 'Work Permit', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop', icon: <FaCertificate /> },
@@ -61,10 +62,51 @@ const RecruiterPage = ({ onBack }) => {
             </div>
             {/* Mobile menu button */}
             <div className="md:hidden">
-              <button className="text-white text-2xl">☰</button>
+              <button 
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="text-white text-2xl hover:text-gray-300 transition-colors"
+              >
+                {isMobileMenuOpen ? '✕' : '☰'}
+              </button>
             </div>
           </div>
         </div>
+        
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-black border-t border-gray-800">
+            <div className="px-4 py-4 space-y-4">
+              <button 
+                onClick={() => {
+                  onBack();
+                  setIsMobileMenuOpen(false);
+                }} 
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2"
+              >
+                Home
+              </button>
+              <button className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+                Professional
+              </button>
+              <button 
+                onClick={() => {
+                  setCurrentView('skills');
+                  window.scrollTo(0, 0);
+                  setIsMobileMenuOpen(false);
+                }} 
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2"
+              >
+                Skills
+              </button>
+              <button className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+                Projects
+              </button>
+              <button className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+                Hire Me
+              </button>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
