@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "category": "Frontend",
+    "technologyName": "React",
+    "icon": "react",
+    "proficiency": 95,
+    "description": "Advanced React development with hooks, context, and modern patterns"
+  },
+  {
+    "id": 2,
+    "category": "Frontend",
+    "technologyName": "JavaScript",
+    "icon": "javascript",
+    "proficiency": 90,
+    "description": "ES6+, async/await, modules, and modern JavaScript features"
+  },
+  {
+    "id": 3,
+    "category": "Frontend",
+    "technologyName": "TypeScript",
+    "icon": "typescript",
+    "proficiency": 85,
+    "description": "Type-safe development with interfaces, generics, and advanced types"
+  },
+  {
+    "id": 4,
+    "category": "Frontend",
+    "technologyName": "Next.js",
+    "icon": "nextjs",
+    "proficiency": 88,
+    "description": "Full-stack React framework with SSR, SSG, and API routes"
+  },
+  {
+    "id": 5,
+    "category": "Frontend",
+    "technologyName": "Vue.js",
+    "icon": "vue",
+    "proficiency": 80,
+    "description": "Progressive framework with composition API and Vuex"
+  },
+  {
+    "id": 6,
+    "category": "Frontend",
+    "technologyName": "Tailwind CSS",
+    "icon": "tailwind",
+    "proficiency": 92,
+    "description": "Utility-first CSS framework for rapid UI development"
+  },
+  {
+    "id": 7,
+    "category": "Backend",
+    "technologyName": "Node.js",
+    "icon": "nodejs",
+    "proficiency": 90,
+    "description": "Server-side JavaScript with Express and middleware"
+  },
+  {
+    "id": 8,
+    "category": "Backend",
+    "technologyName": "Python",
+    "icon": "python",
+    "proficiency": 85,
+    "description": "Django, Flask, and data science applications"
+  },
+  {
+    "id": 9,
+    "category": "Backend",
+    "technologyName": "Java Spring Boot",
+    "icon": "spring",
+    "proficiency": 82,
+    "description": "Enterprise Java applications with Spring ecosystem"
+  },
+  {
+    "id": 10,
+    "category": "Backend",
+    "technologyName": "Ruby on Rails",
+    "icon": "rails",
+    "proficiency": 78,
+    "description": "Rapid web application development with MVC architecture"
+  },
+  {
+    "id": 11,
+    "category": "Database",
+    "technologyName": "PostgreSQL",
+    "icon": "postgresql",
+    "proficiency": 88,
+    "description": "Advanced SQL queries, indexing, and database optimization"
+  },
+  {
+    "id": 12,
+    "category": "Database",
+    "technologyName": "MongoDB",
+    "icon": "mongodb",
+    "proficiency": 85,
+    "description": "NoSQL database with aggregation pipelines and sharding"
+  },
+  {
+    "id": 13,
+    "category": "Database",
+    "technologyName": "Redis",
+    "icon": "redis",
+    "proficiency": 80,
+    "description": "In-memory data structure store for caching and sessions"
+  },
+  {
+    "id": 14,
+    "category": "Cloud & DevOps",
+    "technologyName": "AWS",
+    "icon": "aws",
+    "proficiency": 90,
+    "description": "EC2, S3, Lambda, RDS, and cloud architecture design"
+  },
+  {
+    "id": 15,
+    "category": "Cloud & DevOps",
+    "technologyName": "Docker",
+    "icon": "docker",
+    "proficiency": 88,
+    "description": "Containerization and microservices architecture"
+  },
+  {
+    "id": 16,
+    "category": "Cloud & DevOps",
+    "technologyName": "Kubernetes",
+    "icon": "kubernetes",
+    "proficiency": 85,
+    "description": "Container orchestration and cluster management"
+  },
+  {
+    "id": 17,
+    "category": "Cloud & DevOps",
+    "technologyName": "Terraform",
+    "icon": "terraform",
+    "proficiency": 82,
+    "description": "Infrastructure as Code and cloud resource management"
+  },
+  {
+    "id": 18,
+    "category": "Cloud & DevOps",
+    "technologyName": "GitHub Actions",
+    "icon": "github",
+    "proficiency": 85,
+    "description": "CI/CD pipelines and automated deployment workflows"
+  },
+  {
+    "id": 19,
+    "category": "Tools & Others",
+    "technologyName": "Git",
+    "icon": "git",
+    "proficiency": 92,
+    "description": "Version control with advanced branching strategies"
+  },
+  {
+    "id": 20,
+    "category": "Tools & Others",
+    "technologyName": "Figma",
+    "icon": "figma",
+    "proficiency": 80,
+    "description": "UI/UX design and prototyping"
+  }
+]
