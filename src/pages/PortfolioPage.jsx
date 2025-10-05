@@ -26,6 +26,7 @@ const PortfolioPage = ({ onBack }) => {
   const handleTileClick = (title) => {
     if (title === 'Skills') {
       setCurrentView('skills');
+      window.scrollTo(0, 0);
     }
     // Add other navigation logic here for other tiles
   };
@@ -50,22 +51,29 @@ const PortfolioPage = ({ onBack }) => {
     <div className="min-h-screen bg-black text-white">
       {/* Navigation Bar */}
       <nav className="fixed top-0 w-full z-50 bg-black">
-        <div className="px-6 py-4">
-          <div className="flex items-center">
-            <div className="flex items-center mr-12">
+        <div className="px-4 sm:px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
               <button 
                 onClick={() => setCurrentView('home')} 
-                className="text-3xl font-bold text-netflixRed tracking-tight font-netflix text-arc-effect hover:text-red-400 transition-colors cursor-pointer"
+                className="text-xl sm:text-3xl font-bold text-netflixRed tracking-tight font-netflix text-arc-effect hover:text-red-400 transition-colors cursor-pointer"
               >
                 KEEGAN CHETTY
               </button>
             </div>
-            <div className="flex space-x-8">
+            <div className="hidden md:flex space-x-6 lg:space-x-8">
               <button onClick={onBack} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
               <button className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Professional</button>
-              <button onClick={() => setCurrentView('skills')} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Skills</button>
+              <button onClick={() => {
+                setCurrentView('skills');
+                window.scrollTo(0, 0);
+              }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Skills</button>
               <button className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</button>
               <button className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Hire Me</button>
+            </div>
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <button className="text-white text-2xl">☰</button>
             </div>
           </div>
         </div>
@@ -75,13 +83,13 @@ const PortfolioPage = ({ onBack }) => {
       <section className="relative pt-20 pb-16">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-purple-900/20 to-pink-900/20"></div>
         <div className="absolute inset-0 bg-black/40"></div>
-        <div className="relative max-w-7xl mx-auto px-6 py-20">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
           <div className="text-center">
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-8">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 sm:mb-8">
               KEEGAN CHETTY - SENIOR FULL STACK DEVELOPER
             </h1>
-            <div className="max-w-4xl mx-auto mb-12">
-              <p className="text-xl text-gray-200 leading-relaxed">
+            <div className="max-w-4xl mx-auto mb-8 sm:mb-12">
+              <p className="text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed">
                 Dynamic and results-driven Senior Software Engineer with 5+ years in full-stack development 
                 across high-impact, large-scale applications. Expertise in React, Node.js, Python, AWS, 
                 Kubernetes, and Docker. Achieved serving 10,000+ users and managing 50 million+ bookings, 
@@ -90,14 +98,14 @@ const PortfolioPage = ({ onBack }) => {
                 engine into a high-speed microservices architecture, reducing report generation from 5 minutes to 5 seconds.
               </p>
             </div>
-            <div className="flex justify-center space-x-6">
-              <button className="bg-black text-white px-8 py-4 rounded-lg flex items-center space-x-3 hover:bg-gray-800 transition-colors border border-gray-600">
+            <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
+              <button className="bg-black text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 hover:bg-gray-800 transition-colors border border-gray-600">
                 <FaPlay className="text-white" />
-                <span>Resume</span>
+                <span className="text-sm sm:text-base">Resume</span>
               </button>
-              <button className="bg-black text-white px-8 py-4 rounded-lg flex items-center space-x-3 hover:bg-gray-800 transition-colors border border-gray-600">
+              <button className="bg-black text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 hover:bg-gray-800 transition-colors border border-gray-600">
                 <FaLinkedin className="text-white" />
-                <span>LinkedIn</span>
+                <span className="text-sm sm:text-base">LinkedIn</span>
               </button>
             </div>
           </div>
@@ -105,17 +113,17 @@ const PortfolioPage = ({ onBack }) => {
       </section>
 
       {/* Today's Top Picks Section */}
-      <section className="px-6 py-12">
+      <section className="px-4 sm:px-6 py-8 sm:py-12">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-2xl font-bold text-white mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
             Today's Top Picks for developer
           </h2>
-          <div className="flex space-x-4 overflow-x-auto pb-4">
+          <div className="flex space-x-3 sm:space-x-4 overflow-x-auto pb-4">
             {topPicks.map((item, index) => (
               <div
                 key={index}
                 onClick={() => handleTileClick(item.title)}
-                className="flex-shrink-0 w-64 h-36 rounded-lg overflow-hidden cursor-pointer group hover:scale-105 transition-transform duration-300"
+                className="flex-shrink-0 w-48 sm:w-64 h-28 sm:h-36 rounded-lg overflow-hidden cursor-pointer group hover:scale-105 transition-transform duration-300"
               >
                 <div className="relative w-full h-full">
                   <img
@@ -148,7 +156,7 @@ const PortfolioPage = ({ onBack }) => {
               <div
                 key={index}
                 onClick={() => handleTileClick(item.title)}
-                className="flex-shrink-0 w-64 h-36 rounded-lg overflow-hidden cursor-pointer group hover:scale-105 transition-transform duration-300"
+                className="flex-shrink-0 w-48 sm:w-64 h-28 sm:h-36 rounded-lg overflow-hidden cursor-pointer group hover:scale-105 transition-transform duration-300"
               >
                 <div className="relative w-full h-full">
                   <img

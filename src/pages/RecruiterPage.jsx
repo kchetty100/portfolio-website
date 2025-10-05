@@ -25,6 +25,7 @@ const RecruiterPage = ({ onBack }) => {
   const handleTileClick = (title) => {
     if (title === 'Skills') {
       setCurrentView('skills');
+      window.scrollTo(0, 0);
     }
     // Add other navigation logic here for other tiles
   };
@@ -38,22 +39,29 @@ const RecruiterPage = ({ onBack }) => {
     <div className="min-h-screen bg-black text-white">
       {/* Navigation Bar */}
       <nav className="fixed top-0 w-full z-50 bg-black">
-        <div className="px-6 py-4">
-          <div className="flex items-center">
-            <div className="flex items-center mr-12">
+        <div className="px-4 sm:px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
               <button 
                 onClick={onBack} 
-                className="text-3xl font-bold text-netflixRed tracking-tight font-netflix text-arc-effect hover:text-red-400 transition-colors cursor-pointer"
+                className="text-xl sm:text-3xl font-bold text-netflixRed tracking-tight font-netflix text-arc-effect hover:text-red-400 transition-colors cursor-pointer"
               >
                 KEEGAN CHETTY
               </button>
             </div>
-            <div className="flex space-x-8">
+            <div className="hidden md:flex space-x-6 lg:space-x-8">
               <button onClick={onBack} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
               <button className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Professional</button>
-              <button onClick={() => setCurrentView('skills')} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Skills</button>
+              <button onClick={() => {
+                setCurrentView('skills');
+                window.scrollTo(0, 0);
+              }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Skills</button>
               <button className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</button>
               <button className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Hire Me</button>
+            </div>
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <button className="text-white text-2xl">☰</button>
             </div>
           </div>
         </div>
@@ -70,34 +78,34 @@ const RecruiterPage = ({ onBack }) => {
         ></div>
         <div className="absolute inset-0 bg-black/50"></div>
         
-        <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-6xl md:text-7xl font-bold text-white mb-6">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 text-center">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6">
             Keegan Chetty - Senior Full Stack Developer
           </h1>
-          <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed">
             Experienced full-stack developer with expertise in React, Node.js, Python, and cloud technologies. 
             Successfully delivered scalable applications serving thousands of users, implemented robust security measures, 
             and transformed legacy systems into modern, efficient solutions. Passionate about creating innovative 
             solutions and optimizing system performance for maximum impact.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-black/80 hover:bg-black text-white px-8 py-4 rounded-lg flex items-center justify-center space-x-3 transition-all duration-300 hover:scale-105">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+            <button className="bg-black/80 hover:bg-black text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 transition-all duration-300 hover:scale-105">
               <FaPlay className="text-white" />
-              <span className="text-lg font-semibold">Resume</span>
+              <span className="text-base sm:text-lg font-semibold">Resume</span>
             </button>
-            <button className="bg-black/80 hover:bg-black text-white px-8 py-4 rounded-lg flex items-center justify-center space-x-3 transition-all duration-300 hover:scale-105">
+            <button className="bg-black/80 hover:bg-black text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 transition-all duration-300 hover:scale-105">
               <FaLinkedin className="text-white" />
-              <span className="text-lg font-semibold">LinkedIn</span>
+              <span className="text-base sm:text-lg font-semibold">LinkedIn</span>
             </button>
           </div>
         </div>
       </div>
 
       {/* Today's Top Picks for Recruiter */}
-      <div className="py-16 px-6">
+      <div className="py-8 sm:py-16 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-white mb-8">Today's Top Picks for recruiter</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-6 sm:mb-8">Today's Top Picks for recruiter</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 sm:gap-4">
             {topPicks.map((item, index) => (
               <div
                 key={index}
@@ -122,10 +130,10 @@ const RecruiterPage = ({ onBack }) => {
       </div>
 
       {/* Continue Watching for Recruiter */}
-      <div className="py-16 px-6">
+      <div className="py-8 sm:py-16 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-white mb-8">Continue Watching for recruiter</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-6 sm:mb-8">Continue Watching for recruiter</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
             {continueWatching.map((item, index) => (
               <div
                 key={index}

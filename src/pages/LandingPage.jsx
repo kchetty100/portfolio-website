@@ -55,12 +55,12 @@ const LandingPage = () => {
     <div className="min-h-screen bg-black flex items-center justify-center">
       <div className="text-center">
         {/* Title */}
-        <h1 className="text-6xl font-bold text-white mb-16 font-netflix">
+        <h1 className="text-4xl sm:text-6xl font-bold text-white mb-8 sm:mb-16 font-netflix px-4">
           Who's Watching?
         </h1>
 
         {/* Profile Selection */}
-        <div className="flex justify-center gap-8 mb-8">
+        <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8 mb-8 px-4">
           {profiles.map((profile) => (
             <div
               key={profile.id}
@@ -69,7 +69,7 @@ const LandingPage = () => {
             >
               {/* Profile Icon */}
               <div className={`
-                w-32 h-32 rounded-lg ${profile.color} 
+                w-24 h-24 sm:w-32 sm:h-32 rounded-lg ${profile.color} 
                 flex items-center justify-center mb-4
                 group-hover:scale-110 transition-transform duration-300
                 group-hover:shadow-2xl group-hover:shadow-red-500/20
@@ -96,7 +96,7 @@ const LandingPage = () => {
               </div>
 
               {/* Profile Name */}
-              <span className="text-white text-xl font-medium group-hover:text-netflixRed transition-colors duration-300">
+              <span className="text-white text-lg sm:text-xl font-medium group-hover:text-netflixRed transition-colors duration-300">
                 {profile.name}
               </span>
             </div>
@@ -104,12 +104,12 @@ const LandingPage = () => {
         </div>
 
         {/* Description */}
-        <div className="text-gray-400 text-lg max-w-2xl mx-auto">
+        <div className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto px-4">
           Select a profile to explore different aspects of my professional journey
         </div>
 
         {/* Navigation hint */}
-        <div className="mt-8 text-gray-500 text-sm">
+        <div className="mt-6 sm:mt-8 text-gray-500 text-sm px-4">
           Click on any profile to continue
         </div>
       </div>
