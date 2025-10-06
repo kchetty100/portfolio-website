@@ -113,24 +113,31 @@ const RecruiterPage = ({ onBack }) => {
       <div className="relative pt-20 min-h-screen flex items-center">
         {/* Video Background */}
         <video
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover z-0"
           autoPlay
           loop
           muted
           playsInline
+          preload="auto"
+          onLoadStart={() => console.log('Video loading started')}
+          onCanPlay={() => console.log('Video can play')}
+          onPlay={() => console.log('Video started playing')}
           onError={(e) => {
-            console.log('Video failed to load, falling back to image background');
+            console.log('Video failed to load:', e.target.error);
+            console.log('Video src:', e.target.src);
             e.target.style.display = 'none';
           }}
+          style={{ zIndex: 0 }}
         >
           <source src="/Dwight Gets the Steam - The Office.mp4" type="video/mp4" />
         </video>
         {/* Fallback Image Background */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
           style={{
             backgroundImage: 'url("https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&h=1080&fit=crop")',
-            filter: 'blur(2px)'
+            filter: 'blur(2px)',
+            zIndex: -1
           }}
         ></div>
         <div className="absolute inset-0 bg-black/50"></div>
