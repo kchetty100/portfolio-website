@@ -118,9 +118,21 @@ const RecruiterPage = ({ onBack }) => {
           loop
           muted
           playsInline
+          onError={(e) => {
+            console.log('Video failed to load, falling back to image background');
+            e.target.style.display = 'none';
+          }}
         >
           <source src="/Dwight Gets the Steam - The Office.mp4" type="video/mp4" />
         </video>
+        {/* Fallback Image Background */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: 'url("https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&h=1080&fit=crop")',
+            filter: 'blur(2px)'
+          }}
+        ></div>
         <div className="absolute inset-0 bg-black/50"></div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 text-center">
