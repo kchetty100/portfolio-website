@@ -111,13 +111,16 @@ const RecruiterPage = ({ onBack }) => {
 
       {/* Hero Section */}
       <div className="relative pt-20 min-h-screen flex items-center">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: 'url("https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&h=1080&fit=crop")',
-            filter: 'blur(2px)'
-          }}
-        ></div>
+        {/* Video Background */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          loop
+          muted
+          playsInline
+        >
+          <source src="/Dwight Gets the Steam - The Office.mp4" type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-black/50"></div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 text-center">
