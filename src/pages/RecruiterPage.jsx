@@ -6,6 +6,7 @@ import GamesPage from './GamesPage';
 import SkillsSimple from './SkillsSimple';
 import BooksPage from './BooksPage';
 import ContactPage from './ContactPage';
+import MusicPage from './MusicPage';
 
 const RecruiterPage = ({ onBack }) => {
   const [currentView, setCurrentView] = useState('recruiter');
@@ -58,6 +59,11 @@ const RecruiterPage = ({ onBack }) => {
       window.scrollTo(0, 0);
       return;
     }
+    if (title === 'Music') {
+      setCurrentView('music');
+      window.scrollTo(0, 0);
+      return;
+    }
   };
 
   // If skills view is selected, show skills page
@@ -83,6 +89,10 @@ const RecruiterPage = ({ onBack }) => {
 
   if (currentView === 'games') {
     return <GamesPage onBack={() => setCurrentView('recruiter')} onHome={() => setCurrentView('home')} />;
+  }
+
+  if (currentView === 'music') {
+    return <MusicPage onBack={() => setCurrentView('recruiter')} onHome={() => setCurrentView('home')} />;
   }
 
   return (

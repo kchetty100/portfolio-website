@@ -6,6 +6,7 @@ import ExperiencePage from './ExperiencePage';
 import ProjectsPage from './ProjectsPage';
 import GamesPage from './GamesPage';
 import ContactPage from './ContactPage';
+import MusicPage from './MusicPage';
 
 const PortfolioPage = ({ onBack }) => {
   const [currentView, setCurrentView] = useState('portfolio');
@@ -52,6 +53,11 @@ const PortfolioPage = ({ onBack }) => {
       window.scrollTo(0, 0);
       return;
     }
+    if (title === 'Music') {
+      setCurrentView('music');
+      window.scrollTo(0, 0);
+      return;
+    }
   };
 
   // If home view is selected, go back to landing page
@@ -94,6 +100,13 @@ const PortfolioPage = ({ onBack }) => {
 
   if (currentView === 'games') {
     return <GamesPage 
+      onBack={() => setCurrentView('portfolio')} 
+      onHome={() => setCurrentView('home')} 
+    />;
+  }
+
+  if (currentView === 'music') {
+    return <MusicPage 
       onBack={() => setCurrentView('portfolio')} 
       onHome={() => setCurrentView('home')} 
     />;
