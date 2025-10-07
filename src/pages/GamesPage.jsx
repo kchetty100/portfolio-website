@@ -4,6 +4,7 @@ const GamesPage = ({ onBack, onHome }) => {
   const canvasRef = useRef(null);
   const [selectedGame, setSelectedGame] = useState(null); // 'pacman'
   const [isRunning, setIsRunning] = useState(false);
+  const [gameMessage, setGameMessage] = useState(null);
 
   useEffect(() => {
     if (selectedGame !== 'pacman' || !isRunning) {
@@ -45,6 +46,9 @@ const GamesPage = ({ onBack, onHome }) => {
     };
     generateDots();
 
+    // Reset win/lose banner
+    setGameMessage(null);
+
     // Pacman state
     let pacX = Math.floor(cols() / 2) * cellSize + cellSize / 2;
     let pacY = Math.floor(rows() / 2) * cellSize + cellSize / 2;
@@ -53,6 +57,15 @@ const GamesPage = ({ onBack, onHome }) => {
     const speed = 3;
     let mouthAngle = 0;
     let mouthDelta = 0.12;
+
+    // Enemies (ghosts)
+    const enemyCount = 3;
+    const enemySpeed = 1.8;
+    const enemies = Array.from({ length: enemyCount }).map((_, i) => ({
+      x: (1 + i) * cellSize * 2 + cellSize,
+      y: (1 + i) * cellSize * 2 + cellSize,
+      color: ['#FF4D4D', '#FF6A00', '#00E5FF'][i % 3]
+    }));
 
     const keyHandler = (e) => {
       if (e.key === 'ArrowLeft') { vx = -speed; vy = 0; }
@@ -89,6 +102,13 @@ const GamesPage = ({ onBack, onHome }) => {
       const key = `${c},${r}`;
       if (dots.has(key)) dots.delete(key);
 
+      // Check win condition
+      if (dots.size === 0) {
+        setGameMessage('You won!');
+        setIsRunning(false);
+        return;
+      }
+
       // Render
       ctx.fillStyle = '#000';
       ctx.fillRect(0, 0, width(), height());
@@ -119,6 +139,32 @@ const GamesPage = ({ onBack, onHome }) => {
       );
       ctx.closePath();
       ctx.fill();
+
+      // Enemies logic
+      enemies.forEach((g) => {
+        // Vector towards Pacman
+        let dx = pacX - g.x;
+        let dy = pacY - g.y;
+        const len = Math.hypot(dx, dy) || 1;
+        dx = (dx / len) * enemySpeed;
+        dy = (dy / len) * enemySpeed;
+        g.x += dx; g.y += dy;
+        // wrap
+        if (g.x < 0) g.x = width(); if (g.x > width()) g.x = 0;
+        if (g.y < 0) g.y = height(); if (g.y > height()) g.y = 0;
+
+        // Draw ghost
+        ctx.fillStyle = g.color;
+        ctx.beginPath();
+        ctx.arc(g.x, g.y, 10, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Collision with pacman
+        if (Math.hypot(pacX - g.x, pacY - g.y) < 18) {
+          setGameMessage('Game Over');
+          setIsRunning(false);
+        }
+      });
 
       rafId = requestAnimationFrame(draw);
     };
@@ -179,7 +225,10 @@ const GamesPage = ({ onBack, onHome }) => {
         {selectedGame === 'pacman' && (
           <div className="mt-6">
             {!isRunning && (
-              <button onClick={() => setIsRunning(true)} className="mb-4 bg-netflixRed text-white font-semibold px-5 py-2 rounded hover:bg-red-700 transition-colors">Start Game</button>
+              <div className="mb-4 flex items-center gap-3">
+                <button onClick={() => setIsRunning(true)} className="bg-netflixRed text-white font-semibold px-5 py-2 rounded hover:bg-red-700 transition-colors">Start Game</button>
+                {gameMessage && <span className="text-white/90">{gameMessage}</span>}
+              </div>
             )}
             {isRunning && (
               <div className="mb-4 flex gap-3">
