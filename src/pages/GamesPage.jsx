@@ -6,23 +6,43 @@ const GamesPage = ({ onBack, onHome }) => {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    const width = canvas.width;
-    const height = canvas.height;
+
+    // Responsive canvas sizing
+    const resize = () => {
+      const dpr = Math.max(window.devicePixelRatio || 1, 1);
+      const maxWidth = Math.min(window.innerWidth - 32, 720);
+      const aspect = 12 / 7; // approximate (720x420)
+      const cssWidth = Math.max(240, maxWidth);
+      const cssHeight = Math.round(cssWidth / aspect);
+      canvas.style.width = cssWidth + 'px';
+      canvas.style.height = cssHeight + 'px';
+      canvas.width = Math.floor(cssWidth * dpr);
+      canvas.height = Math.floor(cssHeight * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resize();
+    window.addEventListener('resize', resize);
+    const width = () => canvas.width / (Math.max(window.devicePixelRatio || 1, 1));
+    const height = () => canvas.height / (Math.max(window.devicePixelRatio || 1, 1));
 
     // Simple grid of dots
     const cellSize = 24;
-    const cols = Math.floor(width / cellSize);
-    const rows = Math.floor(height / cellSize);
+    const cols = () => Math.floor(width() / cellSize);
+    const rows = () => Math.floor(height() / cellSize);
     const dots = new Set();
-    for (let r = 1; r < rows - 1; r++) {
-      for (let c = 1; c < cols - 1; c++) {
-        dots.add(`${c},${r}`);
+    const generateDots = () => {
+      dots.clear();
+      for (let r = 1; r < rows() - 1; r++) {
+        for (let c = 1; c < cols() - 1; c++) {
+          dots.add(`${c},${r}`);
+        }
       }
-    }
+    };
+    generateDots();
 
     // Pacman state
-    let pacX = Math.floor(cols / 2) * cellSize + cellSize / 2;
-    let pacY = Math.floor(rows / 2) * cellSize + cellSize / 2;
+    let pacX = Math.floor(cols() / 2) * cellSize + cellSize / 2;
+    let pacY = Math.floor(rows() / 2) * cellSize + cellSize / 2;
     let vx = 0;
     let vy = 0;
     const speed = 3;
@@ -37,13 +57,23 @@ const GamesPage = ({ onBack, onHome }) => {
     };
     window.addEventListener('keydown', keyHandler);
 
+    // On-screen controls
+    const setDirection = (dir) => {
+      if (dir === 'left') { vx = -speed; vy = 0; }
+      if (dir === 'right') { vx = speed; vy = 0; }
+      if (dir === 'up') { vy = -speed; vx = 0; }
+      if (dir === 'down') { vy = speed; vx = 0; }
+    };
+    // expose for buttons
+    canvas.__setDirection = setDirection;
+
     let rafId;
     const draw = () => {
       // Update
       pacX += vx; pacY += vy;
       // wrap around
-      if (pacX < 0) pacX = width; if (pacX > width) pacX = 0;
-      if (pacY < 0) pacY = height; if (pacY > height) pacY = 0;
+      if (pacX < 0) pacX = width(); if (pacX > width()) pacX = 0;
+      if (pacY < 0) pacY = height(); if (pacY > height()) pacY = 0;
 
       mouthAngle += mouthDelta;
       if (mouthAngle > 0.6 || mouthAngle < 0.05) mouthDelta *= -1;
@@ -56,7 +86,7 @@ const GamesPage = ({ onBack, onHome }) => {
 
       // Render
       ctx.fillStyle = '#000';
-      ctx.fillRect(0, 0, width, height);
+      ctx.fillRect(0, 0, width(), height());
 
       // Dots
       ctx.fillStyle = '#bbb';
@@ -92,6 +122,7 @@ const GamesPage = ({ onBack, onHome }) => {
     return () => {
       window.removeEventListener('keydown', keyHandler);
       cancelAnimationFrame(rafId);
+      window.removeEventListener('resize', resize);
     };
   }, []);
 
@@ -119,8 +150,17 @@ const GamesPage = ({ onBack, onHome }) => {
       <div className="pt-20 px-4 sm:px-6 py-6">
         <h1 className="text-2xl sm:text-3xl font-bold mb-4">Games - Pacman</h1>
         <div className="bg-gray-900 rounded-lg p-4 inline-block border border-gray-700">
-          <canvas ref={canvasRef} width={720} height={420} className="block" />
-          <div className="text-gray-400 text-sm mt-2">Use arrow keys to move</div>
+          <canvas ref={canvasRef} width={720} height={420} className="block w-full h-auto" />
+          <div className="text-gray-400 text-sm mt-2">Use arrow keys or on-screen controls</div>
+          {/* On-screen controls for mobile */}
+          <div className="mt-4 grid grid-cols-3 gap-3 w-full max-w-xs mx-auto select-none">
+            <div></div>
+            <button onClick={() => canvasRef.current.__setDirection('up')} className="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 rounded">▲</button>
+            <div></div>
+            <button onClick={() => canvasRef.current.__setDirection('left')} className="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 rounded">◀</button>
+            <button onClick={() => canvasRef.current.__setDirection('down')} className="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 rounded">▼</button>
+            <button onClick={() => canvasRef.current.__setDirection('right')} className="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 rounded">▶</button>
+          </div>
         </div>
       </div>
     </div>
