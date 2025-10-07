@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaPlay, FaLinkedin, FaUser, FaCode, FaProjectDiagram, FaCertificate, FaBriefcase, FaThumbsUp, FaEnvelope, FaMusic, FaBook, FaBlog, FaPhone } from 'react-icons/fa';
 import SkillsSimple from './SkillsSimple';
 import LandingPage from './LandingPage';
+import ExperiencePage from './ExperiencePage';
 import ProjectsPage from './ProjectsPage';
 
 const PortfolioPage = ({ onBack }) => {
@@ -61,6 +62,13 @@ const PortfolioPage = ({ onBack }) => {
     />;
   }
 
+  if (currentView === 'experience') {
+    return <ExperiencePage 
+      onBack={() => setCurrentView('portfolio')} 
+      onHome={() => setCurrentView('home')} 
+    />;
+  }
+
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Navigation Bar */}
@@ -77,7 +85,7 @@ const PortfolioPage = ({ onBack }) => {
             </div>
             <div className="hidden md:flex space-x-6 lg:space-x-8">
               <button onClick={onBack} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
-              <button className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Professional</button>
+              <button onClick={() => { setCurrentView('experience'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Professional</button>
               <button onClick={() => {
                 setCurrentView('skills');
                 window.scrollTo(0, 0);
@@ -111,7 +119,9 @@ const PortfolioPage = ({ onBack }) => {
               >
                 Home
               </button>
-              <button className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+              <button 
+                onClick={() => { setCurrentView('experience'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
                 Professional
               </button>
               <button 
