@@ -3,6 +3,7 @@ import { FaCode, FaUserTie, FaEye, FaRocket } from 'react-icons/fa';
 import PortfolioPage from './PortfolioPage';
 import RecruiterPage from './RecruiterPage';
 import StalkerPage from './StalkerPage';
+import AdventurerPage from './AdventurerPage';
 
 const LandingPage = () => {
   const [selectedProfile, setSelectedProfile] = useState(null);
@@ -55,6 +56,11 @@ const LandingPage = () => {
   // If stalker profile is selected, show stalker page
   if (selectedProfile === 'stalker') {
     return <StalkerPage onBack={() => setSelectedProfile(null)} />;
+  }
+
+  // If adventurer profile is selected, show adventurer page
+  if (selectedProfile === 'adventurer') {
+    return <AdventurerPage onBack={() => setSelectedProfile(null)} />;
   }
 
   return (
