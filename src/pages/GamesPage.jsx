@@ -417,12 +417,42 @@ const GamesPage = ({ onBack, onHome }) => {
         )}
       </nav>
 
-      <div className="pt-20 px-4 sm:px-6 py-6">
-        <h1 className="text-2xl sm:text-3xl font-bold mb-4">Games</h1>
-        <blockquote className="text-lg sm:text-xl text-gray-300 italic mb-6 max-w-4xl">
-          "We don't stop playing because we grow old;<br />
-          ... we grow old because we stop playing."
-        </blockquote>
+      {/* Hero Section with Video Background */}
+      <div className="relative h-screen w-full overflow-hidden">
+        <video
+          autoPlay
+          muted
+          loop
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/streetfightercutter.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-black/50"></div>
+        
+        {/* Content Overlay */}
+        <div className="absolute bottom-6 left-4 sm:left-6 z-10 max-w-3xl pr-4 text-left">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6">
+            GAMES
+          </h1>
+          <blockquote className="text-lg sm:text-xl md:text-2xl text-gray-200 mb-6 sm:mb-8 max-w-4xl leading-relaxed">
+            "We don't stop playing because we grow old;<br />
+            ... we grow old because we stop playing."
+          </blockquote>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-start">
+            <button className="bg-black/80 hover:bg-black text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 transition-all duration-300 hover:scale-105">
+              <span className="text-base sm:text-lg font-semibold">Play Now</span>
+            </button>
+            <button className="bg-gray-600/80 hover:bg-gray-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 transition-all duration-300 hover:scale-105">
+              <span className="text-base sm:text-lg font-semibold">More Info</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="px-4 sm:px-6 py-6">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center">
+          <span className="text-red-500">Choose Your</span> Game
+        </h2>
 
         {/* Game select menu */}
         {!selectedGame && (
