@@ -418,12 +418,12 @@ const GamesPage = ({ onBack, onHome }) => {
       </nav>
 
       {/* Hero Section with Video Background */}
-      <div className="relative h-screen w-full overflow-hidden">
+      <div className="relative h-[60vh] w-full overflow-hidden">
         <video
           autoPlay
           muted
           loop
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-fill"
         >
           <source src="/streetFighterLandscape.mp4" type="video/mp4" />
         </video>
