@@ -171,7 +171,7 @@ const RecruiterPage = ({ onBack }) => {
         ></div>
         <div className="absolute inset-0 bg-black/50"></div>
         
-        <div className="relative z-10 max-w-7xl mx-0 px-4 sm:px-6 text-left">
+        <div className="absolute bottom-6 left-4 sm:left-6 z-10 max-w-3xl pr-4 text-left">
           <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6">
             KEEGAN CHETTY - SENIOR JAVA DEVELOPER
           </h1>
@@ -181,7 +181,7 @@ const RecruiterPage = ({ onBack }) => {
             and transformed legacy systems into modern, efficient solutions. Passionate about creating innovative 
             solutions and optimizing system performance for maximum impact.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-start">
             <button className="bg-black/80 hover:bg-black text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 transition-all duration-300 hover:scale-105">
               <FaPlay className="text-white" />
               <span className="text-base sm:text-lg font-semibold">Resume</span>
