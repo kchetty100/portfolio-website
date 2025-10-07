@@ -178,13 +178,15 @@ const PortfolioPage = ({ onBack }) => {
           muted
           playsInline
           preload="auto"
-          onError={(e) => { e.currentTarget.style.display = 'none'; }}
+          onCanPlay={(e) => { e.currentTarget.style.display = 'block'; }}
+          onError={(e) => { e.currentTarget.remove(); }}
         >
           <source src="/Dwight Gets the Steam - The Office.mp4" type="video/mp4" />
         </video>
-        {/* Fallback gradient/image */}
+        {/* Fallback image behind video */}
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&h=1080&fit=crop")'
+          backgroundImage: 'url("https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&h=1080&fit=crop")',
+          zIndex: -1
         }}></div>
         <div className="absolute inset-0 bg-black/50"></div>
         <div className="absolute bottom-6 left-4 sm:left-6 z-10 max-w-3xl pr-4 text-left">
