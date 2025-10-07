@@ -10,7 +10,6 @@ const RecruiterPage = ({ onBack }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const topPicks = [
-    { title: 'Work Permit', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop', icon: <FaCertificate /> },
     { title: 'Skills', image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&h=800&fit=crop', icon: <FaCode /> },
     { title: 'Experience', image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&h=800&fit=crop', icon: <FaBriefcase /> },
     { title: 'Certifications', image: 'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=1200&h=800&fit=crop', icon: <FaCertificate /> },
