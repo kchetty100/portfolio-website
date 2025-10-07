@@ -13,7 +13,6 @@ const RecruiterPage = ({ onBack }) => {
     { title: 'Skills', image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&h=800&fit=crop', icon: <FaCode /> },
     { title: 'Experience', image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&h=800&fit=crop', icon: <FaBriefcase /> },
     { title: 'Certifications', image: 'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=1200&h=800&fit=crop', icon: <FaCertificate /> },
-    { title: 'Recommendations', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=800&fit=crop', icon: <FaThumbsUp /> },
     { title: 'Projects', image: 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=1200&h=800&fit=crop', icon: <FaProjectDiagram /> }
   ];
 
@@ -205,7 +204,7 @@ const RecruiterPage = ({ onBack }) => {
                 onClick={() => handleTileClick(item.title)}
                 className="group cursor-pointer transform transition-all duration-300 hover:scale-105"
               >
-                <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-800">
+                <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-800 skill-card-hover">
                   <img
                     src={item.image}
                     alt={item.title}
@@ -233,7 +232,7 @@ const RecruiterPage = ({ onBack }) => {
                 onClick={() => handleTileClick(item.title)}
                 className="group cursor-pointer transform transition-all duration-300 hover:scale-105"
               >
-                <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-800">
+                <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-800 skill-card-hover">
                   <img
                     src={item.image}
                     alt={item.title}
