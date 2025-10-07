@@ -199,10 +199,10 @@ const RecruiterPage = ({ onBack }) => {
             KEEGAN CHETTY - SENIOR FULL STACK DEVELOPER
           </h1>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed">
-            Experienced full-stack developer with expertise in React, Node.js, Python, and cloud technologies. 
-            Successfully delivered scalable applications serving thousands of users, implemented robust security measures, 
-            and transformed legacy systems into modern, efficient solutions. Passionate about creating innovative 
-            solutions and optimizing system performance for maximum impact.
+            Experienced Full-Stack Developer skilled in Java (Spring Boot), Angular, React, and cloud-native microservices. 
+            Proven ability to modernize legacy systems, automate DevOps pipelines, and deliver secure, scalable enterprise solutions. 
+            Passionate about innovation, system optimization, and cybersecurity, with hands-on experience across banking, fintech, 
+            and personal automation projects.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-start">
             <button className="bg-black/80 hover:bg-black text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 transition-all duration-300 hover:scale-105">

@@ -257,7 +257,7 @@ const StalkerPage = ({ onBack, onHome }) => {
         <div className="absolute inset-0 bg-black/50"></div>
         
         {/* Paragraph - Bottom */}
-        <div className="absolute bottom-6 left-4 sm:left-6 z-10 max-w-3xl pr-4 text-left">
+        <div className="absolute bottom-6 left-4 sm:left-6 z-10 max-w-3xl pr-4 text-left" style={{ transform: 'translateY(-2cm)' }}>
           {/* Title - Just above paragraph */}
           <div className="flex items-center mb-4">
             <FaEye className="text-red-500 text-3xl mr-4" />
