@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { FaRocket, FaArrowLeft, FaHome, FaEye, FaEyeSlash } from 'react-icons/fa';
+import SkillsSimple from './SkillsSimple';
+import ExperiencePage from './ExperiencePage';
+import ProjectsPage from './ProjectsPage';
+import ContactPage from './ContactPage';
 
 const AdventurerPage = ({ onBack, onHome }) => {
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [currentView, setCurrentView] = useState('adventurer');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const correctPassword = '0836003411';
 
@@ -27,6 +33,31 @@ const AdventurerPage = ({ onBack, onHome }) => {
     setPassword('');
     setPasswordError('');
   };
+
+  // If home view is selected, go back to landing page
+  if (currentView === 'home') {
+    if (onHome) {
+      onHome();
+    }
+    return null;
+  }
+
+  // Handle different views
+  if (currentView === 'skills') {
+    return <SkillsSimple onBack={() => setCurrentView('adventurer')} onHome={() => setCurrentView('home')} />;
+  }
+
+  if (currentView === 'experience') {
+    return <ExperiencePage onBack={() => setCurrentView('adventurer')} onHome={() => setCurrentView('home')} />;
+  }
+
+  if (currentView === 'projects') {
+    return <ProjectsPage onBack={() => setCurrentView('adventurer')} onHome={() => setCurrentView('home')} />;
+  }
+
+  if (currentView === 'contact') {
+    return <ContactPage onBack={() => setCurrentView('adventurer')} onHome={() => setCurrentView('home')} />;
+  }
 
   if (!isUnlocked) {
     return (
@@ -106,20 +137,60 @@ const AdventurerPage = ({ onBack, onHome }) => {
               </button>
             </div>
             <div className="hidden md:flex space-x-6 lg:space-x-8">
-              <button onClick={onHome} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
-              <button onClick={handleBackToPassword} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Lock</button>
+              <button onClick={() => setCurrentView('home')} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
+              <button onClick={() => { setCurrentView('skills'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Skills</button>
+              <button onClick={() => { setCurrentView('experience'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Experience</button>
+              <button onClick={() => { setCurrentView('projects'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</button>
+              <button onClick={() => { setCurrentView('contact'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Contact</button>
             </div>
             {/* Mobile menu button */}
             <div className="md:hidden">
               <button 
-                onClick={onBack}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="text-white text-2xl hover:text-gray-300 transition-colors"
               >
-                <FaArrowLeft />
+                {isMobileMenuOpen ? '✕' : '☰'}
               </button>
             </div>
           </div>
         </div>
+        
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-black border-t border-gray-800">
+            <div className="px-4 py-4 space-y-4">
+              <button 
+                onClick={() => {
+                  setCurrentView('home');
+                  setIsMobileMenuOpen(false);
+                }} 
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2"
+              >
+                Home
+              </button>
+              <button 
+                onClick={() => { setCurrentView('skills'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+                Skills
+              </button>
+              <button 
+                onClick={() => { setCurrentView('experience'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+                Experience
+              </button>
+              <button 
+                onClick={() => { setCurrentView('projects'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+                Projects
+              </button>
+              <button 
+                onClick={() => { setCurrentView('contact'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+                Contact
+              </button>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Main Content - Centered Image */}

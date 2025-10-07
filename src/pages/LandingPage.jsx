@@ -60,7 +60,7 @@ const LandingPage = () => {
 
   // If adventurer profile is selected, show adventurer page
   if (selectedProfile === 'adventurer') {
-    return <AdventurerPage onBack={() => setSelectedProfile(null)} />;
+    return <AdventurerPage onBack={() => setSelectedProfile(null)} onHome={() => setSelectedProfile(null)} />;
   }
 
   return (
