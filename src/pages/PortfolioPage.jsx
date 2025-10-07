@@ -9,6 +9,9 @@ import GamesPage from './GamesPage';
 const PortfolioPage = ({ onBack }) => {
   const [currentView, setCurrentView] = useState('portfolio');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [experienceUnlocked, setExperienceUnlocked] = useState(false);
+  const [experiencePin, setExperiencePin] = useState('');
+  const [pinError, setPinError] = useState('');
 
   const topPicks = [
     { title: 'Skills', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop', icon: <FaCode /> },
@@ -37,6 +40,14 @@ const PortfolioPage = ({ onBack }) => {
     }
     if (title === 'Projects') {
       setCurrentView('projects');
+      window.scrollTo(0, 0);
+      return;
+    }
+    if (title === 'Experience') {
+      setCurrentView('experience');
+      setExperienceUnlocked(false);
+      setExperiencePin('');
+      setPinError('');
       window.scrollTo(0, 0);
       return;
     }
@@ -71,10 +82,51 @@ const PortfolioPage = ({ onBack }) => {
   }
 
   if (currentView === 'experience') {
-    return <ExperiencePage 
-      onBack={() => setCurrentView('portfolio')} 
-      onHome={() => setCurrentView('home')} 
-    />;
+    const correctPin = '12345';
+    const handlePinChange = (e) => {
+      const val = e.target.value.replace(/\D/g, '').slice(0, 5);
+      setExperiencePin(val);
+      if (val.length === 5) {
+        if (val === correctPin) {
+          setExperienceUnlocked(true);
+          setPinError('');
+        } else {
+          setPinError('Incorrect PIN');
+          setTimeout(() => setPinError(''), 1200);
+          setExperiencePin('');
+        }
+      }
+    };
+
+    return (
+      <div className="relative">
+        <div className={experienceUnlocked ? '' : 'blur-sm sm:blur-md'}>
+          <ExperiencePage 
+            onBack={() => setCurrentView('portfolio')} 
+            onHome={() => setCurrentView('home')} 
+          />
+        </div>
+        {!experienceUnlocked && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xl">
+            <div className="bg-black/80 border border-red-700 rounded-xl p-6 w-80 text-center shadow-[0_0_25px_rgba(229,9,20,0.5)]">
+              <h3 className="text-white font-bold text-xl mb-3">Enter Access PIN</h3>
+              <input
+                type="password"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                maxLength={5}
+                value={experiencePin}
+                onChange={handlePinChange}
+                className={`w-full text-center tracking-widest text-white bg-black/60 border-2 rounded-lg py-3 outline-none ${pinError ? 'border-red-600 animate-pulse' : 'border-red-700 focus:border-red-500'}`}
+                placeholder="•••••"
+              />
+              {pinError && <div className="text-red-500 mt-2 text-sm">{pinError}</div>}
+              <p className="text-gray-400 mt-3 text-sm">5-digit PIN required</p>
+            </div>
+          </div>
+        )}
+      </div>
+    );
   }
 
   if (currentView === 'games') {
