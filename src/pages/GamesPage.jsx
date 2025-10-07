@@ -1,9 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const GamesPage = ({ onBack, onHome }) => {
   const canvasRef = useRef(null);
+  const [selectedGame, setSelectedGame] = useState(null); // 'pacman'
+  const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
+    if (selectedGame !== 'pacman' || !isRunning) {
+      return;
+    }
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
 
@@ -124,7 +129,7 @@ const GamesPage = ({ onBack, onHome }) => {
       cancelAnimationFrame(rafId);
       window.removeEventListener('resize', resize);
     };
-  }, []);
+  }, [selectedGame, isRunning]);
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -148,20 +153,55 @@ const GamesPage = ({ onBack, onHome }) => {
       </nav>
 
       <div className="pt-20 px-4 sm:px-6 py-6">
-        <h1 className="text-2xl sm:text-3xl font-bold mb-4">Games - Pacman</h1>
-        <div className="bg-gray-900 rounded-lg p-4 inline-block border border-gray-700">
-          <canvas ref={canvasRef} width={720} height={420} className="block w-full h-auto" />
-          <div className="text-gray-400 text-sm mt-2">Use arrow keys or on-screen controls</div>
-          {/* On-screen controls for mobile */}
-          <div className="mt-4 grid grid-cols-3 gap-3 w-full max-w-xs mx-auto select-none">
-            <div></div>
-            <button onClick={() => canvasRef.current.__setDirection('up')} className="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 rounded">▲</button>
-            <div></div>
-            <button onClick={() => canvasRef.current.__setDirection('left')} className="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 rounded">◀</button>
-            <button onClick={() => canvasRef.current.__setDirection('down')} className="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 rounded">▼</button>
-            <button onClick={() => canvasRef.current.__setDirection('right')} className="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 rounded">▶</button>
+        <h1 className="text-2xl sm:text-3xl font-bold mb-4">Games</h1>
+
+        {/* Game select menu */}
+        {!selectedGame && (
+          <div className="max-w-3xl grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <button
+              onClick={() => { setSelectedGame('pacman'); setIsRunning(false); }}
+              className="group relative aspect-square rounded-lg overflow-hidden bg-gray-900 border border-gray-700 hover:border-netflixRed transition-colors skill-card-hover"
+            >
+              <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&h=800&fit=crop" alt="Pacman" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-60" />
+              <div className="absolute inset-0 bg-black/40"></div>
+              <div className="relative z-10 h-full w-full flex items-center justify-center">
+                <span className="text-white font-bold text-lg">Pacman</span>
+              </div>
+            </button>
+            {/* Placeholder for future games */}
+            <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-500">
+              Coming Soon
+            </div>
           </div>
-        </div>
+        )}
+
+        {/* Game stage */}
+        {selectedGame === 'pacman' && (
+          <div className="mt-6">
+            {!isRunning && (
+              <button onClick={() => setIsRunning(true)} className="mb-4 bg-netflixRed text-white font-semibold px-5 py-2 rounded hover:bg-red-700 transition-colors">Start Game</button>
+            )}
+            {isRunning && (
+              <div className="mb-4 flex gap-3">
+                <button onClick={() => setIsRunning(false)} className="bg-gray-800 text-white font-semibold px-4 py-2 rounded hover:bg-gray-700 transition-colors">Pause</button>
+                <button onClick={() => { setIsRunning(false); setSelectedGame(null); }} className="bg-black border border-gray-700 text-white font-semibold px-4 py-2 rounded hover:bg-gray-800 transition-colors">Exit</button>
+              </div>
+            )}
+            <div className="bg-gray-900 rounded-lg p-4 inline-block border border-gray-700">
+              <canvas ref={canvasRef} width={720} height={420} className="block w-full h-auto" />
+              <div className="text-gray-400 text-sm mt-2">Use arrow keys or on-screen controls</div>
+              {/* On-screen controls for mobile */}
+              <div className="mt-4 grid grid-cols-3 gap-3 w-full max-w-xs mx-auto select-none">
+                <div></div>
+                <button onClick={() => canvasRef.current.__setDirection('up')} className="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 rounded">▲</button>
+                <div></div>
+                <button onClick={() => canvasRef.current.__setDirection('left')} className="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 rounded">◀</button>
+                <button onClick={() => canvasRef.current.__setDirection('down')} className="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 rounded">▼</button>
+                <button onClick={() => canvasRef.current.__setDirection('right')} className="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 rounded">▶</button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
