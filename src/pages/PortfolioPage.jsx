@@ -10,20 +10,21 @@ const PortfolioPage = ({ onBack }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const topPicks = [
-    { title: 'Skills', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop', icon: <FaCode /> },
-    { title: 'Projects', image: 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=300&h=200&fit=crop', icon: <FaProjectDiagram /> },
-    { title: 'Certifications', image: 'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=300&h=200&fit=crop', icon: <FaCertificate /> },
-    { title: 'Experience', image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=300&h=200&fit=crop', icon: <FaBriefcase /> },
-    { title: 'Recommendations', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=200&fit=crop', icon: <FaThumbsUp /> },
-    { title: 'Contact Me', image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=300&h=200&fit=crop', icon: <FaEnvelope /> }
+    { title: 'Skills', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop', icon: <FaCode /> },
+    { title: 'Projects', image: 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=1200&h=800&fit=crop', icon: <FaProjectDiagram /> },
+    { title: 'Certifications', image: 'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=1200&h=800&fit=crop', icon: <FaCertificate /> },
+    { title: 'Experience', image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&h=800&fit=crop', icon: <FaBriefcase /> },
+    { title: 'Blogs', image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=1200&h=800&fit=crop', icon: <FaBlog /> },
+    { title: 'Contact Me', image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1200&h=800&fit=crop', icon: <FaEnvelope /> }
   ];
 
   const continueWatching = [
-    { title: 'Music', image: 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=300&h=200&fit=crop', icon: <FaMusic /> },
-    { title: 'Reading', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop', icon: <FaBook /> },
-    { title: 'Blogs', image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=200&fit=crop', icon: <FaBlog /> },
-    { title: 'Certifications', image: 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=300&h=200&fit=crop', icon: <FaCertificate /> },
-    { title: 'Contact Me', image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=300&h=200&fit=crop', icon: <FaPhone /> }
+    { title: 'Music', image: 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=1200&h=800&fit=crop', icon: <FaMusic /> },
+    { title: 'Reading', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop', icon: <FaBook /> },
+    { title: 'Blogs', image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=1200&h=800&fit=crop', icon: <FaBlog /> },
+    { title: 'Certifications', image: 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=1200&h=800&fit=crop', icon: <FaCertificate /> },
+    { title: 'Contact Me', image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1200&h=800&fit=crop', icon: <FaPhone /> },
+    { title: 'Projects', image: 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=1200&h=800&fit=crop', icon: <FaProjectDiagram /> }
   ];
 
   const handleTileClick = (title) => {
@@ -156,59 +157,50 @@ const PortfolioPage = ({ onBack }) => {
       <section className="relative pt-20 pb-16">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-purple-900/20 to-pink-900/20"></div>
         <div className="absolute inset-0 bg-black/40"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
-          <div className="text-center">
-            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 sm:mb-8">
-              KEEGAN CHETTY - SENIOR FULL STACK DEVELOPER
-            </h1>
-            <div className="max-w-4xl mx-auto mb-8 sm:mb-12">
-              <p className="text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed">
-                Dynamic and results-driven Senior Software Engineer with 5+ years in full-stack development 
-                across high-impact, large-scale applications. Expertise in React, Node.js, Python, AWS, 
-                Kubernetes, and Docker. Achieved serving 10,000+ users and managing 50 million+ bookings, 
-                implementing robust security measures across multiple products including XSS script validation, 
-                advanced password policies, and stringent password resets. Transformed a legacy reporting 
-                engine into a high-speed microservices architecture, reducing report generation from 5 minutes to 5 seconds.
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-              <button className="bg-black text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 hover:bg-gray-800 transition-colors border border-gray-600">
-                <FaPlay className="text-white" />
-                <span className="text-sm sm:text-base">Resume</span>
-              </button>
-              <button className="bg-black text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 hover:bg-gray-800 transition-colors border border-gray-600">
-                <FaLinkedin className="text-white" />
-                <span className="text-sm sm:text-base">LinkedIn</span>
-              </button>
-            </div>
+        <div className="absolute bottom-6 left-4 sm:left-6 z-10 max-w-3xl pr-4 text-left">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 sm:mb-6">
+            KEEGAN CHETTY - SENIOR FULL STACK DEVELOPER
+          </h1>
+          <p className="text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed mb-6 sm:mb-8 max-w-4xl">
+            Dynamic and results-driven Senior Software Engineer with 5+ years in full-stack development across high-impact, large-scale applications. Expertise in React, Node.js, Python, AWS, Kubernetes, and Docker. Achieved serving 10,000+ users and managing 50 million+ bookings.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-start gap-4 sm:gap-6">
+            <button className="bg-black text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 hover:bg-gray-800 transition-colors border border-gray-600">
+              <FaPlay className="text-white" />
+              <span className="text-sm sm:text-base">Resume</span>
+            </button>
+            <button className="bg-black text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 hover:bg-gray-800 transition-colors border border-gray-600">
+              <FaLinkedin className="text-white" />
+              <span className="text-sm sm:text-base">LinkedIn</span>
+            </button>
           </div>
         </div>
+        <div className="relative max-w-7xl mx-0 px-4 sm:px-6 py-24 sm:py-28"></div>
       </section>
 
       {/* Today's Top Picks Section */}
       <section className="px-4 sm:px-6 py-8 sm:py-12">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-0">
           <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
             Today's Top Picks for developer
           </h2>
-          <div className="flex space-x-3 sm:space-x-4 overflow-x-auto pb-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
             {topPicks.map((item, index) => (
               <div
                 key={index}
                 onClick={() => handleTileClick(item.title)}
-                className="flex-shrink-0 w-48 sm:w-64 h-28 sm:h-36 rounded-lg overflow-hidden cursor-pointer group hover:scale-105 transition-transform duration-300"
+                className="group cursor-pointer transform transition-all duration-300 hover:scale-105"
               >
-                <div className="relative w-full h-full">
+                <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-800 skill-card-hover">
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-full object-cover filter brightness-50"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="flex items-center space-x-2">
-                      <div className="text-netflixRed">{item.icon}</div>
-                      <span className="text-white font-semibold text-lg">{item.title}</span>
+                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="text-white text-3xl mb-2">{item.icon}</div>
+                      <p className="text-white font-bold text-lg">{item.title}</p>
                     </div>
                   </div>
                 </div>
@@ -219,29 +211,28 @@ const PortfolioPage = ({ onBack }) => {
       </section>
 
       {/* Continue Watching Section */}
-      <section className="px-6 py-12">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-2xl font-bold text-white mb-6">
+      <section className="px-4 sm:px-6 py-8 sm:py-12">
+        <div className="max-w-7xl mx-0">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-6">
             Continue Watching for developer
           </h2>
-          <div className="flex space-x-4 overflow-x-auto pb-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
             {continueWatching.map((item, index) => (
               <div
                 key={index}
                 onClick={() => handleTileClick(item.title)}
-                className="flex-shrink-0 w-48 sm:w-64 h-28 sm:h-36 rounded-lg overflow-hidden cursor-pointer group hover:scale-105 transition-transform duration-300"
+                className="group cursor-pointer transform transition-all duration-300 hover:scale-105"
               >
-                <div className="relative w-full h-full">
+                <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-800 skill-card-hover">
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-full object-cover filter brightness-50"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="flex items-center space-x-2">
-                      <div className="text-netflixRed">{item.icon}</div>
-                      <span className="text-white font-semibold text-lg">{item.title}</span>
+                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="text-white text-3xl mb-2">{item.icon}</div>
+                      <p className="text-white font-bold text-lg">{item.title}</p>
                     </div>
                   </div>
                 </div>
