@@ -172,12 +172,14 @@ const PortfolioPage = ({ onBack }) => {
       <section className="relative pt-20 pb-16 min-h-[70vh] sm:min-h-[75vh] lg:min-h-[85vh]">
         {/* Video Background */}
         <video
+          key="batman_banner"
           className="absolute inset-0 w-full h-full object-cover z-0"
           autoPlay
           loop
           muted
+          defaultMuted
           playsInline
-          preload="auto"
+          preload="metadata"
           onCanPlay={(e) => { e.currentTarget.style.display = 'block'; }}
           onError={(e) => { e.currentTarget.remove(); }}
         >
