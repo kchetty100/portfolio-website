@@ -5,6 +5,7 @@ import ExperiencePage from './ExperiencePage';
 import GamesPage from './GamesPage';
 import SkillsSimple from './SkillsSimple';
 import BooksPage from './BooksPage';
+import ContactPage from './ContactPage';
 
 const RecruiterPage = ({ onBack }) => {
   const [currentView, setCurrentView] = useState('recruiter');
@@ -23,7 +24,6 @@ const RecruiterPage = ({ onBack }) => {
 
   const continueWatching = [
     { title: 'Music', image: 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=300&h=200&fit=crop', icon: <FaMusic /> },
-    { title: 'Reading', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop', icon: <FaBook /> },
     { title: 'Books', image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&h=200&fit=crop', icon: <FaBook /> },
     { title: 'Blogs', image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=200&fit=crop', icon: <FaBlog /> },
     { title: 'Contact Me', image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=300&h=200&fit=crop', icon: <FaPhone /> },
@@ -46,6 +46,11 @@ const RecruiterPage = ({ onBack }) => {
     }
     if (title === 'Books') {
       setCurrentView('books');
+      window.scrollTo(0, 0);
+      return;
+    }
+    if (title === 'Contact Me') {
+      setCurrentView('contact');
       window.scrollTo(0, 0);
       return;
     }
@@ -117,6 +122,10 @@ const RecruiterPage = ({ onBack }) => {
 
   if (currentView === 'books') {
     return <BooksPage onBack={() => setCurrentView('recruiter')} onHome={() => setCurrentView('home')} />;
+  }
+
+  if (currentView === 'contact') {
+    return <ContactPage onBack={() => setCurrentView('recruiter')} onHome={() => setCurrentView('home')} />;
   }
 
   if (currentView === 'games') {
