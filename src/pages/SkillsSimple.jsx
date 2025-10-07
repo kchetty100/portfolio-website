@@ -76,43 +76,46 @@ const SkillsSimple = ({ onBack, onHome }) => {
                 <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-netflixRed"></div>
               </h2>
             </div>
-            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-              {/* HTML&CSS */}
-              <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-auto">
-                <div className="flex flex-col items-center text-center">
-                  <div className="flex space-x-1 mb-3 group-hover:scale-110 transition-transform">
-                    <FaHtml5 className="text-netflixRed text-2xl" />
-                    <FaCss3Alt className="text-netflixRed text-2xl" />
+            {/* Upside-down pyramid: first row 3, second row 1 (centered) */}
+            <div className="flex flex-col items-center gap-6">
+              <div className="flex justify-center gap-4 sm:gap-6">
+                {/* HTML&CSS */}
+                <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+                  <div className="flex flex-col items-center text-center">
+                    <div className="flex space-x-1 mb-3 group-hover:scale-110 transition-transform">
+                      <FaHtml5 className="text-netflixRed text-2xl" />
+                      <FaCss3Alt className="text-netflixRed text-2xl" />
+                    </div>
+                    <h3 className="text-white font-bold text-lg mb-1">HTML&CSS</h3>
+                    <p className="text-gray-400 text-sm">Web Markup and Styling</p>
                   </div>
-                  <h3 className="text-white font-bold text-lg mb-1">HTML&CSS</h3>
-                  <p className="text-gray-400 text-sm">Web Markup and Styling</p>
+                </div>
+                {/* JavaScript */}
+                <div className="bg-gray-900 p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+                  <div className="flex flex-col items-center text-center">
+                    <FaJs className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
+                    <h3 className="text-white font-bold text-lg mb-1">JavaScript</h3>
+                    <p className="text-gray-400 text-sm">Scripting Language</p>
+                  </div>
+                </div>
+                {/* TypeScript */}
+                <div className="bg-gray-900 p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+                  <div className="flex flex-col items-center text-center">
+                    <SiTypescript className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
+                    <h3 className="text-white font-bold text-lg mb-1">TypeScript</h3>
+                    <p className="text-gray-400 text-sm">Type-safe JavaScript</p>
+                  </div>
                 </div>
               </div>
-
-              {/* JavaScript */}
-              <div className="bg-gray-900 p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-48">
-                <div className="flex flex-col items-center text-center">
-                  <FaJs className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
-                  <h3 className="text-white font-bold text-lg mb-1">JavaScript</h3>
-                  <p className="text-gray-400 text-sm">Scripting Language</p>
-                </div>
-              </div>
-
-              {/* TypeScript */}
-              <div className="bg-gray-900 p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-48">
-                <div className="flex flex-col items-center text-center">
-                  <SiTypescript className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
-                  <h3 className="text-white font-bold text-lg mb-1">TypeScript</h3>
-                  <p className="text-gray-400 text-sm">Type-safe JavaScript</p>
-                </div>
-              </div>
-
-              {/* React */}
-              <div className="bg-gray-900 p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-48">
-                <div className="flex flex-col items-center text-center">
-                  <FaReact className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
-                  <h3 className="text-white font-bold text-lg mb-1">React</h3>
-                  <p className="text-gray-400 text-sm">Frontend Framework</p>
+              {/* Row 2 centered single */}
+              <div className="flex justify-center">
+                {/* React */}
+                <div className="bg-gray-900 p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+                  <div className="flex flex-col items-center text-center">
+                    <FaReact className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
+                    <h3 className="text-white font-bold text-lg mb-1">React</h3>
+                    <p className="text-gray-400 text-sm">Frontend Framework</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -126,9 +129,11 @@ const SkillsSimple = ({ onBack, onHome }) => {
                 <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-netflixRed"></div>
               </h2>
             </div>
-            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+            {/* Pyramid: first row 4, second row 1 */}
+            <div className="flex flex-col items-center gap-6">
+              <div className="flex justify-center gap-4 sm:gap-6">
               {/* Ruby on Rails */}
-              <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-auto">
+              <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
                 <div className="flex flex-col items-center text-center">
                   <SiRubyonrails className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
                   <h3 className="text-white font-bold text-lg mb-1">Ruby on Rails</h3>
@@ -137,7 +142,7 @@ const SkillsSimple = ({ onBack, onHome }) => {
               </div>
 
               {/* PHP */}
-              <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-auto">
+              <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
                 <div className="flex flex-col items-center text-center">
                   <SiPhp className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
                   <h3 className="text-white font-bold text-lg mb-1">PHP</h3>
@@ -146,7 +151,7 @@ const SkillsSimple = ({ onBack, onHome }) => {
               </div>
 
               {/* Java */}
-              <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-auto">
+              <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
                 <div className="flex flex-col items-center text-center">
                   <FaJava className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
                   <h3 className="text-white font-bold text-lg mb-1">Java</h3>
@@ -155,20 +160,23 @@ const SkillsSimple = ({ onBack, onHome }) => {
               </div>
 
               {/* SpringBoot */}
-              <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-auto">
+              <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
                 <div className="flex flex-col items-center text-center">
                   <SiSpring className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
                   <h3 className="text-white font-bold text-lg mb-1">SpringBoot</h3>
                   <p className="text-gray-400 text-sm">Java Framework</p>
                 </div>
               </div>
+              </div>
 
-              {/* Node.js */}
-              <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-auto">
-                <div className="flex flex-col items-center text-center">
-                  <FaNodeJs className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
-                  <h3 className="text-white font-bold text-lg mb-1">Node.js</h3>
-                  <p className="text-gray-400 text-sm">Backend Runtime</p>
+              {/* Row 2 single centered */}
+              <div className="flex justify-center">
+                <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+                  <div className="flex flex-col items-center text-center">
+                    <FaNodeJs className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
+                    <h3 className="text-white font-bold text-lg mb-1">Node.js</h3>
+                    <p className="text-gray-400 text-sm">Backend Runtime</p>
+                  </div>
                 </div>
               </div>
             </div>
