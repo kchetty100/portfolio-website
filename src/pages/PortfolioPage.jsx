@@ -4,6 +4,7 @@ import SkillsSimple from './SkillsSimple';
 import LandingPage from './LandingPage';
 import ExperiencePage from './ExperiencePage';
 import ProjectsPage from './ProjectsPage';
+import GamesPage from './GamesPage';
 
 const PortfolioPage = ({ onBack }) => {
   const [currentView, setCurrentView] = useState('portfolio');
@@ -15,7 +16,8 @@ const PortfolioPage = ({ onBack }) => {
     { title: 'Certifications', image: 'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=1200&h=800&fit=crop', icon: <FaCertificate /> },
     { title: 'Experience', image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&h=800&fit=crop', icon: <FaBriefcase /> },
     { title: 'Blogs', image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=1200&h=800&fit=crop', icon: <FaBlog /> },
-    { title: 'Contact Me', image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1200&h=800&fit=crop', icon: <FaEnvelope /> }
+    { title: 'Contact Me', image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1200&h=800&fit=crop', icon: <FaEnvelope /> },
+    { title: 'Games', image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&h=800&fit=crop', icon: <FaPlay /> }
   ];
 
   const continueWatching = [
@@ -24,7 +26,8 @@ const PortfolioPage = ({ onBack }) => {
     { title: 'Blogs', image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=1200&h=800&fit=crop', icon: <FaBlog /> },
     { title: 'Certifications', image: 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=1200&h=800&fit=crop', icon: <FaCertificate /> },
     { title: 'Contact Me', image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1200&h=800&fit=crop', icon: <FaPhone /> },
-    { title: 'Projects', image: 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=1200&h=800&fit=crop', icon: <FaProjectDiagram /> }
+    { title: 'Projects', image: 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=1200&h=800&fit=crop', icon: <FaProjectDiagram /> },
+    { title: 'Games', image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&h=800&fit=crop', icon: <FaPlay /> }
   ];
 
   const handleTileClick = (title) => {
@@ -35,6 +38,11 @@ const PortfolioPage = ({ onBack }) => {
     }
     if (title === 'Projects') {
       setCurrentView('projects');
+      window.scrollTo(0, 0);
+      return;
+    }
+    if (title === 'Games') {
+      setCurrentView('games');
       window.scrollTo(0, 0);
       return;
     }
@@ -65,6 +73,13 @@ const PortfolioPage = ({ onBack }) => {
 
   if (currentView === 'experience') {
     return <ExperiencePage 
+      onBack={() => setCurrentView('portfolio')} 
+      onHome={() => setCurrentView('home')} 
+    />;
+  }
+
+  if (currentView === 'games') {
+    return <GamesPage 
       onBack={() => setCurrentView('portfolio')} 
       onHome={() => setCurrentView('home')} 
     />;
