@@ -484,7 +484,7 @@ const GamesPage = ({ onBack, onHome }) => {
               onClick={() => { setSelectedGame('pacman'); setIsRunning(false); }}
               className="group relative aspect-square rounded-lg overflow-hidden bg-gray-900 border border-gray-700 hover:border-netflixRed transition-colors skill-card-hover"
             >
-              <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=800&fit=crop" alt="Pacman" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-60" />
+              <img src="/pacman.png" alt="Pacman" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-60" />
               <div className="absolute inset-0 bg-black/40"></div>
               <div className="relative z-10 h-full w-full flex items-center justify-center">
                 <span className="text-white font-bold text-lg">Pacman</span>
@@ -494,7 +494,7 @@ const GamesPage = ({ onBack, onHome }) => {
               onClick={() => { setSelectedGame('snake'); setIsRunning(false); }}
               className="group relative aspect-square rounded-lg overflow-hidden bg-gray-900 border border-gray-700 hover:border-netflixRed transition-colors skill-card-hover"
             >
-              <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&h=800&fit=crop" alt="Snake" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-60" />
+              <img src="/snake.jpg" alt="Snake" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-60" />
               <div className="absolute inset-0 bg-black/40"></div>
               <div className="relative z-10 h-full w-full flex items-center justify-center">
                 <span className="text-white font-bold text-lg">Snake</span>
