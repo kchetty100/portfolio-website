@@ -170,8 +170,23 @@ const PortfolioPage = ({ onBack }) => {
 
       {/* Hero Section */}
       <section className="relative pt-20 pb-16">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-purple-900/20 to-pink-900/20"></div>
-        <div className="absolute inset-0 bg-black/40"></div>
+        {/* Video Background */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover z-0"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          onError={(e) => { e.currentTarget.style.display = 'none'; }}
+        >
+          <source src="/Dwight Gets the Steam - The Office.mp4" type="video/mp4" />
+        </video>
+        {/* Fallback gradient/image */}
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" style={{
+          backgroundImage: 'url("https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&h=1080&fit=crop")'
+        }}></div>
+        <div className="absolute inset-0 bg-black/50"></div>
         <div className="absolute bottom-6 left-4 sm:left-6 z-10 max-w-3xl pr-4 text-left">
           <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 sm:mb-6">
             KEEGAN CHETTY - SENIOR FULL STACK DEVELOPER
