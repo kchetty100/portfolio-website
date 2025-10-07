@@ -211,7 +211,7 @@ const StalkerPage = ({ onBack, onHome }) => {
         ></div>
         <div className="absolute inset-0 bg-black/50"></div>
         
-        <div className="absolute bottom-6 left-4 sm:left-6 z-10 max-w-3xl pr-4 text-left">
+        <div className="absolute top-1/2 left-4 sm:left-6 transform -translate-y-1/2 z-10 max-w-3xl pr-4 text-left">
           <div className="flex items-center mb-4">
             <FaEye className="text-red-500 text-3xl mr-4" />
             <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white">
