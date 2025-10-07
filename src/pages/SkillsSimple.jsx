@@ -231,8 +231,16 @@ const SkillsSimple = ({ onBack, onHome }) => {
                   </div>
                 </div>
               </div>
-              {/* Row 2: 2 tiles centered */}
+              {/* Row 2: 3 tiles centered (add Jenkins) */}
               <div className="flex justify-center gap-4 sm:gap-6">
+                {/* Jenkins */}
+                <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+                  <div className="flex flex-col items-center text-center">
+                    <svg className="w-10 h-10 text-netflixRed mb-3 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 017 7v4a7 7 0 11-14 0V9a7 7 0 017-7zm1 13.93A5.001 5.001 0 0017 11V9a5 5 0 10-10 0v2a5.001 5.001 0 004 4.93V18H9v2h6v-2h-2v-2.07z"/></svg>
+                    <h3 className="text-white font-bold text-lg mb-1">Jenkins</h3>
+                    <p className="text-gray-400 text-sm">Automation Server</p>
+                  </div>
+                </div>
                 {/* Netlify */}
                 <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
                   <div className="flex flex-col items-center text-center">
@@ -250,8 +258,25 @@ const SkillsSimple = ({ onBack, onHome }) => {
                   </div>
                 </div>
               </div>
-              {/* Row 3: 1 tile centered (AWS) */}
-              <div className="flex justify-center">
+              {/* Row 3: 3 tiles centered (OpenShift, Podman, AWS) */}
+              <div className="flex justify-center gap-4 sm:gap-6">
+                {/* OpenShift */}
+                <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+                  <div className="flex flex-col items-center text-center">
+                    <svg className="w-10 h-10 text-netflixRed mb-3 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4a8 8 0 100 16 8 8 0 000-16zm5 8a5 5 0 11-10 0 5 5 0 0110 0z"/></svg>
+                    <h3 className="text-white font-bold text-lg mb-1">OpenShift</h3>
+                    <p className="text-gray-400 text-sm">Red Hat Platform</p>
+                  </div>
+                </div>
+                {/* Podman */}
+                <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+                  <div className="flex flex-col items-center text-center">
+                    <svg className="w-10 h-10 text-netflixRed mb-3 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M3 12h18M12 3v18"/></svg>
+                    <h3 className="text-white font-bold text-lg mb-1">Podman</h3>
+                    <p className="text-gray-400 text-sm">Container Engine</p>
+                  </div>
+                </div>
+                {/* AWS */}
                 <div className="bg-gray-900 p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-48">
                   <div className="flex flex-col items-center text-center">
                     <FaAws className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />

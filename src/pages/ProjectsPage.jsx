@@ -29,7 +29,7 @@ const ProjectsPage = ({ onBack, onHome }) => {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Navigation Bar */}
+      {/* Navigation Bar (match recruiter) */}
       <nav className="fixed top-0 w-full z-50 bg-black">
         <div className="px-4 sm:px-6 py-4">
           <div className="flex items-center justify-between">
@@ -43,25 +43,21 @@ const ProjectsPage = ({ onBack, onHome }) => {
             </div>
             <div className="hidden md:flex space-x-6 lg:space-x-8">
               <button onClick={onHome} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
-              <button onClick={onBack} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Back</button>
+              <button className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Professional</button>
+              <button className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Skills</button>
+              <button className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</button>
+              <a href={`https://github.com/${GITHUB_USERNAME}`} target="_blank" rel="noreferrer" className="text-white font-bold text-lg hover:text-gray-300 transition-colors">GitHub</a>
+              <button className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Hire Me</button>
             </div>
           </div>
         </div>
       </nav>
 
       {/* Content */}
-      <div className="pt-20 px-4 sm:px-6 py-8 sm:py-12">
+      <div className="pt-24 sm:pt-28 px-4 sm:px-6 py-8 sm:py-12">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-baseline justify-between mb-6">
+          <div className="mb-6">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">Projects</h1>
-            <a
-              href={`https://github.com/${GITHUB_USERNAME}`}
-              target="_blank"
-              rel="noreferrer"
-              className="text-sm sm:text-base text-white font-semibold border border-gray-600 px-4 py-2 rounded hover:bg-gray-800 transition-colors"
-            >
-              View GitHub Profile
-            </a>
           </div>
 
           {loading && (
