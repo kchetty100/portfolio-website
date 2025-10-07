@@ -128,9 +128,18 @@ const ExperiencePage = ({ onBack, onHome }) => {
                 KEEGAN CHETTY
               </button>
             </div>
-            <div className="hidden md:flex space-x-6 lg:space-x-8">
+            <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
               <button onClick={onHome} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
               <button onClick={handleBackToPassword} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Lock</button>
+              <button 
+                onClick={onBack}
+                className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-blue-600 hover:from-indigo-400 hover:to-blue-500 transition-all duration-300 hover:scale-110 border-2 border-white/20 hover:border-white/40"
+                title="Back to Profile Selection"
+              >
+                <div className="w-full h-full rounded-full flex items-center justify-center text-white font-bold text-sm">
+                  💼
+                </div>
+              </button>
             </div>
           </div>
         </div>

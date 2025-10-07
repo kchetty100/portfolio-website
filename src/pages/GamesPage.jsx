@@ -360,12 +360,21 @@ const GamesPage = ({ onBack, onHome }) => {
                 </button>
               </div>
             </div>
-            <div className="hidden md:flex space-x-6 lg:space-x-8">
+            <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
               <button onClick={() => setCurrentView('home')} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
               <button onClick={() => { setCurrentView('skills'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Skills</button>
               <button onClick={() => { setCurrentView('experience'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Experience</button>
               <button onClick={() => { setCurrentView('projects'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</button>
               <button onClick={() => { setCurrentView('contact'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Contact</button>
+              <button 
+                onClick={onHome}
+                className="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 hover:from-yellow-300 hover:to-orange-400 transition-all duration-300 hover:scale-110 border-2 border-white/20 hover:border-white/40"
+                title="Back to Profile Selection"
+              >
+                <div className="w-full h-full rounded-full flex items-center justify-center text-black font-bold text-sm">
+                  🎮
+                </div>
+              </button>
             </div>
             {/* Mobile menu button */}
             <div className="md:hidden">
@@ -412,6 +421,20 @@ const GamesPage = ({ onBack, onHome }) => {
                 className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
                 Contact
               </button>
+              <div className="pt-4 border-t border-gray-700">
+                <button 
+                  onClick={() => {
+                    onHome();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="flex items-center space-x-3 text-white font-bold text-lg hover:text-gray-300 transition-colors py-2"
+                >
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-black font-bold text-sm">
+                    🎮
+                  </div>
+                  <span>Back to Profile Selection</span>
+                </button>
+              </div>
             </div>
           </div>
         )}
@@ -461,7 +484,7 @@ const GamesPage = ({ onBack, onHome }) => {
               onClick={() => { setSelectedGame('pacman'); setIsRunning(false); }}
               className="group relative aspect-square rounded-lg overflow-hidden bg-gray-900 border border-gray-700 hover:border-netflixRed transition-colors skill-card-hover"
             >
-              <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&h=800&fit=crop" alt="Pacman" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-60" />
+              <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=800&fit=crop" alt="Pacman" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-60" />
               <div className="absolute inset-0 bg-black/40"></div>
               <div className="relative z-10 h-full w-full flex items-center justify-center">
                 <span className="text-white font-bold text-lg">Pacman</span>

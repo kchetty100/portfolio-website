@@ -136,12 +136,21 @@ const AdventurerPage = ({ onBack, onHome }) => {
                 KEEGAN CHETTY
               </button>
             </div>
-            <div className="hidden md:flex space-x-6 lg:space-x-8">
+            <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
               <button onClick={() => setCurrentView('home')} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
               <button onClick={() => { setCurrentView('skills'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Skills</button>
               <button onClick={() => { setCurrentView('experience'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Experience</button>
               <button onClick={() => { setCurrentView('projects'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</button>
               <button onClick={() => { setCurrentView('contact'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Contact</button>
+              <button 
+                onClick={onBack}
+                className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 hover:from-purple-400 hover:to-pink-500 transition-all duration-300 hover:scale-110 border-2 border-white/20 hover:border-white/40"
+                title="Back to Profile Selection"
+              >
+                <div className="w-full h-full rounded-full flex items-center justify-center text-white font-bold text-sm">
+                  🚀
+                </div>
+              </button>
             </div>
             {/* Mobile menu button */}
             <div className="md:hidden">
@@ -188,6 +197,20 @@ const AdventurerPage = ({ onBack, onHome }) => {
                 className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
                 Contact
               </button>
+              <div className="pt-4 border-t border-gray-700">
+                <button 
+                  onClick={() => {
+                    onBack();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="flex items-center space-x-3 text-white font-bold text-lg hover:text-gray-300 transition-colors py-2"
+                >
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-white font-bold text-sm">
+                    🚀
+                  </div>
+                  <span>Back to Profile Selection</span>
+                </button>
+              </div>
             </div>
           </div>
         )}

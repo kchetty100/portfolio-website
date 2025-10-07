@@ -19,10 +19,19 @@ const SkillsSimple = ({ onBack, onHome }) => {
                 KEEGAN CHETTY
               </button>
             </div>
-            <div className="hidden md:flex space-x-6 lg:space-x-8">
+            <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
               <button onClick={onHome} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
               <a href="#" className="text-white font-bold text-lg">Skills</a>
               <a href="#" className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</a>
+              <button 
+                onClick={onBack}
+                className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-red-600 hover:from-orange-400 hover:to-red-500 transition-all duration-300 hover:scale-110 border-2 border-white/20 hover:border-white/40"
+                title="Back to Profile Selection"
+              >
+                <div className="w-full h-full rounded-full flex items-center justify-center text-white font-bold text-sm">
+                  ⚡
+                </div>
+              </button>
             </div>
             {/* Mobile menu button */}
             <div className="md:hidden">
@@ -55,6 +64,20 @@ const SkillsSimple = ({ onBack, onHome }) => {
               <a href="#" className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
                 Projects
               </a>
+              <div className="pt-4 border-t border-gray-700">
+                <button 
+                  onClick={() => {
+                    onBack();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="flex items-center space-x-3 text-white font-bold text-lg hover:text-gray-300 transition-colors py-2"
+                >
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center text-white font-bold text-sm">
+                    ⚡
+                  </div>
+                  <span>Back to Profile Selection</span>
+                </button>
+              </div>
             </div>
           </div>
         )}

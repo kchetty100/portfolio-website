@@ -35,9 +35,18 @@ const BooksPage = ({ onBack, onHome }) => {
                 KEEGAN CHETTY
               </button>
             </div>
-            <div className="hidden md:flex space-x-6 lg:space-x-8">
+            <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
               <button onClick={onHome} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
               <button onClick={onBack} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Back</button>
+              <button 
+                onClick={onBack}
+                className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 transition-all duration-300 hover:scale-110 border-2 border-white/20 hover:border-white/40"
+                title="Back to Profile Selection"
+              >
+                <div className="w-full h-full rounded-full flex items-center justify-center text-white font-bold text-sm">
+                  📚
+                </div>
+              </button>
             </div>
             {/* Mobile menu button */}
             <div className="md:hidden">
@@ -46,6 +55,35 @@ const BooksPage = ({ onBack, onHome }) => {
                 className="text-white text-2xl hover:text-gray-300 transition-colors"
               >
                 <FaArrowLeft />
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        {/* Mobile Menu */}
+        <div className="md:hidden bg-gray-900 border-t border-gray-800">
+          <div className="px-4 py-4 space-y-4">
+            <button 
+              onClick={onHome}
+              className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2"
+            >
+              Home
+            </button>
+            <button 
+              onClick={onBack}
+              className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2"
+            >
+              Back
+            </button>
+            <div className="pt-4 border-t border-gray-700">
+              <button 
+                onClick={onBack}
+                className="flex items-center space-x-3 text-white font-bold text-lg hover:text-gray-300 transition-colors py-2"
+              >
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white font-bold text-sm">
+                  📚
+                </div>
+                <span>Back to Profile Selection</span>
               </button>
             </div>
           </div>
