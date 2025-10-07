@@ -1,10 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
+import SkillsSimple from './SkillsSimple';
+import ExperiencePage from './ExperiencePage';
+import ProjectsPage from './ProjectsPage';
+import ContactPage from './ContactPage';
 
 const GamesPage = ({ onBack, onHome }) => {
   const canvasRef = useRef(null);
   const [selectedGame, setSelectedGame] = useState(null); // 'pacman' | 'snake'
   const [isRunning, setIsRunning] = useState(false);
   const [gameMessage, setGameMessage] = useState(null);
+  const [currentView, setCurrentView] = useState('games');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     if (!selectedGame || !isRunning) return;
@@ -303,6 +309,31 @@ const GamesPage = ({ onBack, onHome }) => {
     return () => clearTimeout(t);
   }, []);
 
+  // If home view is selected, go back to landing page
+  if (currentView === 'home') {
+    if (onHome) {
+      onHome();
+    }
+    return null;
+  }
+
+  // Handle different views
+  if (currentView === 'skills') {
+    return <SkillsSimple onBack={() => setCurrentView('games')} onHome={() => setCurrentView('home')} />;
+  }
+
+  if (currentView === 'experience') {
+    return <ExperiencePage onBack={() => setCurrentView('games')} onHome={() => setCurrentView('home')} />;
+  }
+
+  if (currentView === 'projects') {
+    return <ProjectsPage onBack={() => setCurrentView('games')} onHome={() => setCurrentView('home')} />;
+  }
+
+  if (currentView === 'contact') {
+    return <ContactPage onBack={() => setCurrentView('games')} onHome={() => setCurrentView('home')} />;
+  }
+
   return (
     <div className="min-h-screen bg-black text-white">
       <nav className="fixed top-0 w-full z-50 bg-black">
@@ -330,15 +361,68 @@ const GamesPage = ({ onBack, onHome }) => {
               </div>
             </div>
             <div className="hidden md:flex space-x-6 lg:space-x-8">
-              <button onClick={onBack} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Back</button>
-              <button onClick={onHome} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
+              <button onClick={() => setCurrentView('home')} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
+              <button onClick={() => { setCurrentView('skills'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Skills</button>
+              <button onClick={() => { setCurrentView('experience'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Experience</button>
+              <button onClick={() => { setCurrentView('projects'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</button>
+              <button onClick={() => { setCurrentView('contact'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Contact</button>
+            </div>
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <button 
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="text-white text-2xl hover:text-gray-300 transition-colors"
+              >
+                {isMobileMenuOpen ? '✕' : '☰'}
+              </button>
             </div>
           </div>
         </div>
+        
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-black border-t border-gray-800">
+            <div className="px-4 py-4 space-y-4">
+              <button 
+                onClick={() => {
+                  setCurrentView('home');
+                  setIsMobileMenuOpen(false);
+                }} 
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2"
+              >
+                Home
+              </button>
+              <button 
+                onClick={() => { setCurrentView('skills'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+                Skills
+              </button>
+              <button 
+                onClick={() => { setCurrentView('experience'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+                Experience
+              </button>
+              <button 
+                onClick={() => { setCurrentView('projects'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+                Projects
+              </button>
+              <button 
+                onClick={() => { setCurrentView('contact'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+                Contact
+              </button>
+            </div>
+          </div>
+        )}
       </nav>
 
       <div className="pt-20 px-4 sm:px-6 py-6">
         <h1 className="text-2xl sm:text-3xl font-bold mb-4">Games</h1>
+        <blockquote className="text-lg sm:text-xl text-gray-300 italic mb-6 max-w-4xl">
+          "We don't stop playing because we grow old;<br />
+          ... we grow old because we stop playing."
+        </blockquote>
 
         {/* Game select menu */}
         {!selectedGame && (
