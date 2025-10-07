@@ -169,7 +169,7 @@ const PortfolioPage = ({ onBack }) => {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-20 pb-16">
+      <section className="relative pt-20 pb-16 min-h-[70vh] sm:min-h-[75vh] lg:min-h-[85vh]">
         {/* Video Background */}
         <video
           className="absolute inset-0 w-full h-full object-cover z-0"
@@ -207,7 +207,7 @@ const PortfolioPage = ({ onBack }) => {
             </button>
           </div>
         </div>
-        <div className="relative max-w-7xl mx-0 px-4 sm:px-6 py-24 sm:py-28"></div>
+        {/* Spacer no longer needed because section has a min-height */}
       </section>
 
       {/* Today's Top Picks Section */}
