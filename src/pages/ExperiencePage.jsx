@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { FaBriefcase, FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const experiences = [
   {
@@ -24,6 +25,95 @@ const experiences = [
 ];
 
 const ExperiencePage = ({ onBack, onHome }) => {
+  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  const correctPassword = '0836003411';
+
+  const handlePasswordChange = (e) => {
+    const val = e.target.value;
+    setPassword(val);
+    if (val === correctPassword) {
+      setIsUnlocked(true);
+      setPasswordError('');
+    } else if (val.length === correctPassword.length) {
+      setPasswordError('Incorrect password');
+      setTimeout(() => setPasswordError(''), 2000);
+      setPassword('');
+    }
+  };
+
+  const handleBackToPassword = () => {
+    setIsUnlocked(false);
+    setPassword('');
+    setPasswordError('');
+  };
+
+  if (!isUnlocked) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        {/* Password Protection Overlay */}
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl">
+          <div className="bg-black/80 border border-red-700 rounded-xl p-8 w-96 text-center shadow-[0_0_25px_rgba(229,9,20,0.5)]">
+            <div className="flex items-center justify-center mb-6">
+              <FaBriefcase className="text-red-500 text-4xl mr-4" />
+              <h2 className="text-2xl font-bold text-white">Experience Access</h2>
+            </div>
+            
+            <div className="mb-6">
+              <label className="block text-white text-sm font-semibold mb-2">
+                Enter Access Code
+              </label>
+              <div className="relative">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={handlePasswordChange}
+                  className={`w-full text-center tracking-widest text-white bg-black/60 border-2 rounded-lg py-3 px-4 outline-none ${
+                    passwordError ? 'border-red-600 animate-pulse' : 'border-red-700 focus:border-red-500'
+                  }`}
+                  placeholder="Enter access code"
+                  maxLength={10}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
+              {passwordError && (
+                <div className="text-red-500 mt-2 text-sm">{passwordError}</div>
+              )}
+            </div>
+            
+            <p className="text-gray-400 text-sm mb-6">
+              10-digit access code required
+            </p>
+            
+            <div className="flex space-x-4">
+              <button
+                onClick={onBack}
+                className="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-colors"
+              >
+                Back
+              </button>
+              <button
+                onClick={onHome}
+                className="flex-1 bg-red-700 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition-colors"
+              >
+                Home
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Nav */}
@@ -40,7 +130,7 @@ const ExperiencePage = ({ onBack, onHome }) => {
             </div>
             <div className="hidden md:flex space-x-6 lg:space-x-8">
               <button onClick={onHome} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
-              <button onClick={onBack} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Back</button>
+              <button onClick={handleBackToPassword} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Lock</button>
             </div>
           </div>
         </div>
