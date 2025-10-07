@@ -4,6 +4,7 @@ import SkillsSimple from './SkillsSimple';
 import ExperiencePage from './ExperiencePage';
 import ProjectsPage from './ProjectsPage';
 import BooksPage from './BooksPage';
+import ContactPage from './ContactPage';
 
 const StalkerPage = ({ onBack, onHome }) => {
   const [currentView, setCurrentView] = useState('stalker');
@@ -204,11 +205,11 @@ const StalkerPage = ({ onBack, onHome }) => {
             <div className="hidden md:flex space-x-6 lg:space-x-8">
               <button onClick={onHome} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
               <button onClick={() => { setCurrentView('skills'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Skills</button>
-              <button onClick={() => { setCurrentView('projects'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</button>
               <button onClick={() => { setCurrentView('experience'); setExperienceUnlocked(false); setExperiencePin(''); setPinError(''); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Experience</button>
               <button onClick={() => { setCurrentView('books'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Books</button>
+              <button onClick={() => { setCurrentView('projects'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</button>
+              <button onClick={() => { setCurrentView('contact'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Contact</button>
               <a href="https://github.com/kchetty100" target="_blank" rel="noreferrer" className="text-white font-bold text-lg hover:text-gray-300 transition-colors">GitHub</a>
-              <button onClick={onBack} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Back</button>
             </div>
             {/* Mobile menu button */}
             <div className="md:hidden">
@@ -241,11 +242,6 @@ const StalkerPage = ({ onBack, onHome }) => {
                 Skills
               </button>
               <button 
-                onClick={() => { setCurrentView('projects'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
-                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
-                Projects
-              </button>
-              <button 
                 onClick={() => { setCurrentView('experience'); setExperienceUnlocked(false); setExperiencePin(''); setPinError(''); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
                 className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
                 Experience
@@ -255,15 +251,17 @@ const StalkerPage = ({ onBack, onHome }) => {
                 className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
                 Books
               </button>
-              <a href="https://github.com/kchetty100" target="_blank" rel="noreferrer" className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">GitHub</a>
               <button 
-                onClick={() => {
-                  onBack();
-                  setIsMobileMenuOpen(false);
-                }}
+                onClick={() => { setCurrentView('projects'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
                 className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
-                Back
+                Projects
               </button>
+              <button 
+                onClick={() => { setCurrentView('contact'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+                Contact
+              </button>
+              <a href="https://github.com/kchetty100" target="_blank" rel="noreferrer" className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">GitHub</a>
             </div>
           </div>
         )}

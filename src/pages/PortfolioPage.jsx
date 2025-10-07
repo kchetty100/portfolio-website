@@ -178,14 +178,12 @@ const PortfolioPage = ({ onBack }) => {
             </div>
             <div className="hidden md:flex space-x-6 lg:space-x-8">
               <button onClick={onBack} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
-              <button onClick={() => { setCurrentView('experience'); setExperienceUnlocked(false); setExperiencePin(''); setPinError(''); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Professional</button>
-              <button onClick={() => {
-                setCurrentView('skills');
-                window.scrollTo(0, 0);
-              }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Skills</button>
+              <button onClick={() => { setCurrentView('skills'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Skills</button>
+              <button onClick={() => { setCurrentView('experience'); setExperienceUnlocked(false); setExperiencePin(''); setPinError(''); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Experience</button>
+              <button onClick={() => { setCurrentView('books'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Books</button>
               <button onClick={() => { setCurrentView('projects'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</button>
+              <button onClick={() => { setCurrentView('contact'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Contact</button>
               <a href="https://github.com/kchetty100" target="_blank" rel="noreferrer" className="text-white font-bold text-lg hover:text-gray-300 transition-colors">GitHub</a>
-              <button className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Hire Me</button>
             </div>
             {/* Mobile menu button */}
             <div className="md:hidden">
@@ -213,19 +211,19 @@ const PortfolioPage = ({ onBack }) => {
                 Home
               </button>
               <button 
-                onClick={() => { setCurrentView('experience'); setExperienceUnlocked(false); setExperiencePin(''); setPinError(''); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
+                onClick={() => { setCurrentView('skills'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
                 className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
-                Professional
+                Skills
               </button>
               <button 
-                onClick={() => {
-                  setCurrentView('skills');
-                  window.scrollTo(0, 0);
-                  setIsMobileMenuOpen(false);
-                }} 
-                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2"
-              >
-                Skills
+                onClick={() => { setCurrentView('experience'); setExperienceUnlocked(false); setExperiencePin(''); setPinError(''); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+                Experience
+              </button>
+              <button 
+                onClick={() => { setCurrentView('books'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+                Books
               </button>
               <button 
                 onClick={() => { 
@@ -236,10 +234,12 @@ const PortfolioPage = ({ onBack }) => {
                 className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
                 Projects
               </button>
-              <a href="https://github.com/kchetty100" target="_blank" rel="noreferrer" className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">GitHub</a>
-              <button className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
-                Hire Me
+              <button 
+                onClick={() => { setCurrentView('contact'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+                Contact
               </button>
+              <a href="https://github.com/kchetty100" target="_blank" rel="noreferrer" className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">GitHub</a>
             </div>
           </div>
         )}

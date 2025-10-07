@@ -155,7 +155,6 @@ const RecruiterPage = ({ onBack }) => {
               }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Skills</button>
               <button onClick={() => { setCurrentView('projects'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</button>
               <a href="https://github.com/kchetty100" target="_blank" rel="noreferrer" className="text-white font-bold text-lg hover:text-gray-300 transition-colors">GitHub</a>
-              <button className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Hire Me</button>
             </div>
             {/* Mobile menu button */}
             <div className="md:hidden">
@@ -207,9 +206,6 @@ const RecruiterPage = ({ onBack }) => {
                 Projects
               </button>
               <a href="https://github.com/kchetty100" target="_blank" rel="noreferrer" className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">GitHub</a>
-              <button className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
-                Hire Me
-              </button>
             </div>
           </div>
         )}

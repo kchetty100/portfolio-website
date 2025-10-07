@@ -37,19 +37,13 @@ const ContactPage = ({ onBack, onHome }) => {
     {
       icon: <FaEnvelope className="text-2xl" />,
       title: 'Email',
-      value: 'keegan.chetty@example.com',
-      link: 'mailto:keegan.chetty@example.com'
-    },
-    {
-      icon: <FaPhone className="text-2xl" />,
-      title: 'Phone',
-      value: '+1 (555) 123-4567',
-      link: 'tel:+15551234567'
+      value: 'backroads317@gmail.com',
+      link: 'mailto:backroads317@gmail.com'
     },
     {
       icon: <FaMapMarkerAlt className="text-2xl" />,
       title: 'Location',
-      value: 'San Francisco, CA',
+      value: 'South Africa',
       link: '#'
     }
   ];
@@ -91,7 +85,12 @@ const ContactPage = ({ onBack, onHome }) => {
             </div>
             <div className="hidden md:flex space-x-6 lg:space-x-8">
               <button onClick={onHome} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
-              <button onClick={onBack} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Back</button>
+              <button onClick={() => { /* Skills navigation */ }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Skills</button>
+              <button onClick={() => { /* Experience navigation */ }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Experience</button>
+              <button onClick={() => { /* Books navigation */ }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Books</button>
+              <button onClick={() => { /* Projects navigation */ }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</button>
+              <button onClick={() => { /* Contact navigation */ }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Contact</button>
+              <a href="https://github.com/kchetty100" target="_blank" rel="noreferrer" className="text-white font-bold text-lg hover:text-gray-300 transition-colors">GitHub</a>
             </div>
             {/* Mobile menu button */}
             <div className="md:hidden">
@@ -119,13 +118,31 @@ const ContactPage = ({ onBack, onHome }) => {
                 Home
               </button>
               <button 
-                onClick={() => {
-                  onBack();
-                  setIsMobileMenuOpen(false);
-                }}
+                onClick={() => { setIsMobileMenuOpen(false); }}
                 className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
-                Back
+                Skills
               </button>
+              <button 
+                onClick={() => { setIsMobileMenuOpen(false); }}
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+                Experience
+              </button>
+              <button 
+                onClick={() => { setIsMobileMenuOpen(false); }}
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+                Books
+              </button>
+              <button 
+                onClick={() => { setIsMobileMenuOpen(false); }}
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+                Projects
+              </button>
+              <button 
+                onClick={() => { setIsMobileMenuOpen(false); }}
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+                Contact
+              </button>
+              <a href="https://github.com/kchetty100" target="_blank" rel="noreferrer" className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">GitHub</a>
             </div>
           </div>
         )}

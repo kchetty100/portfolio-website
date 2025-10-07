@@ -23,7 +23,6 @@ const SkillsSimple = ({ onBack, onHome }) => {
               <button onClick={onHome} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
               <a href="#" className="text-white font-bold text-lg">Skills</a>
               <a href="#" className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</a>
-              <a href="#" className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Hire Me</a>
             </div>
             {/* Mobile menu button */}
             <div className="md:hidden">
@@ -55,9 +54,6 @@ const SkillsSimple = ({ onBack, onHome }) => {
               </a>
               <a href="#" className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
                 Projects
-              </a>
-              <a href="#" className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
-                Hire Me
               </a>
             </div>
           </div>

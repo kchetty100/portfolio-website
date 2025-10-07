@@ -47,7 +47,6 @@ const ProjectsPage = ({ onBack, onHome }) => {
               <button className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Skills</button>
               <button className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</button>
               <a href={`https://github.com/${GITHUB_USERNAME}`} target="_blank" rel="noreferrer" className="text-white font-bold text-lg hover:text-gray-300 transition-colors">GitHub</a>
-              <button className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Hire Me</button>
             </div>
           </div>
         </div>
