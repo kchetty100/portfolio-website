@@ -181,7 +181,7 @@ const PortfolioPage = ({ onBack }) => {
           onCanPlay={(e) => { e.currentTarget.style.display = 'block'; }}
           onError={(e) => { e.currentTarget.remove(); }}
         >
-          <source src="/Dwight Gets the Steam - The Office.mp4" type="video/mp4" />
+          <source src="/batman_banner.mp4" type="video/mp4" />
         </video>
         {/* Fallback image behind video */}
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" style={{
