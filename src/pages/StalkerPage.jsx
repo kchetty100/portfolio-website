@@ -179,20 +179,55 @@ const StalkerPage = ({ onBack, onHome }) => {
       </nav>
 
       {/* Hero Section */}
-      <div className="pt-20 px-4 sm:px-6 py-8">
-        <div className="max-w-7xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center mb-6">
-              <FaEye className="text-red-500 text-4xl mr-4" />
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold">
-                <span className="text-red-500">Stalk</span> My Digital Life
-              </h1>
-            </div>
-            <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto">
-              Welcome to my social media universe! Follow me across platforms and see what I'm up to.
-            </p>
+      <div className="relative pt-20 min-h-screen flex items-center">
+        {/* Video Background */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover z-0"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          onLoadStart={() => console.log('Video loading started')}
+          onCanPlay={() => console.log('Video can play')}
+          onPlay={() => console.log('Video started playing')}
+          onError={(e) => {
+            console.log('Video failed to load:', e.target.error);
+            console.log('Video src:', e.target.src);
+            e.target.style.display = 'none';
+          }}
+          style={{ zIndex: 0 }}
+        >
+          <source src="/aceVentura.mp4" type="video/mp4" />
+        </video>
+        {/* Fallback Image Background */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
+          style={{
+            backgroundImage: 'url("https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&h=1080&fit=crop")',
+            filter: 'blur(2px)',
+            zIndex: -1
+          }}
+        ></div>
+        <div className="absolute inset-0 bg-black/50"></div>
+        
+        <div className="absolute bottom-6 left-4 sm:left-6 z-10 max-w-3xl pr-4 text-left">
+          <div className="flex items-center mb-4">
+            <FaEye className="text-red-500 text-3xl mr-4" />
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white">
+              <span className="text-red-500">Stalk</span> My Digital Life
+            </h1>
           </div>
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 sm:mb-8 max-w-4xl leading-relaxed">
+            Welcome to my social media universe! Follow me across platforms and see what I'm up to. 
+            From coding adventures to random thoughts, it's all here for your stalking pleasure! 👀
+          </p>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="px-4 sm:px-6 py-8">
+        <div className="max-w-7xl mx-auto">
 
           {/* Social Platforms Grid */}
           <div className="mb-16">
