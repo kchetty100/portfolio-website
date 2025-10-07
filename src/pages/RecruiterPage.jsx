@@ -172,7 +172,7 @@ const RecruiterPage = ({ onBack }) => {
         
         <div className="absolute bottom-6 left-4 sm:left-6 z-10 max-w-3xl pr-4 text-left">
           <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6">
-            KEEGAN CHETTY - SENIOR JAVA DEVELOPER
+            KEEGAN CHETTY - SENIOR FULL STACK DEVELOPER
           </h1>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed">
             Experienced full-stack developer with expertise in React, Node.js, Python, and cloud technologies. 
