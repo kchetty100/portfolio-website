@@ -256,18 +256,16 @@ const StalkerPage = ({ onBack, onHome }) => {
         ></div>
         <div className="absolute inset-0 bg-black/50"></div>
         
-        {/* Title - Centered */}
-        <div className="absolute top-1/2 left-4 sm:left-6 transform -translate-y-1/2 z-10 max-w-3xl pr-4 text-left">
-          <div className="flex items-center">
+        {/* Paragraph - Bottom */}
+        <div className="absolute bottom-6 left-4 sm:left-6 z-10 max-w-3xl pr-4 text-left">
+          {/* Title - Just above paragraph */}
+          <div className="flex items-center mb-4">
             <FaEye className="text-red-500 text-3xl mr-4" />
             <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white">
               <span className="text-red-500">Stalk</span> My Digital Life
             </h1>
           </div>
-        </div>
-        
-        {/* Paragraph - Bottom */}
-        <div className="absolute bottom-6 left-4 sm:left-6 z-10 max-w-3xl pr-4 text-left">
+          
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 max-w-4xl leading-relaxed">
             Welcome to my social media universe! Follow me across platforms and see what I'm up to. 
             From coding adventures to random thoughts, it's all here for your stalking pleasure! 👀

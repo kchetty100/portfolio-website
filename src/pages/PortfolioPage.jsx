@@ -5,7 +5,6 @@ import LandingPage from './LandingPage';
 import ExperiencePage from './ExperiencePage';
 import ProjectsPage from './ProjectsPage';
 import GamesPage from './GamesPage';
-import BooksPage from './BooksPage';
 import ContactPage from './ContactPage';
 
 const PortfolioPage = ({ onBack }) => {
@@ -16,16 +15,12 @@ const PortfolioPage = ({ onBack }) => {
     { title: 'Skills', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop', icon: <FaCode /> },
     { title: 'Projects', image: 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=1200&h=800&fit=crop', icon: <FaProjectDiagram /> },
     { title: 'Experience', image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&h=800&fit=crop', icon: <FaBriefcase /> },
-    { title: 'Blogs', image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=1200&h=800&fit=crop', icon: <FaBlog /> },
     { title: 'Contact Me', image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1200&h=800&fit=crop', icon: <FaEnvelope /> },
     { title: 'Games', image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&h=800&fit=crop', icon: <FaPlay /> }
   ];
 
   const continueWatching = [
     { title: 'Music', image: 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=1200&h=800&fit=crop', icon: <FaMusic /> },
-    { title: 'Books', image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&h=800&fit=crop', icon: <FaBook /> },
-    { title: 'Blogs', image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=1200&h=800&fit=crop', icon: <FaBlog /> },
-    { title: 'Certifications', image: 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=1200&h=800&fit=crop', icon: <FaCertificate /> },
     { title: 'Contact Me', image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1200&h=800&fit=crop', icon: <FaPhone /> },
     { title: 'Projects', image: 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=1200&h=800&fit=crop', icon: <FaProjectDiagram /> },
     { title: 'Games', image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&h=800&fit=crop', icon: <FaPlay /> }
@@ -44,11 +39,6 @@ const PortfolioPage = ({ onBack }) => {
     }
     if (title === 'Experience') {
       setCurrentView('experience');
-      window.scrollTo(0, 0);
-      return;
-    }
-    if (title === 'Books') {
-      setCurrentView('books');
       window.scrollTo(0, 0);
       return;
     }
@@ -94,12 +84,6 @@ const PortfolioPage = ({ onBack }) => {
     />;
   }
 
-  if (currentView === 'books') {
-    return <BooksPage 
-      onBack={() => setCurrentView('portfolio')} 
-      onHome={() => setCurrentView('home')} 
-    />;
-  }
 
   if (currentView === 'contact') {
     return <ContactPage 
@@ -133,10 +117,8 @@ const PortfolioPage = ({ onBack }) => {
               <button onClick={onBack} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
               <button onClick={() => { setCurrentView('skills'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Skills</button>
               <button onClick={() => { setCurrentView('experience'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Experience</button>
-              <button onClick={() => { setCurrentView('books'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Books</button>
               <button onClick={() => { setCurrentView('projects'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</button>
               <button onClick={() => { setCurrentView('contact'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Contact</button>
-              <a href="https://github.com/kchetty100" target="_blank" rel="noreferrer" className="text-white font-bold text-lg hover:text-gray-300 transition-colors">GitHub</a>
             </div>
             {/* Mobile menu button */}
             <div className="md:hidden">
@@ -174,11 +156,6 @@ const PortfolioPage = ({ onBack }) => {
                 Experience
               </button>
               <button 
-                onClick={() => { setCurrentView('books'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
-                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
-                Books
-              </button>
-              <button 
                 onClick={() => { 
                   setCurrentView('projects'); 
                   window.scrollTo(0, 0);
@@ -192,7 +169,6 @@ const PortfolioPage = ({ onBack }) => {
                 className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
                 Contact
               </button>
-              <a href="https://github.com/kchetty100" target="_blank" rel="noreferrer" className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">GitHub</a>
             </div>
           </div>
         )}
