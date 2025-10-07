@@ -12,21 +12,24 @@ const MusicPage = ({ onBack, onHome }) => {
   const [equalizerOn, setEqualizerOn] = useState(true);
   const [playlistVisible, setPlaylistVisible] = useState(true);
   const [eqBands, setEqBands] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  const [showVideo, setShowVideo] = useState(false);
   const audioRef = useRef(null);
+  const videoRef = useRef(null);
 
   const playlist = [
-    { id: 1, title: "Mori Calliope - Go-Getters", duration: "3:15", artist: "Mori Calliope" },
-    { id: 2, title: "CircusP - Goodbye", duration: "3:24", artist: "CircusP" },
-    { id: 3, title: "AmaLee - Siren", duration: "4:02", artist: "AmaLee" },
-    { id: 4, title: "Crusher-P - Echo", duration: "3:50", artist: "Crusher-P" },
-    { id: 5, title: "M83 - Midnight City", duration: "4:03", artist: "M83" },
-    { id: 6, title: "Sunnexo - Please Wait", duration: "4:15", artist: "Sunnexo" },
-    { id: 7, title: "Omaru Polka - Persona", duration: "4:56", artist: "Omaru Polka" },
-    { id: 8, title: "Daft Punk - Digital Love", duration: "4:35", artist: "Daft Punk" },
-    { id: 9, title: "Porter Robinson - Language", duration: "6:08", artist: "Porter Robinson" },
-    { id: 10, title: "Deadmau5 - Strobe", duration: "10:37", artist: "Deadmau5" },
-    { id: 11, title: "Skrillex - Bangarang", duration: "3:35", artist: "Skrillex" },
-    { id: 12, title: "Madeon - All My Friends", duration: "3:24", artist: "Madeon" }
+    { id: 1, title: "Mori Calliope - Go-Getters", duration: "3:15", artist: "Mori Calliope", type: "audio" },
+    { id: 2, title: "CircusP - Goodbye", duration: "3:24", artist: "CircusP", type: "audio" },
+    { id: 3, title: "AmaLee - Siren", duration: "4:02", artist: "AmaLee", type: "audio" },
+    { id: 4, title: "Crusher-P - Echo", duration: "3:50", artist: "Crusher-P", type: "audio" },
+    { id: 5, title: "M83 - Midnight City", duration: "4:03", artist: "M83", type: "audio" },
+    { id: 6, title: "Sunnexo - Please Wait", duration: "4:15", artist: "Sunnexo", type: "audio" },
+    { id: 7, title: "Omaru Polka - Persona", duration: "4:56", artist: "Omaru Polka", type: "audio" },
+    { id: 8, title: "Daft Punk - Digital Love", duration: "4:35", artist: "Daft Punk", type: "audio" },
+    { id: 9, title: "Porter Robinson - Language", duration: "6:08", artist: "Porter Robinson", type: "audio" },
+    { id: 10, title: "Deadmau5 - Strobe", duration: "10:37", artist: "Deadmau5", type: "audio" },
+    { id: 11, title: "Skrillex - Bangarang", duration: "3:35", artist: "Skrillex", type: "audio" },
+    { id: 12, title: "Madeon - All My Friends", duration: "3:24", artist: "Madeon", type: "audio" },
+    { id: 13, title: "Michael Gray - The Weekend", duration: "3:45", artist: "Michael Gray", type: "video", videoSrc: "/Michael Gray - The Weekend (Official Video).mp4" }
   ];
 
   const eqFrequencies = ['70', '100', '320', '600', '1K', '3K', '6K', '12K', '14K', '16K'];
@@ -54,20 +57,40 @@ const MusicPage = ({ onBack, onHome }) => {
   };
 
   const handleNext = () => {
+    let nextIndex;
     if (shuffle) {
-      const randomIndex = Math.floor(Math.random() * playlist.length);
-      setCurrentTrack(randomIndex);
+      nextIndex = Math.floor(Math.random() * playlist.length);
     } else {
-      setCurrentTrack((prev) => (prev + 1) % playlist.length);
+      nextIndex = (currentTrack + 1) % playlist.length;
+    }
+    setCurrentTrack(nextIndex);
+    const track = playlist[nextIndex];
+    if (track && track.type === 'video') {
+      setShowVideo(true);
+    } else {
+      setShowVideo(false);
     }
   };
 
   const handlePrevious = () => {
-    setCurrentTrack((prev) => (prev - 1 + playlist.length) % playlist.length);
+    const prevIndex = (currentTrack - 1 + playlist.length) % playlist.length;
+    setCurrentTrack(prevIndex);
+    const track = playlist[prevIndex];
+    if (track && track.type === 'video') {
+      setShowVideo(true);
+    } else {
+      setShowVideo(false);
+    }
   };
 
   const handleTrackSelect = (index) => {
     setCurrentTrack(index);
+    const track = playlist[index];
+    if (track && track.type === 'video') {
+      setShowVideo(true);
+    } else {
+      setShowVideo(false);
+    }
   };
 
   const handleVolumeChange = (e) => {
@@ -270,8 +293,54 @@ const MusicPage = ({ onBack, onHome }) => {
                     className="w-20"
                   />
                 </div>
+                {playlist[currentTrack]?.type === 'video' && (
+                  <button
+                    onClick={() => setShowVideo(!showVideo)}
+                    className={`px-3 py-1 rounded text-sm ${showVideo ? 'bg-orange-600 text-white' : 'bg-gray-700 text-gray-300'}`}
+                  >
+                    📹 VIDEO
+                  </button>
+                )}
               </div>
             </div>
+
+            {/* Video Display */}
+            {showVideo && playlist[currentTrack]?.type === 'video' && (
+              <div className="bg-gray-800 border-t border-gray-600">
+                <div className="bg-gray-700 px-3 py-1 flex items-center justify-between">
+                  <span className="text-white font-bold text-sm">WINAMP VIDEO</span>
+                  <button
+                    onClick={() => setShowVideo(false)}
+                    className="px-2 py-1 bg-gray-600 text-white text-xs rounded"
+                  >
+                    CLOSE
+                  </button>
+                </div>
+                <div className="p-4">
+                  <div className="bg-black rounded overflow-hidden">
+                    <video
+                      ref={videoRef}
+                      src={playlist[currentTrack]?.videoSrc}
+                      className="w-full h-64 object-cover"
+                      controls
+                      autoPlay={isPlaying}
+                      muted={false}
+                      onPlay={() => setIsPlaying(true)}
+                      onPause={() => setIsPlaying(false)}
+                      onEnded={handleNext}
+                    />
+                  </div>
+                  <div className="text-center mt-2">
+                    <div className="text-white text-sm font-semibold">
+                      {playlist[currentTrack]?.title}
+                    </div>
+                    <div className="text-gray-400 text-xs">
+                      {playlist[currentTrack]?.artist}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Equalizer */}
             <div className="bg-gray-800 border-t border-gray-600">
@@ -341,8 +410,11 @@ const MusicPage = ({ onBack, onHome }) => {
                           index === currentTrack ? 'text-green-400 bg-gray-800' : 'text-white'
                         }`}
                       >
-                        <span className="text-sm">
+                        <span className="text-sm flex items-center">
                           {index + 1}. {track.title}
+                          {track.type === 'video' && (
+                            <span className="ml-2 text-orange-400 text-xs">📹</span>
+                          )}
                         </span>
                         <span className="text-xs text-gray-400">{track.duration}</span>
                       </div>
