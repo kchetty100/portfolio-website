@@ -194,7 +194,7 @@ const PortfolioPage = ({ onBack }) => {
             KEEGAN CHETTY - SENIOR FULL STACK DEVELOPER
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed mb-6 sm:mb-8 max-w-4xl">
-            Dynamic and results-driven Senior Software Engineer with 5+ years in full-stack development across high-impact, large-scale applications. Expertise in React, Node.js, Python, AWS, Kubernetes, and Docker. Achieved serving 10,000+ users and managing 50 million+ bookings.
+            Dynamic and results-driven Senior Software Engineer with 8+ years in full-stack development across high-impact, large-scale applications. Expertise in React, Node.js, Python, AWS, Kubernetes, and Docker. Achieved serving 10,000+ users and managing 50 million+ bookings.
           </p>
           <div className="flex flex-col sm:flex-row justify-start gap-4 sm:gap-6">
             <button className="bg-black text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 hover:bg-gray-800 transition-colors border border-gray-600">
