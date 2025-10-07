@@ -297,18 +297,37 @@ const GamesPage = ({ onBack, onHome }) => {
     };
   }, [selectedGame, isRunning]);
 
+  const [eatRun, setEatRun] = useState(true);
+  useEffect(() => {
+    const t = setTimeout(() => setEatRun(false), 1800); // run once on load
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <div className="min-h-screen bg-black text-white">
       <nav className="fixed top-0 w-full z-50 bg-black">
         <div className="px-4 sm:px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <button
-                onClick={onHome}
-                className="text-xl sm:text-3xl font-bold text-netflixRed tracking-tight font-netflix text-arc-effect hover:text-red-400 transition-colors cursor-pointer"
-              >
-                KEEGAN CHETTY
-              </button>
+              <div className="relative inline-block">
+                {/* Animated Pacman eating the name once */}
+                {eatRun && (
+                  <svg width="28" height="28" viewBox="0 0 32 32" className="absolute left-0 top-1/2 -translate-y-1/2 animate-[pacrun_1.6s_linear_forwards]">
+                    <defs>
+                      <clipPath id="mouthClip"><path d="M16,16 L32,0 L32,32 Z"/></clipPath>
+                    </defs>
+                    <circle cx="16" cy="16" r="14" fill="#FFE000" clipPath="url(#mouthClip)"/>
+                    <circle cx="12" cy="10" r="2" fill="#000"/>
+                  </svg>
+                )}
+                <style>{`@keyframes pacrun{0%{transform:translate(0,-50%);}100%{transform:translate(140px,-50%);}}`}</style>
+                <button
+                  onClick={onHome}
+                  className={`text-xl sm:text-3xl font-bold tracking-tight font-netflix text-arc-effect transition-colors cursor-pointer ${eatRun ? 'text-transparent' : 'text-netflixRed hover:text-red-400'}`}
+                >
+                  KEEGAN CHETTY
+                </button>
+              </div>
             </div>
             <div className="hidden md:flex space-x-6 lg:space-x-8">
               <button onClick={onBack} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Back</button>
