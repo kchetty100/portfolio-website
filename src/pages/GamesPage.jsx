@@ -60,7 +60,7 @@ const GamesPage = ({ onBack, onHome }) => {
 
     // Enemies (ghosts)
     const enemyCount = 3;
-    const enemySpeed = 1.8;
+    const enemySpeed = 1.0; // slower ghosts
     const enemies = Array.from({ length: enemyCount }).map((_, i) => ({
       x: (1 + i) * cellSize * 2 + cellSize,
       y: (1 + i) * cellSize * 2 + cellSize,
@@ -142,13 +142,28 @@ const GamesPage = ({ onBack, onHome }) => {
 
       // Enemies logic
       enemies.forEach((g) => {
-        // Vector towards Pacman
-        let dx = pacX - g.x;
-        let dy = pacY - g.y;
-        const len = Math.hypot(dx, dy) || 1;
-        dx = (dx / len) * enemySpeed;
-        dy = (dy / len) * enemySpeed;
-        g.x += dx; g.y += dy;
+        // Move along grid-aligned paths (follow dot lines)
+        const dxTot = pacX - g.x;
+        const dyTot = pacY - g.y;
+        let stepX = 0, stepY = 0;
+        if (Math.abs(dxTot) >= Math.abs(dyTot)) {
+          // favor horizontal movement first
+          stepX = dxTot > 0 ? enemySpeed : -enemySpeed;
+          stepY = 0;
+        } else {
+          stepY = dyTot > 0 ? enemySpeed : -enemySpeed;
+          stepX = 0;
+        }
+        // Snap movement to grid corridors by keeping one axis constant towards nearest corridor center
+        // Align to nearest row/column center when moving horizontally/vertically
+        if (stepX !== 0) {
+          const targetRowY = Math.round(g.y / cellSize) * cellSize;
+          g.y += Math.sign(targetRowY - g.y) * Math.min(Math.abs(targetRowY - g.y), enemySpeed);
+        } else if (stepY !== 0) {
+          const targetColX = Math.round(g.x / cellSize) * cellSize;
+          g.x += Math.sign(targetColX - g.x) * Math.min(Math.abs(targetColX - g.x), enemySpeed);
+        }
+        g.x += stepX; g.y += stepY;
         // wrap
         if (g.x < 0) g.x = width(); if (g.x > width()) g.x = 0;
         if (g.y < 0) g.y = height(); if (g.y > height()) g.y = 0;
@@ -161,7 +176,7 @@ const GamesPage = ({ onBack, onHome }) => {
 
         // Collision with pacman
         if (Math.hypot(pacX - g.x, pacY - g.y) < 18) {
-          setGameMessage('Game Over');
+          setGameMessage('You lose!');
           setIsRunning(false);
         }
       });
