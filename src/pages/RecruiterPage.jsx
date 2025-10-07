@@ -226,7 +226,7 @@ const RecruiterPage = ({ onBack }) => {
       <div className="py-8 sm:py-16 px-4 sm:px-6">
         <div className="max-w-7xl mx-0">
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-6 sm:mb-8">Continue Watching for recruiter</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
             {continueWatching.map((item, index) => (
               <div
                 key={index}
