@@ -9,13 +9,12 @@ const RecruiterPage = ({ onBack }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const topPicks = [
-    { title: 'Work Permit', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop', icon: <FaCertificate /> },
-    { title: 'Skills', image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=300&h=200&fit=crop', icon: <FaCode /> },
-    { title: 'Experience', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=200&fit=crop', icon: <FaBriefcase /> },
-    { title: 'Certifications', image: 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=300&h=200&fit=crop', icon: <FaCertificate /> },
-    { title: 'Recommendations', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=200&fit=crop', icon: <FaThumbsUp /> },
-    { title: 'Projects', image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=200&fit=crop', icon: <FaProjectDiagram /> },
-    { title: 'Contact Me', image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=300&h=200&fit=crop', icon: <FaEnvelope /> }
+    { title: 'Work Permit', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop', icon: <FaCertificate /> },
+    { title: 'Skills', image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&h=800&fit=crop', icon: <FaCode /> },
+    { title: 'Experience', image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&h=800&fit=crop', icon: <FaBriefcase /> },
+    { title: 'Certifications', image: 'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=1200&h=800&fit=crop', icon: <FaCertificate /> },
+    { title: 'Recommendations', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=800&fit=crop', icon: <FaThumbsUp /> },
+    { title: 'Projects', image: 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=1200&h=800&fit=crop', icon: <FaProjectDiagram /> }
   ];
 
   const continueWatching = [
@@ -28,6 +27,11 @@ const RecruiterPage = ({ onBack }) => {
   const handleTileClick = (title) => {
     if (title === 'Skills') {
       setCurrentView('skills');
+      window.scrollTo(0, 0);
+      return;
+    }
+    if (title === 'Experience') {
+      setCurrentView('experience');
       window.scrollTo(0, 0);
       return;
     }
@@ -169,7 +173,7 @@ const RecruiterPage = ({ onBack }) => {
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 text-center">
           <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6">
-            Keegan Chetty - Senior Full Stack Developer
+            KEEGAN CHETTY - SENIOR JAVA DEVELOPER
           </h1>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed">
             Experienced full-stack developer with expertise in React, Node.js, Python, and cloud technologies. 
@@ -194,7 +198,7 @@ const RecruiterPage = ({ onBack }) => {
       <div className="py-8 sm:py-16 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-6 sm:mb-8">Today's Top Picks for recruiter</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
             {topPicks.map((item, index) => (
               <div
                 key={index}
