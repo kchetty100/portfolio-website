@@ -5,6 +5,7 @@ import LandingPage from './LandingPage';
 import ExperiencePage from './ExperiencePage';
 import ProjectsPage from './ProjectsPage';
 import GamesPage from './GamesPage';
+import BooksPage from './BooksPage';
 
 const PortfolioPage = ({ onBack }) => {
   const [currentView, setCurrentView] = useState('portfolio');
@@ -17,6 +18,7 @@ const PortfolioPage = ({ onBack }) => {
     { title: 'Skills', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop', icon: <FaCode /> },
     { title: 'Projects', image: 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=1200&h=800&fit=crop', icon: <FaProjectDiagram /> },
     { title: 'Experience', image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&h=800&fit=crop', icon: <FaBriefcase /> },
+    { title: 'Books', image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&h=800&fit=crop', icon: <FaBook /> },
     { title: 'Blogs', image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=1200&h=800&fit=crop', icon: <FaBlog /> },
     { title: 'Contact Me', image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1200&h=800&fit=crop', icon: <FaEnvelope /> },
     { title: 'Games', image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&h=800&fit=crop', icon: <FaPlay /> }
@@ -48,6 +50,11 @@ const PortfolioPage = ({ onBack }) => {
       setExperienceUnlocked(false);
       setExperiencePin('');
       setPinError('');
+      window.scrollTo(0, 0);
+      return;
+    }
+    if (title === 'Books') {
+      setCurrentView('books');
       window.scrollTo(0, 0);
       return;
     }
@@ -127,6 +134,13 @@ const PortfolioPage = ({ onBack }) => {
         )}
       </div>
     );
+  }
+
+  if (currentView === 'books') {
+    return <BooksPage 
+      onBack={() => setCurrentView('portfolio')} 
+      onHome={() => setCurrentView('home')} 
+    />;
   }
 
   if (currentView === 'games') {
