@@ -205,7 +205,7 @@ const RecruiterPage = ({ onBack }) => {
                 onClick={() => handleTileClick(item.title)}
                 className="group cursor-pointer transform transition-all duration-300 hover:scale-105"
               >
-                <div className="relative aspect-[3/4] rounded-lg overflow-hidden bg-gray-800">
+                <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-800">
                   <img
                     src={item.image}
                     alt={item.title}
@@ -233,7 +233,7 @@ const RecruiterPage = ({ onBack }) => {
                 onClick={() => handleTileClick(item.title)}
                 className="group cursor-pointer transform transition-all duration-300 hover:scale-105"
               >
-                <div className="relative aspect-[3/4] rounded-lg overflow-hidden bg-gray-800">
+                <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-800">
                   <img
                     src={item.image}
                     alt={item.title}
