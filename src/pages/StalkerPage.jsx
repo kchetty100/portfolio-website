@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
-import { FaEye, FaInstagram, FaTwitter, FaLinkedin, FaGithub, FaYoutube, FaTiktok, FaSnapchat, FaDiscord, FaReddit, FaArrowLeft, FaHome } from 'react-icons/fa';
+import { FaEye, FaInstagram, FaTwitter, FaLinkedin, FaGithub, FaYoutube, FaTiktok, FaSnapchat, FaDiscord, FaReddit, FaArrowLeft, FaHome, FaCode, FaProjectDiagram, FaBriefcase, FaBook } from 'react-icons/fa';
+import SkillsSimple from './SkillsSimple';
+import ExperiencePage from './ExperiencePage';
+import ProjectsPage from './ProjectsPage';
+import BooksPage from './BooksPage';
 
 const StalkerPage = ({ onBack, onHome }) => {
+  const [currentView, setCurrentView] = useState('stalker');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [experienceUnlocked, setExperienceUnlocked] = useState(false);
+  const [experiencePin, setExperiencePin] = useState('');
+  const [pinError, setPinError] = useState('');
 
   const socialPlatforms = [
     {
@@ -122,6 +130,71 @@ const StalkerPage = ({ onBack, onHome }) => {
     }
   ];
 
+  // Handle different views
+  if (currentView === 'skills') {
+    return <SkillsSimple onBack={() => setCurrentView('stalker')} onHome={() => setCurrentView('home')} />;
+  }
+
+  if (currentView === 'projects') {
+    return <ProjectsPage onBack={() => setCurrentView('stalker')} onHome={() => setCurrentView('home')} />;
+  }
+
+  if (currentView === 'books') {
+    return <BooksPage onBack={() => setCurrentView('stalker')} onHome={() => setCurrentView('home')} />;
+  }
+
+  if (currentView === 'experience') {
+    const correctPin = '12345';
+    const handlePinChange = (e) => {
+      const val = e.target.value.replace(/\D/g, '').slice(0, 5);
+      setExperiencePin(val);
+      if (val.length === 5) {
+        if (val === correctPin) {
+          setExperienceUnlocked(true);
+          setPinError('');
+        } else {
+          setPinError('Incorrect PIN');
+          setTimeout(() => setPinError(''), 1200);
+          setExperiencePin('');
+        }
+      }
+    };
+
+    return (
+      <div className="relative">
+        <div className={experienceUnlocked ? '' : 'blur-sm sm:blur-md'}>
+          <ExperiencePage onBack={() => setCurrentView('stalker')} onHome={() => setCurrentView('home')} />
+        </div>
+        {!experienceUnlocked && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xl">
+            <div className="bg-black/80 border border-red-700 rounded-xl p-6 w-80 text-center shadow-[0_0_25px_rgba(229,9,20,0.5)]">
+              <h3 className="text-white font-bold text-xl mb-3">Enter Access PIN</h3>
+              <input
+                type="password"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                maxLength={5}
+                value={experiencePin}
+                onChange={handlePinChange}
+                className={`w-full text-center tracking-widest text-white bg-black/60 border-2 rounded-lg py-3 outline-none ${pinError ? 'border-red-600 animate-pulse' : 'border-red-700 focus:border-red-500'}`}
+                placeholder="•••••"
+              />
+              {pinError && <div className="text-red-500 mt-2 text-sm">{pinError}</div>}
+              <p className="text-gray-400 mt-3 text-sm">5-digit PIN required</p>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  if (currentView === 'home') {
+    if (onHome) {
+      onHome();
+    }
+    return null;
+  }
+
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Navigation Bar */}
@@ -138,6 +211,11 @@ const StalkerPage = ({ onBack, onHome }) => {
             </div>
             <div className="hidden md:flex space-x-6 lg:space-x-8">
               <button onClick={onHome} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
+              <button onClick={() => { setCurrentView('skills'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Skills</button>
+              <button onClick={() => { setCurrentView('projects'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</button>
+              <button onClick={() => { setCurrentView('experience'); setExperienceUnlocked(false); setExperiencePin(''); setPinError(''); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Experience</button>
+              <button onClick={() => { setCurrentView('books'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Books</button>
+              <a href="https://github.com/kchetty100" target="_blank" rel="noreferrer" className="text-white font-bold text-lg hover:text-gray-300 transition-colors">GitHub</a>
               <button onClick={onBack} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Back</button>
             </div>
             {/* Mobile menu button */}
@@ -165,6 +243,27 @@ const StalkerPage = ({ onBack, onHome }) => {
               >
                 Home
               </button>
+              <button 
+                onClick={() => { setCurrentView('skills'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+                Skills
+              </button>
+              <button 
+                onClick={() => { setCurrentView('projects'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+                Projects
+              </button>
+              <button 
+                onClick={() => { setCurrentView('experience'); setExperienceUnlocked(false); setExperiencePin(''); setPinError(''); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+                Experience
+              </button>
+              <button 
+                onClick={() => { setCurrentView('books'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+                Books
+              </button>
+              <a href="https://github.com/kchetty100" target="_blank" rel="noreferrer" className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">GitHub</a>
               <button 
                 onClick={() => {
                   onBack();
@@ -211,14 +310,19 @@ const StalkerPage = ({ onBack, onHome }) => {
         ></div>
         <div className="absolute inset-0 bg-black/50"></div>
         
+        {/* Title - Centered */}
         <div className="absolute top-1/2 left-4 sm:left-6 transform -translate-y-1/2 z-10 max-w-3xl pr-4 text-left">
-          <div className="flex items-center mb-4">
+          <div className="flex items-center">
             <FaEye className="text-red-500 text-3xl mr-4" />
             <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white">
               <span className="text-red-500">Stalk</span> My Digital Life
             </h1>
           </div>
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 sm:mb-8 max-w-4xl leading-relaxed">
+        </div>
+        
+        {/* Paragraph - Bottom */}
+        <div className="absolute bottom-6 left-4 sm:left-6 z-10 max-w-3xl pr-4 text-left">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 max-w-4xl leading-relaxed">
             Welcome to my social media universe! Follow me across platforms and see what I'm up to. 
             From coding adventures to random thoughts, it's all here for your stalking pleasure! 👀
           </p>
