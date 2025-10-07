@@ -2,14 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 
 const GamesPage = ({ onBack, onHome }) => {
   const canvasRef = useRef(null);
-  const [selectedGame, setSelectedGame] = useState(null); // 'pacman'
+  const [selectedGame, setSelectedGame] = useState(null); // 'pacman' | 'snake'
   const [isRunning, setIsRunning] = useState(false);
   const [gameMessage, setGameMessage] = useState(null);
 
   useEffect(() => {
-    if (selectedGame !== 'pacman' || !isRunning) {
-      return;
-    }
+    if (!selectedGame || !isRunning) return;
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
 
@@ -49,6 +47,10 @@ const GamesPage = ({ onBack, onHome }) => {
     // Reset win/lose banner
     setGameMessage(null);
 
+    // Direction helper for both games
+    let setDirection = () => {};
+    canvas.__setDirection = (d) => setDirection(d);
+
     // Pacman state
     let pacX = Math.floor(cols() / 2) * cellSize + cellSize / 2;
     let pacY = Math.floor(rows() / 2) * cellSize + cellSize / 2;
@@ -76,14 +78,12 @@ const GamesPage = ({ onBack, onHome }) => {
     window.addEventListener('keydown', keyHandler);
 
     // On-screen controls
-    const setDirection = (dir) => {
+    const setPacmanDirection = (dir) => {
       if (dir === 'left') { vx = -speed; vy = 0; }
       if (dir === 'right') { vx = speed; vy = 0; }
       if (dir === 'up') { vy = -speed; vx = 0; }
       if (dir === 'down') { vy = speed; vx = 0; }
     };
-    // expose for buttons
-    canvas.__setDirection = setDirection;
 
     let rafId;
     const draw = () => {
@@ -183,7 +183,101 @@ const GamesPage = ({ onBack, onHome }) => {
 
       rafId = requestAnimationFrame(draw);
     };
-    rafId = requestAnimationFrame(draw);
+    // Snake implementation
+    let snake = [{ x: Math.floor(cols() / 2), y: Math.floor(rows() / 2) }];
+    let dir = { x: 1, y: 0 };
+    let pendingDir = dir;
+    let food = { x: 2, y: 2 };
+    let score = 0;
+    let tickAccumulator = 0;
+    const snakeSpeed = 8; // cells per second
+
+    const placeFood = () => {
+      const cmax = cols() - 2, rmax = rows() - 2;
+      food = { x: 1 + Math.floor(Math.random() * cmax), y: 1 + Math.floor(Math.random() * rmax) };
+    };
+    placeFood();
+
+    const setSnakeDirection = (d) => {
+      const map = { left: { x: -1, y: 0 }, right: { x: 1, y: 0 }, up: { x: 0, y: -1 }, down: { x: 0, y: 1 } };
+      const nd = map[d] || dir;
+      // prevent reversing
+      if (nd.x === -dir.x && nd.y === -dir.y) return;
+      pendingDir = nd;
+    };
+
+    // Bind controls depending on game
+    setDirection = selectedGame === 'pacman' ? setPacmanDirection : setSnakeDirection;
+
+    const updateSnake = (dt) => {
+      tickAccumulator += dt;
+      const stepTime = 1 / snakeSpeed;
+      let moved = false;
+      while (tickAccumulator >= stepTime) {
+        tickAccumulator -= stepTime;
+        dir = pendingDir;
+        const head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
+        // wrap borderless map
+        head.x = (head.x + cols()) % cols();
+        head.y = (head.y + rows()) % rows();
+        // self collision
+        if (snake.some((s, i) => i > 0 && s.x === head.x && s.y === head.y)) {
+          setGameMessage('Game Over');
+          setIsRunning(false);
+          return false;
+        }
+        snake.unshift(head);
+        if (head.x === food.x && head.y === food.y) {
+          score += 1;
+          placeFood();
+        } else {
+          snake.pop();
+        }
+        moved = true;
+      }
+      return moved;
+    };
+
+    let lastTs = 0;
+    const loop = (ts) => {
+      const dt = (ts - lastTs) / 1000 || 0;
+      lastTs = ts;
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, width(), height());
+
+      if (selectedGame === 'pacman') {
+        draw(dt * 60); // reuse pacman draw at ~60fps scale
+      } else if (selectedGame === 'snake') {
+        // grid background
+        ctx.strokeStyle = '#111';
+        for (let c = 0; c < cols(); c++) {
+          ctx.beginPath(); ctx.moveTo(c * cellSize, 0); ctx.lineTo(c * cellSize, height()); ctx.stroke();
+        }
+        for (let r = 0; r < rows(); r++) {
+          ctx.beginPath(); ctx.moveTo(0, r * cellSize); ctx.lineTo(width(), r * cellSize); ctx.stroke();
+        }
+
+        if (updateSnake(dt) === false) return;
+
+        // draw food
+        ctx.fillStyle = '#E50914';
+        ctx.fillRect(food.x * cellSize + 6, food.y * cellSize + 6, cellSize - 12, cellSize - 12);
+
+        // draw snake
+        ctx.fillStyle = '#00FF66';
+        snake.forEach((s, i) => {
+          ctx.fillRect(s.x * cellSize + 2, s.y * cellSize + 2, cellSize - 4, cellSize - 4);
+        });
+
+        // score
+        ctx.fillStyle = '#fff';
+        ctx.font = '14px sans-serif';
+        ctx.fillText(`Score: ${score}`, 10, 18);
+      }
+      rafId = requestAnimationFrame(loop);
+    };
+
+    rafId = requestAnimationFrame(loop);
 
     return () => {
       window.removeEventListener('keydown', keyHandler);
@@ -229,6 +323,16 @@ const GamesPage = ({ onBack, onHome }) => {
                 <span className="text-white font-bold text-lg">Pacman</span>
               </div>
             </button>
+            <button
+              onClick={() => { setSelectedGame('snake'); setIsRunning(false); }}
+              className="group relative aspect-square rounded-lg overflow-hidden bg-gray-900 border border-gray-700 hover:border-netflixRed transition-colors skill-card-hover"
+            >
+              <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&h=800&fit=crop" alt="Snake" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-60" />
+              <div className="absolute inset-0 bg-black/40"></div>
+              <div className="relative z-10 h-full w-full flex items-center justify-center">
+                <span className="text-white font-bold text-lg">Snake</span>
+              </div>
+            </button>
             {/* Placeholder for future games */}
             <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-500">
               Coming Soon
@@ -255,6 +359,35 @@ const GamesPage = ({ onBack, onHome }) => {
               <canvas ref={canvasRef} width={720} height={420} className="block w-full h-auto" />
               <div className="text-gray-400 text-sm mt-2">Use arrow keys or on-screen controls</div>
               {/* On-screen controls for mobile */}
+              <div className="mt-4 grid grid-cols-3 gap-3 w-full max-w-xs mx-auto select-none">
+                <div></div>
+                <button onClick={() => canvasRef.current.__setDirection('up')} className="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 rounded">▲</button>
+                <div></div>
+                <button onClick={() => canvasRef.current.__setDirection('left')} className="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 rounded">◀</button>
+                <button onClick={() => canvasRef.current.__setDirection('down')} className="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 rounded">▼</button>
+                <button onClick={() => canvasRef.current.__setDirection('right')} className="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 rounded">▶</button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {selectedGame === 'snake' && (
+          <div className="mt-6">
+            {!isRunning && (
+              <div className="mb-4 flex items-center gap-3">
+                <button onClick={() => setIsRunning(true)} className="bg-netflixRed text-white font-semibold px-5 py-2 rounded hover:bg-red-700 transition-colors">Start Game</button>
+                {gameMessage && <span className="text-white/90">{gameMessage}</span>}
+              </div>
+            )}
+            {isRunning && (
+              <div className="mb-4 flex gap-3">
+                <button onClick={() => setIsRunning(false)} className="bg-gray-800 text-white font-semibold px-4 py-2 rounded hover:bg-gray-700 transition-colors">Pause</button>
+                <button onClick={() => { setIsRunning(false); setSelectedGame(null); }} className="bg-black border border-gray-700 text-white font-semibold px-4 py-2 rounded hover:bg-gray-800 transition-colors">Exit</button>
+              </div>
+            )}
+            <div className="bg-gray-900 rounded-lg p-4 inline-block border border-gray-700">
+              <canvas ref={canvasRef} width={720} height={420} className="block w-full h-auto" />
+              <div className="text-gray-400 text-sm mt-2">Use arrow keys or on-screen controls</div>
               <div className="mt-4 grid grid-cols-3 gap-3 w-full max-w-xs mx-auto select-none">
                 <div></div>
                 <button onClick={() => canvasRef.current.__setDirection('up')} className="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 rounded">▲</button>
