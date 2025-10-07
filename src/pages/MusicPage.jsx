@@ -29,7 +29,8 @@ const MusicPage = ({ onBack, onHome }) => {
     { id: 10, title: "Deadmau5 - Strobe", duration: "10:37", artist: "Deadmau5", type: "audio" },
     { id: 11, title: "Skrillex - Bangarang", duration: "3:35", artist: "Skrillex", type: "audio" },
     { id: 12, title: "Madeon - All My Friends", duration: "3:24", artist: "Madeon", type: "audio" },
-    { id: 13, title: "Michael Gray - The Weekend", duration: "3:45", artist: "Michael Gray", type: "video", videoSrc: "/Michael Gray - The Weekend (Official Video).mp4" }
+    { id: 13, title: "Michael Gray - The Weekend", duration: "3:45", artist: "Michael Gray", type: "video", videoSrc: "/Michael Gray - The Weekend (Official Video).mp4" },
+    { id: 14, title: "OUR PRICES HAVE NEVER BEEN LOWER!", duration: "0:15", artist: "The Office US", type: "video", videoSrc: "/'OUR PRICES HAVE NEVER BEEN LOWER!' - The Office US.mp4" }
   ];
 
   const eqFrequencies = ['70', '100', '320', '600', '1K', '3K', '6K', '12K', '14K', '16K'];
