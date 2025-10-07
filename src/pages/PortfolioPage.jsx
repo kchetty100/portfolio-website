@@ -152,7 +152,7 @@ const PortfolioPage = ({ onBack }) => {
             </div>
             <div className="hidden md:flex space-x-6 lg:space-x-8">
               <button onClick={onBack} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
-              <button onClick={() => { setCurrentView('experience'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Professional</button>
+              <button onClick={() => { setCurrentView('experience'); setExperienceUnlocked(false); setExperiencePin(''); setPinError(''); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Professional</button>
               <button onClick={() => {
                 setCurrentView('skills');
                 window.scrollTo(0, 0);
@@ -187,7 +187,7 @@ const PortfolioPage = ({ onBack }) => {
                 Home
               </button>
               <button 
-                onClick={() => { setCurrentView('experience'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
+                onClick={() => { setCurrentView('experience'); setExperienceUnlocked(false); setExperiencePin(''); setPinError(''); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
                 className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
                 Professional
               </button>
