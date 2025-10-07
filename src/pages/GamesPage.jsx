@@ -70,10 +70,21 @@ const GamesPage = ({ onBack, onHome }) => {
     }));
 
     const keyHandler = (e) => {
-      if (e.key === 'ArrowLeft') { vx = -speed; vy = 0; }
-      if (e.key === 'ArrowRight') { vx = speed; vy = 0; }
-      if (e.key === 'ArrowUp') { vy = -speed; vx = 0; }
-      if (e.key === 'ArrowDown') { vy = speed; vx = 0; }
+      if (selectedGame === 'pacman') {
+        if (e.key === 'ArrowLeft') { vx = -speed; vy = 0; }
+        if (e.key === 'ArrowRight') { vx = speed; vy = 0; }
+        if (e.key === 'ArrowUp') { vy = -speed; vx = 0; }
+        if (e.key === 'ArrowDown') { vy = speed; vx = 0; }
+      } else if (selectedGame === 'snake') {
+        const map = { ArrowLeft: { x: -1, y: 0 }, ArrowRight: { x: 1, y: 0 }, ArrowUp: { x: 0, y: -1 }, ArrowDown: { x: 0, y: 1 } };
+        const nd = map[e.key];
+        if (nd) {
+          // prevent reversing
+          if (!(nd.x === -dir.x && nd.y === -dir.y)) {
+            pendingDir = nd;
+          }
+        }
+      }
     };
     window.addEventListener('keydown', keyHandler);
 
@@ -224,7 +235,7 @@ const GamesPage = ({ onBack, onHome }) => {
         if (snake.some((s, i) => i > 0 && s.x === head.x && s.y === head.y)) {
           setGameMessage('Game Over');
           setIsRunning(false);
-          return false;
+          return true; // game over
         }
         snake.unshift(head);
         if (head.x === food.x && head.y === food.y) {
@@ -235,7 +246,7 @@ const GamesPage = ({ onBack, onHome }) => {
         }
         moved = true;
       }
-      return moved;
+      return false; // not game over
     };
 
     let lastTs = 0;
@@ -257,7 +268,7 @@ const GamesPage = ({ onBack, onHome }) => {
           ctx.beginPath(); ctx.moveTo(0, r * cellSize); ctx.lineTo(width(), r * cellSize); ctx.stroke();
         }
 
-        if (updateSnake(dt) === false) return;
+        if (updateSnake(dt)) return; // return only if game over
 
         // draw food
         ctx.fillStyle = '#E50914';
