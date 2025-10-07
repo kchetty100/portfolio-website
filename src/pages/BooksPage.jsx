@@ -13,43 +13,11 @@ const BooksPage = ({ onBack, onHome }) => {
     },
     {
       id: 2,
-      title: "Rich Dad Poor Dad",
-      author: "Robert Kiyosaki",
-      description: "An eye-opener on wealth, assets, and financial literacy.",
-      coverImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop",
-      color: "from-purple-50 to-purple-100"
-    },
-    {
-      id: 3,
       title: "The Alchemist",
       author: "Paulo Coelho",
       description: "A magical journey of following one's dreams.",
       coverImage: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&h=400&fit=crop",
       color: "from-amber-50 to-amber-100"
-    },
-    {
-      id: 4,
-      title: "Eat That Frog",
-      author: "Brian Tracy",
-      description: "A motivational book on overcoming procrastination.",
-      coverImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop",
-      color: "from-green-50 to-green-100"
-    },
-    {
-      id: 5,
-      title: "Vijayaniki Aidhu Metlu",
-      author: "Yandamoori Veerendranath",
-      description: "An inspirational Telugu book for personal growth.",
-      coverImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop",
-      color: "from-blue-50 to-blue-100"
-    },
-    {
-      id: 6,
-      title: "Vennelo Adapilla",
-      author: "Yandamoori Veerendranath",
-      description: "A classic Telugu romantic novel that touches the heart.",
-      coverImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop",
-      color: "from-pink-50 to-pink-100"
     }
   ];
 
