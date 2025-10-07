@@ -171,7 +171,7 @@ const RecruiterPage = ({ onBack }) => {
         ></div>
         <div className="absolute inset-0 bg-black/50"></div>
         
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 text-center">
+        <div className="relative z-10 max-w-7xl mx-0 px-4 sm:px-6 text-left">
           <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6">
             KEEGAN CHETTY - SENIOR JAVA DEVELOPER
           </h1>
@@ -196,7 +196,7 @@ const RecruiterPage = ({ onBack }) => {
 
       {/* Today's Top Picks for Recruiter */}
       <div className="py-8 sm:py-16 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-0">
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-6 sm:mb-8">Today's Top Picks for recruiter</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
             {topPicks.map((item, index) => (
@@ -224,7 +224,7 @@ const RecruiterPage = ({ onBack }) => {
 
       {/* Continue Watching for Recruiter */}
       <div className="py-8 sm:py-16 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-0">
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-6 sm:mb-8">Continue Watching for recruiter</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
             {continueWatching.map((item, index) => (
