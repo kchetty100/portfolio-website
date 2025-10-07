@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaPlay, FaLinkedin, FaUser, FaCode, FaProjectDiagram, FaCertificate, FaBriefcase, FaThumbsUp, FaEnvelope, FaMusic, FaBook, FaBlog, FaPhone } from 'react-icons/fa';
 import SkillsSimple from './SkillsSimple';
 import LandingPage from './LandingPage';
+import ProjectsPage from './ProjectsPage';
 
 const PortfolioPage = ({ onBack }) => {
   const [currentView, setCurrentView] = useState('portfolio');
@@ -28,8 +29,13 @@ const PortfolioPage = ({ onBack }) => {
     if (title === 'Skills') {
       setCurrentView('skills');
       window.scrollTo(0, 0);
+      return;
     }
-    // Add other navigation logic here for other tiles
+    if (title === 'Projects') {
+      setCurrentView('projects');
+      window.scrollTo(0, 0);
+      return;
+    }
   };
 
   // If home view is selected, go back to landing page
@@ -43,6 +49,13 @@ const PortfolioPage = ({ onBack }) => {
   // If skills view is selected, show skills page
   if (currentView === 'skills') {
     return <SkillsSimple 
+      onBack={() => setCurrentView('portfolio')} 
+      onHome={() => setCurrentView('home')} 
+    />;
+  }
+
+  if (currentView === 'projects') {
+    return <ProjectsPage 
       onBack={() => setCurrentView('portfolio')} 
       onHome={() => setCurrentView('home')} 
     />;
@@ -69,7 +82,8 @@ const PortfolioPage = ({ onBack }) => {
                 setCurrentView('skills');
                 window.scrollTo(0, 0);
               }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Skills</button>
-              <button className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</button>
+              <button onClick={() => { setCurrentView('projects'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</button>
+              <a href="https://github.com/kchetty100" target="_blank" rel="noreferrer" className="text-white font-bold text-lg hover:text-gray-300 transition-colors">GitHub</a>
               <button className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Hire Me</button>
             </div>
             {/* Mobile menu button */}
@@ -110,9 +124,16 @@ const PortfolioPage = ({ onBack }) => {
               >
                 Skills
               </button>
-              <button className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+              <button 
+                onClick={() => { 
+                  setCurrentView('projects'); 
+                  window.scrollTo(0, 0);
+                  setIsMobileMenuOpen(false);
+                }}
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
                 Projects
               </button>
+              <a href="https://github.com/kchetty100" target="_blank" rel="noreferrer" className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">GitHub</a>
               <button className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
                 Hire Me
               </button>
