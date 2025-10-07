@@ -20,8 +20,7 @@ const StalkerPage = ({ onBack, onHome }) => {
       username: '@keegan_chetty',
       followers: '2.5K',
       description: 'Daily life, coding adventures, and random thoughts',
-      color: 'from-pink-500 to-purple-600',
-      link: 'https://instagram.com/keegan_chetty'
+      color: 'from-pink-500 to-purple-600'
     },
     {
       id: 2,
@@ -30,8 +29,7 @@ const StalkerPage = ({ onBack, onHome }) => {
       username: '@keegan_dev',
       followers: '1.8K',
       description: 'Tech tweets, memes, and developer rants',
-      color: 'from-blue-400 to-blue-600',
-      link: 'https://twitter.com/keegan_dev'
+      color: 'from-blue-400 to-blue-600'
     },
     {
       id: 3,
@@ -40,8 +38,7 @@ const StalkerPage = ({ onBack, onHome }) => {
       username: 'Keegan Chetty',
       followers: '5.2K',
       description: 'Professional updates and career milestones',
-      color: 'from-blue-600 to-blue-800',
-      link: 'https://linkedin.com/in/keegan-chetty'
+      color: 'from-blue-600 to-blue-800'
     },
     {
       id: 4,
@@ -50,8 +47,7 @@ const StalkerPage = ({ onBack, onHome }) => {
       username: 'kchetty100',
       followers: '890',
       description: 'Code repositories and open source contributions',
-      color: 'from-gray-700 to-gray-900',
-      link: 'https://github.com/kchetty100'
+      color: 'from-gray-700 to-gray-900'
     },
     {
       id: 5,
@@ -60,8 +56,7 @@ const StalkerPage = ({ onBack, onHome }) => {
       username: 'Keegan Codes',
       followers: '3.1K',
       description: 'Coding tutorials and tech reviews',
-      color: 'from-red-500 to-red-700',
-      link: 'https://youtube.com/@keegancodes'
+      color: 'from-red-500 to-red-700'
     },
     {
       id: 6,
@@ -70,8 +65,7 @@ const StalkerPage = ({ onBack, onHome }) => {
       username: '@keegan_codes',
       followers: '12.5K',
       description: 'Quick coding tips and behind-the-scenes',
-      color: 'from-black to-gray-800',
-      link: 'https://tiktok.com/@keegan_codes'
+      color: 'from-black to-gray-800'
     },
     {
       id: 7,
@@ -80,8 +74,7 @@ const StalkerPage = ({ onBack, onHome }) => {
       username: 'Keegan#1234',
       followers: 'Server: 500+',
       description: 'Gaming and developer community',
-      color: 'from-indigo-500 to-purple-600',
-      link: 'https://discord.gg/keegan-dev'
+      color: 'from-indigo-500 to-purple-600'
     },
     {
       id: 8,
@@ -90,8 +83,7 @@ const StalkerPage = ({ onBack, onHome }) => {
       username: 'u/keegan_dev',
       followers: '2.1K',
       description: 'Tech discussions and programming help',
-      color: 'from-orange-500 to-red-600',
-      link: 'https://reddit.com/u/keegan_dev'
+      color: 'from-orange-500 to-red-600'
     }
   ];
 
@@ -338,19 +330,16 @@ const StalkerPage = ({ onBack, onHome }) => {
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8 text-center">Social Media Profiles</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {socialPlatforms.map((platform) => (
-                <a
+                <div
                   key={platform.id}
-                  href={platform.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group cursor-pointer transform transition-all duration-300 hover:scale-105"
+                  className="group transform transition-all duration-300"
                 >
-                  <div className={`bg-gradient-to-br ${platform.color} rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300`}>
+                  <div className={`bg-gradient-to-br ${platform.color} rounded-xl p-6 shadow-lg transition-all duration-300`}>
                     <div className="text-center text-white">
                       <div className="mb-4 flex justify-center">
                         {platform.icon}
                       </div>
-                      <h3 className="text-xl font-bold mb-2 group-hover:text-gray-200 transition-colors">
+                      <h3 className="text-xl font-bold mb-2">
                         {platform.name}
                       </h3>
                       <p className="text-sm font-semibold mb-2 opacity-90">
@@ -364,7 +353,7 @@ const StalkerPage = ({ onBack, onHome }) => {
                       </p>
                     </div>
                   </div>
-                </a>
+                </div>
               ))}
             </div>
           </div>
