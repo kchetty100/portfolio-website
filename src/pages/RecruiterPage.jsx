@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaPlay, FaLinkedin, FaUser, FaCode, FaProjectDiagram, FaCertificate, FaBriefcase, FaThumbsUp, FaEnvelope, FaMusic, FaBook, FaBlog, FaPhone } from 'react-icons/fa';
+import { FaPlay, FaLinkedin, FaUser, FaCode, FaProjectDiagram, FaBriefcase, FaThumbsUp, FaEnvelope, FaMusic, FaBook, FaBlog, FaPhone } from 'react-icons/fa';
 import ProjectsPage from './ProjectsPage';
 import ExperiencePage from './ExperiencePage';
 import GamesPage from './GamesPage';
@@ -7,6 +7,7 @@ import SkillsSimple from './SkillsSimple';
 import BooksPage from './BooksPage';
 import ContactPage from './ContactPage';
 import MusicPage from './MusicPage';
+import BlogPage from './BlogPage';
 
 const RecruiterPage = ({ onBack }) => {
   const [currentView, setCurrentView] = useState('recruiter');
@@ -15,7 +16,6 @@ const RecruiterPage = ({ onBack }) => {
   const topPicks = [
     { title: 'Skills', image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&h=800&fit=crop', icon: <FaCode /> },
     { title: 'Experience', image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&h=800&fit=crop', icon: <FaBriefcase /> },
-    { title: 'Certifications', image: 'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=1200&h=800&fit=crop', icon: <FaCertificate /> },
     { title: 'Projects', image: 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=1200&h=800&fit=crop', icon: <FaProjectDiagram /> },
     { title: 'Games', image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&h=800&fit=crop', icon: <FaPlay /> }
   ];
@@ -64,6 +64,11 @@ const RecruiterPage = ({ onBack }) => {
       window.scrollTo(0, 0);
       return;
     }
+    if (title === 'Blogs') {
+      setCurrentView('blog');
+      window.scrollTo(0, 0);
+      return;
+    }
   };
 
   // If skills view is selected, show skills page
@@ -93,6 +98,10 @@ const RecruiterPage = ({ onBack }) => {
 
   if (currentView === 'music') {
     return <MusicPage onBack={() => setCurrentView('recruiter')} onHome={() => setCurrentView('home')} />;
+  }
+
+  if (currentView === 'blog') {
+    return <BlogPage onBack={() => setCurrentView('recruiter')} onHome={() => setCurrentView('home')} />;
   }
 
   return (

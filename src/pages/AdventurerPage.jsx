@@ -110,7 +110,7 @@ const AdventurerPage = ({ onBack, onHome }) => {
                 Back
               </button>
               <button
-                onClick={onHome}
+                onClick={() => { if (onHome) onHome(); }}
                 className="flex-1 bg-red-700 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition-colors"
               >
                 Home
@@ -137,7 +137,7 @@ const AdventurerPage = ({ onBack, onHome }) => {
               </button>
             </div>
             <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
-              <button onClick={() => setCurrentView('home')} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
+              <button onClick={() => { setCurrentView('home'); if (onHome) onHome(); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
               <button onClick={() => { setCurrentView('skills'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Skills</button>
               <button onClick={() => { setCurrentView('experience'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Experience</button>
               <button onClick={() => { setCurrentView('projects'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</button>
@@ -172,6 +172,7 @@ const AdventurerPage = ({ onBack, onHome }) => {
                 onClick={() => {
                   setCurrentView('home');
                   setIsMobileMenuOpen(false);
+                  if (onHome) onHome();
                 }} 
                 className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2"
               >
