@@ -16,11 +16,12 @@ const ProjectsPage = ({ onBack, onHome }) => {
         setIsRefreshing(true);
       }
       
-      const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=24`);
+      const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100&type=all`);
       if (!response.ok) {
         throw new Error(`GitHub API error: ${response.status}`);
       }
       const data = await response.json();
+      console.log(`Fetched ${data.length} repositories from GitHub API`);
       
       // Check for new repositories
       if (repos.length > 0 && showRefreshIndicator) {
@@ -96,7 +97,14 @@ const ProjectsPage = ({ onBack, onHome }) => {
       <div className="pt-24 sm:pt-28 px-4 sm:px-6 py-8 sm:py-12">
         <div className="max-w-7xl mx-auto">
           <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">Projects</h1>
+            <div>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">Projects</h1>
+              {!loading && !error && repos.length > 0 && (
+                <p className="text-gray-400 text-sm mt-1">
+                  Showing {repos.length} {repos.length === 1 ? 'repository' : 'repositories'}
+                </p>
+              )}
+            </div>
             <div className="flex items-center gap-4">
               {lastUpdated && (
                 <span className="text-sm text-gray-400">
