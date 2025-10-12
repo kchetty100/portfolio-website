@@ -6,25 +6,56 @@ const ProjectsPage = ({ onBack, onHome }) => {
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [lastUpdated, setLastUpdated] = useState(null);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [newReposCount, setNewReposCount] = useState(0);
+
+  const fetchRepos = async (showRefreshIndicator = false) => {
+    try {
+      if (showRefreshIndicator) {
+        setIsRefreshing(true);
+      }
+      
+      const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=24`);
+      if (!response.ok) {
+        throw new Error(`GitHub API error: ${response.status}`);
+      }
+      const data = await response.json();
+      
+      // Check for new repositories
+      if (repos.length > 0 && showRefreshIndicator) {
+        const newRepos = data.filter(newRepo => 
+          !repos.some(existingRepo => existingRepo.id === newRepo.id)
+        );
+        if (newRepos.length > 0) {
+          setNewReposCount(newRepos.length);
+          // Clear notification after 5 seconds
+          setTimeout(() => setNewReposCount(0), 5000);
+        }
+      }
+      
+      setRepos(data);
+      setLastUpdated(new Date());
+      setError(null);
+    } catch (err) {
+      setError(err.message || 'Failed to load projects');
+    } finally {
+      setLoading(false);
+      setIsRefreshing(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchRepos = async () => {
-      try {
-        const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=24`);
-        if (!response.ok) {
-          throw new Error(`GitHub API error: ${response.status}`);
-        }
-        const data = await response.json();
-        setRepos(data);
-      } catch (err) {
-        setError(err.message || 'Failed to load projects');
-      } finally {
-        setLoading(false);
-      }
-    };
-
     window.scrollTo(0, 0);
     fetchRepos();
+
+    // Set up periodic refresh every 5 minutes (300000ms)
+    const refreshInterval = setInterval(() => {
+      fetchRepos(true);
+    }, 300000); // 5 minutes
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(refreshInterval);
   }, []);
 
   return (
@@ -64,9 +95,40 @@ const ProjectsPage = ({ onBack, onHome }) => {
       {/* Content */}
       <div className="pt-24 sm:pt-28 px-4 sm:px-6 py-8 sm:py-12">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-6">
+          <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">Projects</h1>
+            <div className="flex items-center gap-4">
+              {lastUpdated && (
+                <span className="text-sm text-gray-400">
+                  Last updated: {lastUpdated.toLocaleTimeString()}
+                </span>
+              )}
+              {isRefreshing && (
+                <div className="flex items-center gap-2 text-sm text-gray-400">
+                  <div className="animate-spin w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full"></div>
+                  Refreshing...
+                </div>
+              )}
+              <button
+                onClick={() => fetchRepos(true)}
+                className="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm transition-colors"
+                disabled={isRefreshing}
+              >
+                {isRefreshing ? 'Refreshing...' : 'Refresh Now'}
+              </button>
+            </div>
           </div>
+
+          {newReposCount > 0 && (
+            <div className="mb-4 p-4 bg-green-900/30 border border-green-500 rounded-lg">
+              <div className="flex items-center gap-2">
+                <span className="text-green-400">🎉</span>
+                <span className="text-green-400 font-semibold">
+                  {newReposCount} new {newReposCount === 1 ? 'repository' : 'repositories'} detected!
+                </span>
+              </div>
+            </div>
+          )}
 
           {loading && (
             <div className="text-gray-400">Loading projects...</div>
