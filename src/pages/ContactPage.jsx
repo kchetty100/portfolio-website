@@ -172,34 +172,34 @@ const ContactPage = ({ onBack, onHome }) => {
       </nav>
 
       {/* Main Content */}
-      <div className="pt-20 px-4 sm:px-6 py-8">
+      <div className="pt-16 sm:pt-20 px-4 sm:px-6 py-6 sm:py-8">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
+          <div className="text-center mb-8 sm:mb-10 md:mb-12">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
               <span className="text-red-500">Get In</span> Touch
             </h1>
-            <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4">
               Ready to start your next project? Let's discuss how we can work together to bring your ideas to life.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12">
             {/* Contact Information */}
             <div className="space-y-8">
               <div>
-                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">Contact Information</h2>
-                <div className="space-y-6">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6">Contact Information</h2>
+                <div className="space-y-4 sm:space-y-6">
                   {contactInfo.map((info, index) => (
-                    <div key={index} className="flex items-center space-x-4">
-                      <div className="text-red-500">
-                        {info.icon}
+                    <div key={index} className="flex items-center space-x-3 sm:space-x-4">
+                      <div className="text-red-500 flex-shrink-0">
+                        <div className="text-xl sm:text-2xl">{info.icon}</div>
                       </div>
-                      <div>
-                        <h3 className="text-white font-semibold text-lg">{info.title}</h3>
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-white font-semibold text-base sm:text-lg">{info.title}</h3>
                         <a 
                           href={info.link}
-                          className="text-gray-300 hover:text-red-400 transition-colors"
+                          className="text-gray-300 hover:text-red-400 transition-colors text-sm sm:text-base break-all"
                         >
                           {info.value}
                         </a>
@@ -211,7 +211,7 @@ const ContactPage = ({ onBack, onHome }) => {
 
               {/* Social Links */}
               <div>
-                <h3 className="text-xl font-bold text-white mb-4">Follow Me</h3>
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">Follow Me</h3>
                 <div className="flex space-x-4">
                   {socialLinks.map((social, index) => (
                     <a
@@ -219,7 +219,7 @@ const ContactPage = ({ onBack, onHome }) => {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`text-gray-400 ${social.color} transition-colors duration-300`}
+                      className={`text-gray-400 ${social.color} transition-colors duration-300 text-xl sm:text-2xl min-w-[44px] min-h-[44px] flex items-center justify-center`}
                       aria-label={social.name}
                     >
                       {social.icon}
@@ -243,9 +243,9 @@ const ContactPage = ({ onBack, onHome }) => {
 
             {/* Contact Form */}
             <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">Send Message</h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6">Send Message</h2>
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <label className="block text-white text-sm font-semibold mb-2">
                       <FaUser className="inline mr-2" />

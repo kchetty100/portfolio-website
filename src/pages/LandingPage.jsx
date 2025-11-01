@@ -64,29 +64,29 @@ const LandingPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center">
-      <div className="text-center">
+    <div className="min-h-screen bg-black flex items-center justify-center py-8 sm:py-0">
+      <div className="text-center w-full max-w-6xl mx-auto">
         {/* Title */}
-        <h1 className="text-4xl sm:text-6xl font-bold text-white mb-8 sm:mb-16 font-netflix px-4">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-white mb-6 sm:mb-12 md:mb-16 font-netflix px-4">
           Who's Watching?
         </h1>
 
         {/* Profile Selection */}
-        <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8 mb-8 px-4">
+        <div className="grid grid-cols-2 sm:flex sm:flex-row justify-center gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8 px-4">
           {profiles.map((profile) => (
             <div
               key={profile.id}
-              className="flex flex-col items-center cursor-pointer group"
+              className="flex flex-col items-center cursor-pointer group active:scale-95 transition-transform duration-200"
               onClick={() => handleProfileClick(profile.id)}
             >
               {/* Profile Icon */}
               <div className={`
-                w-24 h-24 sm:w-32 sm:h-32 rounded-lg ${profile.color} 
-                flex items-center justify-center mb-4
-                group-hover:scale-110 transition-transform duration-300
+                w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-lg ${profile.color} 
+                flex items-center justify-center mb-3 sm:mb-4
+                group-hover:scale-110 group-active:scale-105 transition-transform duration-300
                 group-hover:shadow-2xl group-hover:shadow-red-500/20
                 border-2 border-transparent group-hover:border-netflixRed/50
-                relative overflow-hidden
+                relative overflow-hidden touch-manipulation
               `}>
                 {/* Fluffy texture effect */}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent rounded-lg"></div>
@@ -96,7 +96,9 @@ const LandingPage = () => {
                 
                 {/* Icon */}
                 <div className="relative z-10">
-                  {profile.icon}
+                  <div className="text-3xl sm:text-4xl">
+                    {profile.icon}
+                  </div>
                 </div>
                 
                 {/* Eyes */}
@@ -108,7 +110,7 @@ const LandingPage = () => {
               </div>
 
               {/* Profile Name */}
-              <span className="text-white text-lg sm:text-xl font-medium group-hover:text-netflixRed transition-colors duration-300">
+              <span className="text-white text-base sm:text-lg md:text-xl font-medium group-hover:text-netflixRed transition-colors duration-300">
                 {profile.name}
               </span>
             </div>
@@ -116,12 +118,12 @@ const LandingPage = () => {
         </div>
 
         {/* Description */}
-        <div className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto px-4">
+        <div className="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4 mb-4">
           Select a profile to explore different aspects of my professional journey
         </div>
 
         {/* Navigation hint */}
-        <div className="mt-6 sm:mt-8 text-gray-500 text-sm px-4">
+        <div className="mt-4 sm:mt-6 md:mt-8 text-gray-500 text-xs sm:text-sm px-4">
           Click on any profile to continue
         </div>
       </div>

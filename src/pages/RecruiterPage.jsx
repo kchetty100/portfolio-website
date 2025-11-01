@@ -160,9 +160,9 @@ const RecruiterPage = ({ onBack }) => {
                 Home
               </button>
               <button 
-                onClick={() => { setCurrentView('experience'); setExperienceUnlocked(false); setExperiencePin(''); setPinError(''); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
+                onClick={() => { setCurrentView('experience'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
                 className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
-                Professional
+                Experience
               </button>
               <button 
                 onClick={() => {
@@ -203,7 +203,7 @@ const RecruiterPage = ({ onBack }) => {
       </nav>
 
       {/* Hero Section */}
-      <div className="relative pt-20 min-h-screen flex items-center">
+      <div className="relative pt-16 sm:pt-20 min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] lg:min-h-screen flex items-center">
         {/* Video Background */}
         <video
           className="absolute inset-0 w-full h-full object-cover z-0"
@@ -235,34 +235,34 @@ const RecruiterPage = ({ onBack }) => {
         ></div>
         <div className="absolute inset-0 bg-black/50"></div>
         
-        <div className="absolute bottom-6 left-4 sm:left-6 z-10 max-w-3xl pr-4 text-left">
-          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6">
+        <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 z-10 max-w-[calc(100%-2rem)] sm:max-w-3xl pr-4 text-left">
+          <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight">
             KEEGAN CHETTY - SENIOR FULL STACK DEVELOPER
           </h1>
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-200 mb-4 sm:mb-6 md:mb-8 max-w-4xl leading-relaxed">
             Experienced Full-Stack Developer skilled in Java (Spring Boot), Angular, React, and cloud-native microservices. 
             Proven ability to modernize legacy systems, automate DevOps pipelines, and deliver secure, scalable enterprise solutions. 
             Passionate about innovation, system optimization, and cybersecurity, with hands-on experience across banking, fintech, 
             and personal automation projects.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-start">
-            <button className="bg-black/80 hover:bg-black text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 transition-all duration-300 hover:scale-105">
-              <FaPlay className="text-white" />
-              <span className="text-base sm:text-lg font-semibold">Resume</span>
+            <button className="bg-black/80 hover:bg-black text-white px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 transition-all duration-300 hover:scale-105 active:scale-95 min-h-[44px]">
+              <FaPlay className="text-white text-sm sm:text-base" />
+              <span className="text-sm sm:text-base md:text-lg font-semibold">Resume</span>
             </button>
-            <button className="bg-black/80 hover:bg-black text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 transition-all duration-300 hover:scale-105">
-              <FaLinkedin className="text-white" />
-              <span className="text-base sm:text-lg font-semibold">LinkedIn</span>
+            <button className="bg-black/80 hover:bg-black text-white px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 transition-all duration-300 hover:scale-105 active:scale-95 min-h-[44px]">
+              <FaLinkedin className="text-white text-sm sm:text-base" />
+              <span className="text-sm sm:text-base md:text-lg font-semibold">LinkedIn</span>
             </button>
           </div>
         </div>
       </div>
 
       {/* Today's Top Picks for Recruiter */}
-      <div className="py-8 sm:py-16 px-4 sm:px-6">
-        <div className="max-w-7xl mx-0">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-6 sm:mb-8">Today's Top Picks for recruiter</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+      <div className="py-6 sm:py-8 md:py-16 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white mb-4 sm:mb-6 md:mb-8">Today's Top Picks for recruiter</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3 md:gap-4">
             {topPicks.map((item, index) => (
               <div
                 key={index}
@@ -276,8 +276,8 @@ const RecruiterPage = ({ onBack }) => {
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className="text-white font-bold text-lg">{item.title}</h3>
+                  <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 right-2 sm:right-4">
+                    <h3 className="text-white font-bold text-sm sm:text-base md:text-lg">{item.title}</h3>
                   </div>
                 </div>
               </div>
@@ -287,10 +287,10 @@ const RecruiterPage = ({ onBack }) => {
       </div>
 
       {/* Continue Watching for Recruiter */}
-      <div className="py-8 sm:py-16 px-4 sm:px-6">
-        <div className="max-w-7xl mx-0">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-6 sm:mb-8">Continue Watching for recruiter</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+      <div className="py-6 sm:py-8 md:py-16 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white mb-4 sm:mb-6 md:mb-8">Continue Watching for recruiter</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3 md:gap-4">
             {continueWatching.map((item, index) => (
               <div
                 key={index}
@@ -304,8 +304,8 @@ const RecruiterPage = ({ onBack }) => {
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className="text-white font-bold text-lg">{item.title}</h3>
+                  <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 right-2 sm:right-4">
+                    <h3 className="text-white font-bold text-sm sm:text-base md:text-lg">{item.title}</h3>
                   </div>
                 </div>
               </div>

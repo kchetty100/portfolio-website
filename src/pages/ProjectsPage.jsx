@@ -94,7 +94,7 @@ const ProjectsPage = ({ onBack, onHome }) => {
       </nav>
 
       {/* Content */}
-      <div className="pt-24 sm:pt-28 px-4 sm:px-6 py-8 sm:py-12">
+      <div className="pt-20 sm:pt-24 md:pt-28 px-4 sm:px-6 py-6 sm:py-8 md:py-12">
         <div className="max-w-7xl mx-auto">
           <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
@@ -105,21 +105,21 @@ const ProjectsPage = ({ onBack, onHome }) => {
                 </p>
               )}
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
               {lastUpdated && (
-                <span className="text-sm text-gray-400">
+                <span className="text-xs sm:text-sm text-gray-400">
                   Last updated: {lastUpdated.toLocaleTimeString()}
                 </span>
               )}
               {isRefreshing && (
-                <div className="flex items-center gap-2 text-sm text-gray-400">
+                <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-400">
                   <div className="animate-spin w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full"></div>
-                  Refreshing...
+                  <span className="hidden sm:inline">Refreshing...</span>
                 </div>
               )}
               <button
                 onClick={() => fetchRepos(true)}
-                className="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm transition-colors"
+                className="px-4 py-2 bg-gray-800 hover:bg-gray-700 active:bg-gray-600 rounded-lg text-xs sm:text-sm transition-colors min-h-[44px] whitespace-nowrap"
                 disabled={isRefreshing}
               >
                 {isRefreshing ? 'Refreshing...' : 'Refresh Now'}
@@ -147,7 +147,7 @@ const ProjectsPage = ({ onBack, onHome }) => {
           )}
 
           {!loading && !error && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
               {repos.map((repo) => (
                 <div key={repo.id} className="bg-gray-900 rounded-lg overflow-hidden hover:bg-gray-800 transition-colors group">
                   <div className="p-5">

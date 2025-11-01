@@ -211,7 +211,7 @@ const PortfolioPage = ({ onBack }) => {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-20 pb-16 min-h-[70vh] sm:min-h-[75vh] lg:min-h-[85vh]">
+      <section className="relative pt-16 sm:pt-20 pb-12 sm:pb-16 min-h-[60vh] sm:min-h-[70vh] md:min-h-[75vh] lg:min-h-[85vh]">
         {/* Video Background */}
         <video
           key="batman_banner"
@@ -233,21 +233,21 @@ const PortfolioPage = ({ onBack }) => {
           zIndex: -1
         }}></div>
         <div className="absolute inset-0 bg-black/50"></div>
-        <div className="absolute bottom-6 left-4 sm:left-6 z-10 max-w-3xl pr-4 text-left">
-          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 sm:mb-6">
+        <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 z-10 max-w-[calc(100%-2rem)] sm:max-w-3xl pr-4 text-left">
+          <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight">
             KEEGAN CHETTY - SENIOR FULL STACK DEVELOPER
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed mb-6 sm:mb-8 max-w-4xl">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-200 leading-relaxed mb-4 sm:mb-6 md:mb-8 max-w-4xl">
             Dynamic and results-driven Senior Software Engineer with 8+ years in full-stack development across high-impact, large-scale applications. Expertise in React, Node.js, Python, AWS, Kubernetes, and Docker. Achieved serving 10,000+ users and managing 50 million+ bookings.
           </p>
-          <div className="flex flex-col sm:flex-row justify-start gap-4 sm:gap-6">
-            <button className="bg-black text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 hover:bg-gray-800 transition-colors border border-gray-600">
-              <FaPlay className="text-white" />
-              <span className="text-sm sm:text-base">Resume</span>
+          <div className="flex flex-col sm:flex-row justify-start gap-3 sm:gap-4 md:gap-6">
+            <button className="bg-black text-white px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 hover:bg-gray-800 active:scale-95 transition-all border border-gray-600 min-h-[44px]">
+              <FaPlay className="text-white text-sm sm:text-base" />
+              <span className="text-sm sm:text-base font-medium">Resume</span>
             </button>
-            <button className="bg-black text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 hover:bg-gray-800 transition-colors border border-gray-600">
-              <FaLinkedin className="text-white" />
-              <span className="text-sm sm:text-base">LinkedIn</span>
+            <button className="bg-black text-white px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 hover:bg-gray-800 active:scale-95 transition-all border border-gray-600 min-h-[44px]">
+              <FaLinkedin className="text-white text-sm sm:text-base" />
+              <span className="text-sm sm:text-base font-medium">LinkedIn</span>
             </button>
           </div>
         </div>
@@ -255,12 +255,12 @@ const PortfolioPage = ({ onBack }) => {
       </section>
 
       {/* Today's Top Picks Section */}
-      <section className="px-4 sm:px-6 py-8 sm:py-12">
-        <div className="max-w-7xl mx-0">
-          <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
+      <section className="px-4 sm:px-6 py-6 sm:py-8 md:py-12">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-4 sm:mb-6">
             Today's Top Picks for developers
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3 md:gap-4">
             {topPicks.map((item, index) => (
               <div
                 key={index}
@@ -274,9 +274,9 @@ const PortfolioPage = ({ onBack }) => {
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="text-white text-3xl mb-2">{item.icon}</div>
-                      <p className="text-white font-bold text-lg">{item.title}</p>
+                    <div className="text-center px-2">
+                      <div className="text-white text-xl sm:text-2xl md:text-3xl mb-1 sm:mb-2">{item.icon}</div>
+                      <p className="text-white font-bold text-sm sm:text-base md:text-lg">{item.title}</p>
                     </div>
                   </div>
                 </div>
@@ -287,12 +287,12 @@ const PortfolioPage = ({ onBack }) => {
       </section>
 
       {/* Continue Watching Section */}
-      <section className="px-4 sm:px-6 py-8 sm:py-12">
-        <div className="max-w-7xl mx-0">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-6">
+      <section className="px-4 sm:px-6 py-6 sm:py-8 md:py-12">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white mb-4 sm:mb-6">
             Continue Watching for developer
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3 md:gap-4">
             {continueWatching.map((item, index) => (
               <div
                 key={index}
@@ -306,9 +306,9 @@ const PortfolioPage = ({ onBack }) => {
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="text-white text-3xl mb-2">{item.icon}</div>
-                      <p className="text-white font-bold text-lg">{item.title}</p>
+                    <div className="text-center px-2">
+                      <div className="text-white text-xl sm:text-2xl md:text-3xl mb-1 sm:mb-2">{item.icon}</div>
+                      <p className="text-white font-bold text-sm sm:text-base md:text-lg">{item.title}</p>
                     </div>
                   </div>
                 </div>

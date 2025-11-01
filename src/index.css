@@ -20,6 +20,28 @@
   background: #888888;
 }
 
+/* Mobile-specific improvements */
+@media (max-width: 640px) {
+  /* Touch-friendly scrollbar on mobile */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  /* Prevent text size adjustment on iOS */
+  * {
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  
+  /* Improve touch targets */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
