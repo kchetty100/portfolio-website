@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaCode, FaUserTie, FaEye, FaRocket } from 'react-icons/fa';
 import PortfolioPage from './PortfolioPage';
 import RecruiterPage from './RecruiterPage';
@@ -6,7 +6,16 @@ import StalkerPage from './StalkerPage';
 import AdventurerPage from './AdventurerPage';
 
 const LandingPage = () => {
-  const [selectedProfile, setSelectedProfile] = useState(null);
+  // Initialize state from URL hash or default to null
+  const getInitialProfile = () => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash === 'recruiter' || hash === 'developer' || hash === 'stalker' || hash === 'adventurer') {
+      return hash;
+    }
+    return null;
+  };
+
+  const [selectedProfile, setSelectedProfile] = useState(getInitialProfile);
 
   const profiles = [
     {
@@ -39,28 +48,52 @@ const LandingPage = () => {
     }
   ];
 
+  // Handle browser back/forward buttons
+  useEffect(() => {
+    const handlePopState = (event) => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash === 'recruiter' || hash === 'developer' || hash === 'stalker' || hash === 'adventurer') {
+        setSelectedProfile(hash);
+      } else {
+        setSelectedProfile(null);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
   const handleProfileClick = (profileId) => {
     setSelectedProfile(profileId);
+    // Update URL hash and push to history
+    window.history.pushState({ profile: profileId }, '', `#${profileId}`);
+  };
+
+  const handleBack = () => {
+    setSelectedProfile(null);
+    // Update URL to remove hash and push to history
+    const url = window.location.pathname + window.location.search;
+    window.history.pushState({ profile: null }, '', url);
   };
 
   // If developer profile is selected, show portfolio page
   if (selectedProfile === 'developer') {
-    return <PortfolioPage onBack={() => setSelectedProfile(null)} />;
+    return <PortfolioPage onBack={handleBack} />;
   }
 
   // If recruiter profile is selected, show recruiter page
   if (selectedProfile === 'recruiter') {
-    return <RecruiterPage onBack={() => setSelectedProfile(null)} />;
+    return <RecruiterPage onBack={handleBack} />;
   }
 
   // If stalker profile is selected, show stalker page
   if (selectedProfile === 'stalker') {
-    return <StalkerPage onBack={() => setSelectedProfile(null)} />;
+    return <StalkerPage onBack={handleBack} />;
   }
 
   // If adventurer profile is selected, show adventurer page
   if (selectedProfile === 'adventurer') {
-    return <AdventurerPage onBack={() => setSelectedProfile(null)} onHome={() => setSelectedProfile(null)} />;
+    return <AdventurerPage onBack={handleBack} onHome={handleBack} />;
   }
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaPlay, FaLinkedin, FaUser, FaCode, FaProjectDiagram, FaCertificate, FaBriefcase, FaThumbsUp, FaEnvelope, FaMusic, FaBook, FaBlog, FaPhone } from 'react-icons/fa';
 import SkillsSimple from './SkillsSimple';
 import LandingPage from './LandingPage';
@@ -9,8 +9,44 @@ import ContactPage from './ContactPage';
 import MusicPage from './MusicPage';
 
 const PortfolioPage = ({ onBack }) => {
-  const [currentView, setCurrentView] = useState('portfolio');
+  // Initialize state from URL hash
+  const getInitialView = () => {
+    const hash = window.location.hash;
+    if (hash.startsWith('#developer')) {
+      const view = hash.replace('#developer/', '').replace('#developer', '').replace('/', '');
+      const views = ['skills', 'projects', 'experience', 'contact', 'games', 'music'];
+      if (views.includes(view)) {
+        return view;
+      }
+    }
+    return 'portfolio';
+  };
+
+  const [currentView, setCurrentView] = useState(getInitialView);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Handle browser back/forward buttons
+  useEffect(() => {
+    const handlePopState = () => {
+      const hash = window.location.hash;
+      // Check if we're still on developer profile
+      if (hash.startsWith('#developer')) {
+        const view = hash.replace('#developer/', '').replace('#developer', '').replace('/', '');
+        const views = ['skills', 'projects', 'experience', 'contact', 'games', 'music'];
+        if (views.includes(view)) {
+          setCurrentView(view);
+        } else {
+          setCurrentView('portfolio');
+        }
+      } else {
+        // We've navigated away from developer profile
+        if (onBack) onBack();
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [onBack]);
 
   const topPicks = [
     { title: 'Skills', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop', icon: <FaCode /> },
@@ -27,37 +63,43 @@ const PortfolioPage = ({ onBack }) => {
     { title: 'Games', image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&h=800&fit=crop', icon: <FaPlay /> }
   ];
 
+  const handleViewChange = (view) => {
+    setCurrentView(view);
+    window.scrollTo(0, 0);
+    // Update URL hash and push to history
+    window.history.pushState({ view }, '', `#developer/${view}`);
+  };
+
   const handleTileClick = (title) => {
     if (title === 'Skills') {
-      setCurrentView('skills');
-      window.scrollTo(0, 0);
+      handleViewChange('skills');
       return;
     }
     if (title === 'Projects') {
-      setCurrentView('projects');
-      window.scrollTo(0, 0);
+      handleViewChange('projects');
       return;
     }
     if (title === 'Experience') {
-      setCurrentView('experience');
-      window.scrollTo(0, 0);
+      handleViewChange('experience');
       return;
     }
     if (title === 'Contact Me') {
-      setCurrentView('contact');
-      window.scrollTo(0, 0);
+      handleViewChange('contact');
       return;
     }
     if (title === 'Games') {
-      setCurrentView('games');
-      window.scrollTo(0, 0);
+      handleViewChange('games');
       return;
     }
     if (title === 'Music') {
-      setCurrentView('music');
-      window.scrollTo(0, 0);
+      handleViewChange('music');
       return;
     }
+  };
+
+  const handleBackToPortfolio = () => {
+    setCurrentView('portfolio');
+    window.history.pushState({ view: 'portfolio' }, '', '#developer');
   };
 
   // If home view is selected, go back to landing page
@@ -71,44 +113,44 @@ const PortfolioPage = ({ onBack }) => {
   // If skills view is selected, show skills page
   if (currentView === 'skills') {
     return <SkillsSimple 
-      onBack={() => setCurrentView('portfolio')} 
-      onHome={() => setCurrentView('home')} 
+      onBack={handleBackToPortfolio} 
+      onHome={() => { if (onBack) onBack(); }} 
     />;
   }
 
   if (currentView === 'projects') {
     return <ProjectsPage 
-      onBack={() => setCurrentView('portfolio')} 
-      onHome={() => setCurrentView('home')} 
+      onBack={handleBackToPortfolio} 
+      onHome={() => { if (onBack) onBack(); }} 
     />;
   }
 
   if (currentView === 'experience') {
     return <ExperiencePage 
-      onBack={() => setCurrentView('portfolio')} 
-      onHome={() => setCurrentView('home')} 
+      onBack={handleBackToPortfolio} 
+      onHome={() => { if (onBack) onBack(); }} 
     />;
   }
 
 
   if (currentView === 'contact') {
     return <ContactPage 
-      onBack={() => setCurrentView('portfolio')} 
-      onHome={() => setCurrentView('home')} 
+      onBack={handleBackToPortfolio} 
+      onHome={() => { if (onBack) onBack(); }} 
     />;
   }
 
   if (currentView === 'games') {
     return <GamesPage 
-      onBack={() => setCurrentView('portfolio')} 
-      onHome={() => setCurrentView('home')} 
+      onBack={handleBackToPortfolio} 
+      onHome={() => { if (onBack) onBack(); }} 
     />;
   }
 
   if (currentView === 'music') {
     return <MusicPage 
-      onBack={() => setCurrentView('portfolio')} 
-      onHome={() => setCurrentView('home')} 
+      onBack={handleBackToPortfolio} 
+      onHome={() => { if (onBack) onBack(); }} 
     />;
   }
 
@@ -128,10 +170,10 @@ const PortfolioPage = ({ onBack }) => {
             </div>
             <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
               <button onClick={onBack} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
-              <button onClick={() => { setCurrentView('skills'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Skills</button>
-              <button onClick={() => { setCurrentView('experience'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Experience</button>
-              <button onClick={() => { setCurrentView('projects'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</button>
-              <button onClick={() => { setCurrentView('contact'); window.scrollTo(0, 0); }} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Contact</button>
+              <button onClick={() => handleViewChange('skills')} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Skills</button>
+              <button onClick={() => handleViewChange('experience')} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Experience</button>
+              <button onClick={() => handleViewChange('projects')} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</button>
+              <button onClick={() => handleViewChange('contact')} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Contact</button>
               <button 
                 onClick={onBack}
                 className="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-teal-600 hover:from-green-400 hover:to-teal-500 transition-all duration-300 hover:scale-110 border-2 border-white/20 hover:border-white/40"
@@ -168,26 +210,25 @@ const PortfolioPage = ({ onBack }) => {
                 Home
               </button>
               <button 
-                onClick={() => { setCurrentView('skills'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
+                onClick={() => { handleViewChange('skills'); setIsMobileMenuOpen(false); }}
                 className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
                 Skills
               </button>
               <button 
-                onClick={() => { setCurrentView('experience'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
+                onClick={() => { handleViewChange('experience'); setIsMobileMenuOpen(false); }}
                 className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
                 Experience
               </button>
               <button 
                 onClick={() => { 
-                  setCurrentView('projects'); 
-                  window.scrollTo(0, 0);
+                  handleViewChange('projects'); 
                   setIsMobileMenuOpen(false);
                 }}
                 className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
                 Projects
               </button>
               <button 
-                onClick={() => { setCurrentView('contact'); window.scrollTo(0, 0); setIsMobileMenuOpen(false); }}
+                onClick={() => { handleViewChange('contact'); setIsMobileMenuOpen(false); }}
                 className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
                 Contact
               </button>
