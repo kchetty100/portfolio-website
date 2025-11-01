@@ -67,20 +67,20 @@ const Skills = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="pt-20 pb-16 px-4 sm:px-6 lg:px-8">
+      <section className="pt-16 sm:pt-20 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-fade-in">
+          <div className="text-center mb-8 sm:mb-10 md:mb-12">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 animate-fade-in leading-tight">
               My <span className="text-netflixRed">Skills</span>
             </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto animate-slide-up">
+            <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto animate-slide-up px-4">
               A comprehensive showcase of technologies and tools I work with, 
               organized by category and proficiency level.
             </p>
           </div>
 
           {/* Search and Filter Controls */}
-          <div className="flex flex-col md:flex-row gap-4 mb-8 justify-center items-center">
+          <div className="flex flex-col md:flex-row gap-4 mb-6 sm:mb-8 justify-center items-stretch md:items-center">
             {/* Search Input */}
             <div className="relative w-full md:w-80">
               <input
@@ -88,7 +88,7 @@ const Skills = () => {
                 placeholder="Search technologies..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-4 py-3 bg-netflixGray/50 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-netflixRed focus:ring-1 focus:ring-netflixRed transition-all duration-200"
+                className="w-full px-4 py-3 sm:py-3 bg-netflixGray/50 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-netflixRed focus:ring-1 focus:ring-netflixRed transition-all duration-200 text-sm sm:text-base min-h-[44px]"
               />
               <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                 <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -98,12 +98,12 @@ const Skills = () => {
             </div>
 
             {/* Category Filter */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 justify-center md:justify-start">
               {categories.map((category) => (
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                  className={`px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 min-h-[44px] ${
                     selectedCategory === category
                       ? 'bg-netflixRed text-white shadow-lg shadow-netflixRed/25'
                       : 'bg-netflixGray/50 text-gray-300 hover:bg-netflixGray hover:text-white'
@@ -118,19 +118,19 @@ const Skills = () => {
       </section>
 
       {/* Skills Grid */}
-      <section className="px-4 sm:px-6 lg:px-8 pb-16">
+      <section className="px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16">
         <div className="max-w-7xl mx-auto">
           {selectedCategory === 'All' ? (
             // Display grouped by category
             Object.entries(groupedSkills).map(([category, categorySkills]) => (
-              <div key={category} className="mb-16">
-                <h2 className="text-3xl font-bold text-white mb-8 text-center">
+              <div key={category} className="mb-12 sm:mb-16">
+                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8 text-center">
                   {category}
-                  <span className="block text-sm font-normal text-gray-400 mt-2">
+                  <span className="block text-xs sm:text-sm font-normal text-gray-400 mt-2">
                     {categorySkills.length} {categorySkills.length === 1 ? 'skill' : 'skills'}
                   </span>
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
                   {categorySkills.map((skill) => (
                     <SkillCard
                       key={skill.id}
@@ -146,7 +146,7 @@ const Skills = () => {
             ))
           ) : (
             // Display filtered skills
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
               {filteredSkills.map((skill) => (
                 <SkillCard
                   key={skill.id}

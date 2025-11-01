@@ -84,56 +84,56 @@ const SkillsSimple = ({ onBack, onHome }) => {
       </nav>
 
       {/* Main Content */}
-      <div className="pt-16 sm:pt-20 px-4 sm:px-6 py-8 sm:py-12">
+      <div className="pt-16 sm:pt-20 px-4 sm:px-6 py-6 sm:py-8 md:py-12">
         <div className="max-w-7xl mx-auto">
           
           {/* Frontend Section */}
-          <div className="mb-16">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white relative inline-block">
+          <div className="mb-12 sm:mb-16">
+            <div className="text-center mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white relative inline-block">
                 Frontend
                 <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-netflixRed"></div>
               </h2>
             </div>
             {/* Upside-down pyramid: first row 3, second row 1 (centered) */}
-            <div className="flex flex-col items-center gap-6">
-              <div className="flex justify-center gap-4 sm:gap-6">
+            <div className="flex flex-col items-center gap-4 sm:gap-6">
+              <div className="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-6 w-full">
                 {/* HTML&CSS */}
-                <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+                <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48 max-w-[180px] sm:max-w-none">
                   <div className="flex flex-col items-center text-center">
-                    <div className="flex space-x-1 mb-3 group-hover:scale-110 transition-transform">
-                      <FaHtml5 className="text-netflixRed text-2xl" />
-                      <FaCss3Alt className="text-netflixRed text-2xl" />
+                    <div className="flex space-x-1 mb-2 sm:mb-3 group-hover:scale-110 transition-transform">
+                      <FaHtml5 className="text-netflixRed text-xl sm:text-2xl" />
+                      <FaCss3Alt className="text-netflixRed text-xl sm:text-2xl" />
                     </div>
-                    <h3 className="text-white font-bold text-lg mb-1">HTML&CSS</h3>
-                    <p className="text-gray-400 text-sm">Web Markup and Styling</p>
+                    <h3 className="text-white font-bold text-base sm:text-lg mb-1">HTML&CSS</h3>
+                    <p className="text-gray-400 text-xs sm:text-sm">Web Markup and Styling</p>
                   </div>
                 </div>
                 {/* JavaScript */}
-                <div className="bg-gray-900 p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+                <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48 max-w-[180px] sm:max-w-none">
                   <div className="flex flex-col items-center text-center">
-                    <FaJs className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
-                    <h3 className="text-white font-bold text-lg mb-1">JavaScript</h3>
-                    <p className="text-gray-400 text-sm">Scripting Language</p>
+                    <FaJs className="text-netflixRed text-3xl sm:text-4xl mb-2 sm:mb-3 group-hover:scale-110 transition-transform" />
+                    <h3 className="text-white font-bold text-base sm:text-lg mb-1">JavaScript</h3>
+                    <p className="text-gray-400 text-xs sm:text-sm">Scripting Language</p>
                   </div>
                 </div>
                 {/* TypeScript */}
-                <div className="bg-gray-900 p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+                <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48 max-w-[180px] sm:max-w-none">
                   <div className="flex flex-col items-center text-center">
-                    <SiTypescript className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
-                    <h3 className="text-white font-bold text-lg mb-1">TypeScript</h3>
-                    <p className="text-gray-400 text-sm">Type-safe JavaScript</p>
+                    <SiTypescript className="text-netflixRed text-3xl sm:text-4xl mb-2 sm:mb-3 group-hover:scale-110 transition-transform" />
+                    <h3 className="text-white font-bold text-base sm:text-lg mb-1">TypeScript</h3>
+                    <p className="text-gray-400 text-xs sm:text-sm">Type-safe JavaScript</p>
                   </div>
                 </div>
               </div>
               {/* Row 2 centered single */}
-              <div className="flex justify-center">
+              <div className="flex justify-center w-full">
                 {/* React */}
-                <div className="bg-gray-900 p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+                <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48 max-w-[180px] sm:max-w-none">
                   <div className="flex flex-col items-center text-center">
-                    <FaReact className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
-                    <h3 className="text-white font-bold text-lg mb-1">React</h3>
-                    <p className="text-gray-400 text-sm">Frontend Framework</p>
+                    <FaReact className="text-netflixRed text-3xl sm:text-4xl mb-2 sm:mb-3 group-hover:scale-110 transition-transform" />
+                    <h3 className="text-white font-bold text-base sm:text-lg mb-1">React</h3>
+                    <p className="text-gray-400 text-xs sm:text-sm">Frontend Framework</p>
                   </div>
                 </div>
               </div>
@@ -141,60 +141,60 @@ const SkillsSimple = ({ onBack, onHome }) => {
           </div>
 
           {/* Backend Section */}
-          <div className="mb-16">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white relative inline-block">
+          <div className="mb-12 sm:mb-16">
+            <div className="text-center mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white relative inline-block">
                 Backend
                 <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-netflixRed"></div>
               </h2>
             </div>
             {/* Pyramid: first row 4, second row 1 */}
-            <div className="flex flex-col items-center gap-6">
-              <div className="flex justify-center gap-4 sm:gap-6">
+            <div className="flex flex-col items-center gap-4 sm:gap-6">
+              <div className="grid grid-cols-2 sm:flex sm:justify-center gap-3 sm:gap-4 md:gap-6 w-full sm:w-auto">
               {/* Ruby on Rails */}
-              <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+              <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48">
                 <div className="flex flex-col items-center text-center">
-                  <SiRubyonrails className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
-                  <h3 className="text-white font-bold text-lg mb-1">Ruby on Rails</h3>
-                  <p className="text-gray-400 text-sm">Backend Framework</p>
+                  <SiRubyonrails className="text-netflixRed text-3xl sm:text-4xl mb-2 sm:mb-3 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-white font-bold text-base sm:text-lg mb-1">Ruby on Rails</h3>
+                  <p className="text-gray-400 text-xs sm:text-sm">Backend Framework</p>
                 </div>
               </div>
 
               {/* PHP */}
-              <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+              <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48">
                 <div className="flex flex-col items-center text-center">
-                  <SiPhp className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
-                  <h3 className="text-white font-bold text-lg mb-1">PHP</h3>
-                  <p className="text-gray-400 text-sm">Backend Language</p>
+                  <SiPhp className="text-netflixRed text-3xl sm:text-4xl mb-2 sm:mb-3 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-white font-bold text-base sm:text-lg mb-1">PHP</h3>
+                  <p className="text-gray-400 text-xs sm:text-sm">Backend Language</p>
                 </div>
               </div>
 
               {/* Java */}
-              <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+              <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48">
                 <div className="flex flex-col items-center text-center">
-                  <FaJava className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
-                  <h3 className="text-white font-bold text-lg mb-1">Java</h3>
-                  <p className="text-gray-400 text-sm">Object-Oriented Programming Language</p>
+                  <FaJava className="text-netflixRed text-3xl sm:text-4xl mb-2 sm:mb-3 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-white font-bold text-base sm:text-lg mb-1">Java</h3>
+                  <p className="text-gray-400 text-xs sm:text-sm">Object-Oriented Programming</p>
                 </div>
               </div>
 
               {/* SpringBoot */}
-              <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+              <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48">
                 <div className="flex flex-col items-center text-center">
-                  <SiSpring className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
-                  <h3 className="text-white font-bold text-lg mb-1">SpringBoot</h3>
-                  <p className="text-gray-400 text-sm">Java Framework</p>
+                  <SiSpring className="text-netflixRed text-3xl sm:text-4xl mb-2 sm:mb-3 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-white font-bold text-base sm:text-lg mb-1">SpringBoot</h3>
+                  <p className="text-gray-400 text-xs sm:text-sm">Java Framework</p>
                 </div>
               </div>
               </div>
 
               {/* Row 2 single centered */}
-              <div className="flex justify-center">
-                <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+              <div className="flex justify-center w-full">
+                <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48 max-w-[180px] sm:max-w-none">
                   <div className="flex flex-col items-center text-center">
-                    <FaNodeJs className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
-                    <h3 className="text-white font-bold text-lg mb-1">Node.js</h3>
-                    <p className="text-gray-400 text-sm">Backend Runtime</p>
+                    <FaNodeJs className="text-netflixRed text-3xl sm:text-4xl mb-2 sm:mb-3 group-hover:scale-110 transition-transform" />
+                    <h3 className="text-white font-bold text-base sm:text-lg mb-1">Node.js</h3>
+                    <p className="text-gray-400 text-xs sm:text-sm">Backend Runtime</p>
                   </div>
                 </div>
               </div>
@@ -202,105 +202,105 @@ const SkillsSimple = ({ onBack, onHome }) => {
           </div>
 
           {/* Cloud & DevOps Section */}
-          <div className="mb-16">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white relative inline-block">
+          <div className="mb-12 sm:mb-16">
+            <div className="text-center mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white relative inline-block">
                 Cloud & DevOps
                 <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-netflixRed"></div>
               </h2>
             </div>
             {/* Inverted pyramid: row of 4, row of 2, row of 1 */}
-            <div className="flex flex-col items-center gap-6">
+            <div className="flex flex-col items-center gap-4 sm:gap-6">
               {/* Row 1: 4 tiles */}
-              <div className="flex justify-center gap-4 sm:gap-6">
+              <div className="grid grid-cols-2 sm:flex sm:justify-center gap-3 sm:gap-4 md:gap-6 w-full sm:w-auto">
                 {/* CI/CD */}
-                <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+                <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48">
                   <div className="flex flex-col items-center text-center">
-                    <div className="w-12 h-12 bg-netflixRed rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                      <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-netflixRed rounded-full flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform">
+                      <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
                       </svg>
                     </div>
-                    <h3 className="text-white font-bold text-lg mb-1">CI/CD</h3>
-                    <p className="text-gray-400 text-sm">Continuous Integration & Delivery</p>
+                    <h3 className="text-white font-bold text-base sm:text-lg mb-1">CI/CD</h3>
+                    <p className="text-gray-400 text-xs sm:text-sm">Continuous Integration</p>
                   </div>
                 </div>
                 {/* Kubernetes */}
-                <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+                <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48">
                   <div className="flex flex-col items-center text-center">
-                    <SiKubernetes className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
-                    <h3 className="text-white font-bold text-lg mb-1">Kubernetes</h3>
-                    <p className="text-gray-400 text-sm">Container Orchestration</p>
+                    <SiKubernetes className="text-netflixRed text-3xl sm:text-4xl mb-2 sm:mb-3 group-hover:scale-110 transition-transform" />
+                    <h3 className="text-white font-bold text-base sm:text-lg mb-1">Kubernetes</h3>
+                    <p className="text-gray-400 text-xs sm:text-sm">Container Orchestration</p>
                   </div>
                 </div>
                 {/* Docker */}
-                <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+                <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48">
                   <div className="flex flex-col items-center text-center">
-                    <FaDocker className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
-                    <h3 className="text-white font-bold text-lg mb-1">Docker</h3>
-                    <p className="text-gray-400 text-sm">Containerization</p>
+                    <FaDocker className="text-netflixRed text-3xl sm:text-4xl mb-2 sm:mb-3 group-hover:scale-110 transition-transform" />
+                    <h3 className="text-white font-bold text-base sm:text-lg mb-1">Docker</h3>
+                    <p className="text-gray-400 text-xs sm:text-sm">Containerization</p>
                   </div>
                 </div>
                 {/* GCP */}
-                <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+                <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48">
                   <div className="flex flex-col items-center text-center">
-                    <SiGooglecloud className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
-                    <h3 className="text-white font-bold text-lg mb-1">GCP</h3>
-                    <p className="text-gray-400 text-sm">Google Cloud Platform</p>
+                    <SiGooglecloud className="text-netflixRed text-3xl sm:text-4xl mb-2 sm:mb-3 group-hover:scale-110 transition-transform" />
+                    <h3 className="text-white font-bold text-base sm:text-lg mb-1">GCP</h3>
+                    <p className="text-gray-400 text-xs sm:text-sm">Google Cloud Platform</p>
                   </div>
                 </div>
               </div>
               {/* Row 2: 3 tiles centered (add Jenkins) */}
-              <div className="flex justify-center gap-4 sm:gap-6">
+              <div className="grid grid-cols-2 sm:flex sm:justify-center gap-3 sm:gap-4 md:gap-6 w-full sm:w-auto">
                 {/* Jenkins */}
-                <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+                <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48">
                   <div className="flex flex-col items-center text-center">
-                    <svg className="w-10 h-10 text-netflixRed mb-3 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 017 7v4a7 7 0 11-14 0V9a7 7 0 017-7zm1 13.93A5.001 5.001 0 0017 11V9a5 5 0 10-10 0v2a5.001 5.001 0 004 4.93V18H9v2h6v-2h-2v-2.07z"/></svg>
-                    <h3 className="text-white font-bold text-lg mb-1">Jenkins</h3>
-                    <p className="text-gray-400 text-sm">Automation Server</p>
+                    <svg className="w-8 h-8 sm:w-10 sm:h-10 text-netflixRed mb-2 sm:mb-3 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 017 7v4a7 7 0 11-14 0V9a7 7 0 017-7zm1 13.93A5.001 5.001 0 0017 11V9a5 5 0 10-10 0v2a5.001 5.001 0 004 4.93V18H9v2h6v-2h-2v-2.07z"/></svg>
+                    <h3 className="text-white font-bold text-base sm:text-lg mb-1">Jenkins</h3>
+                    <p className="text-gray-400 text-xs sm:text-sm">Automation Server</p>
                   </div>
                 </div>
                 {/* Netlify */}
-                <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+                <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48">
                   <div className="flex flex-col items-center text-center">
-                    <SiNetlify className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
-                    <h3 className="text-white font-bold text-lg mb-1">Netlify</h3>
-                    <p className="text-gray-400 text-sm">Frontend Deployment Platform</p>
+                    <SiNetlify className="text-netflixRed text-3xl sm:text-4xl mb-2 sm:mb-3 group-hover:scale-110 transition-transform" />
+                    <h3 className="text-white font-bold text-base sm:text-lg mb-1">Netlify</h3>
+                    <p className="text-gray-400 text-xs sm:text-sm">Frontend Deployment</p>
                   </div>
                 </div>
                 {/* Heroku */}
-                <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+                <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48">
                   <div className="flex flex-col items-center text-center">
-                    <SiHeroku className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
-                    <h3 className="text-white font-bold text-lg mb-1">Heroku</h3>
-                    <p className="text-gray-400 text-sm">Cloud Platform for Apps</p>
+                    <SiHeroku className="text-netflixRed text-3xl sm:text-4xl mb-2 sm:mb-3 group-hover:scale-110 transition-transform" />
+                    <h3 className="text-white font-bold text-base sm:text-lg mb-1">Heroku</h3>
+                    <p className="text-gray-400 text-xs sm:text-sm">Cloud Platform</p>
                   </div>
                 </div>
               </div>
               {/* Row 3: 3 tiles centered (OpenShift, Podman, AWS) */}
-              <div className="flex justify-center gap-4 sm:gap-6">
+              <div className="grid grid-cols-2 sm:flex sm:justify-center gap-3 sm:gap-4 md:gap-6 w-full sm:w-auto">
                 {/* OpenShift */}
-                <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+                <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48">
                   <div className="flex flex-col items-center text-center">
-                    <svg className="w-10 h-10 text-netflixRed mb-3 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4a8 8 0 100 16 8 8 0 000-16zm5 8a5 5 0 11-10 0 5 5 0 0110 0z"/></svg>
-                    <h3 className="text-white font-bold text-lg mb-1">OpenShift</h3>
-                    <p className="text-gray-400 text-sm">Red Hat Platform</p>
+                    <svg className="w-8 h-8 sm:w-10 sm:h-10 text-netflixRed mb-2 sm:mb-3 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4a8 8 0 100 16 8 8 0 000-16zm5 8a5 5 0 11-10 0 5 5 0 0110 0z"/></svg>
+                    <h3 className="text-white font-bold text-base sm:text-lg mb-1">OpenShift</h3>
+                    <p className="text-gray-400 text-xs sm:text-sm">Red Hat Platform</p>
                   </div>
                 </div>
                 {/* Podman */}
-                <div className="bg-gray-900 p-4 sm:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-40 sm:w-48">
+                <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48">
                   <div className="flex flex-col items-center text-center">
-                    <svg className="w-10 h-10 text-netflixRed mb-3 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M3 12h18M12 3v18"/></svg>
-                    <h3 className="text-white font-bold text-lg mb-1">Podman</h3>
-                    <p className="text-gray-400 text-sm">Container Engine</p>
+                    <svg className="w-8 h-8 sm:w-10 sm:h-10 text-netflixRed mb-2 sm:mb-3 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M3 12h18M12 3v18"/></svg>
+                    <h3 className="text-white font-bold text-base sm:text-lg mb-1">Podman</h3>
+                    <p className="text-gray-400 text-xs sm:text-sm">Container Engine</p>
                   </div>
                 </div>
                 {/* AWS */}
-                <div className="bg-gray-900 p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-48">
+                <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48">
                   <div className="flex flex-col items-center text-center">
-                    <FaAws className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
-                    <h3 className="text-white font-bold text-lg mb-1">AWS</h3>
-                    <p className="text-gray-400 text-sm">Cloud Platform</p>
+                    <FaAws className="text-netflixRed text-3xl sm:text-4xl mb-2 sm:mb-3 group-hover:scale-110 transition-transform" />
+                    <h3 className="text-white font-bold text-base sm:text-lg mb-1">AWS</h3>
+                    <p className="text-gray-400 text-xs sm:text-sm">Cloud Platform</p>
                   </div>
                 </div>
               </div>
@@ -308,29 +308,29 @@ const SkillsSimple = ({ onBack, onHome }) => {
           </div>
 
           {/* Databases Section */}
-          <div className="mb-16">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white relative inline-block">
+          <div className="mb-12 sm:mb-16">
+            <div className="text-center mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white relative inline-block">
                 Databases
                 <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-netflixRed"></div>
               </h2>
             </div>
-            <div className="flex justify-center gap-6">
+            <div className="grid grid-cols-2 sm:flex sm:justify-center gap-3 sm:gap-4 md:gap-6 max-w-md sm:max-w-none mx-auto sm:mx-0">
               {/* MySQL */}
-              <div className="bg-gray-900 p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-48">
+              <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48">
                 <div className="flex flex-col items-center text-center">
-                  <SiMysql className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
-                  <h3 className="text-white font-bold text-lg mb-1">MySQL</h3>
-                  <p className="text-gray-400 text-sm">Relational Database</p>
+                  <SiMysql className="text-netflixRed text-3xl sm:text-4xl mb-2 sm:mb-3 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-white font-bold text-base sm:text-lg mb-1">MySQL</h3>
+                  <p className="text-gray-400 text-xs sm:text-sm">Relational Database</p>
                 </div>
               </div>
 
               {/* PostgreSQL */}
-              <div className="bg-gray-900 p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-48">
+              <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48">
                 <div className="flex flex-col items-center text-center">
-                  <SiPostgresql className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
-                  <h3 className="text-white font-bold text-lg mb-1">PostgreSQL</h3>
-                  <p className="text-gray-400 text-sm">Relational Database</p>
+                  <SiPostgresql className="text-netflixRed text-3xl sm:text-4xl mb-2 sm:mb-3 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-white font-bold text-base sm:text-lg mb-1">PostgreSQL</h3>
+                  <p className="text-gray-400 text-xs sm:text-sm">Relational Database</p>
                 </div>
               </div>
             </div>
@@ -338,33 +338,33 @@ const SkillsSimple = ({ onBack, onHome }) => {
 
 
           {/* Other Tools & Practices Section */}
-          <div className="mb-16">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white relative inline-block">
+          <div className="mb-12 sm:mb-16">
+            <div className="text-center mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white relative inline-block">
                 Other Tools & Practices
                 <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-netflixRed"></div>
               </h2>
             </div>
-            <div className="flex justify-center gap-6">
+            <div className="grid grid-cols-2 sm:flex sm:justify-center gap-3 sm:gap-4 md:gap-6 max-w-md sm:max-w-none mx-auto sm:mx-0">
               {/* Dockerization */}
-              <div className="bg-gray-900 p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-48">
+              <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48">
                 <div className="flex flex-col items-center text-center">
-                  <SiDocker className="text-netflixRed text-4xl mb-3 group-hover:scale-110 transition-transform" />
-                  <h3 className="text-white font-bold text-lg mb-1">Dockerization</h3>
-                  <p className="text-gray-400 text-sm">Container Management</p>
+                  <SiDocker className="text-netflixRed text-3xl sm:text-4xl mb-2 sm:mb-3 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-white font-bold text-base sm:text-lg mb-1">Dockerization</h3>
+                  <p className="text-gray-400 text-xs sm:text-sm">Container Management</p>
                 </div>
               </div>
 
               {/* Agile */}
-              <div className="bg-gray-900 p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-48">
+              <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48">
                 <div className="flex flex-col items-center text-center">
-                  <div className="w-12 h-12 bg-netflixRed rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-netflixRed rounded-full flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform">
+                    <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <h3 className="text-white font-bold text-lg mb-1">Agile</h3>
-                  <p className="text-gray-400 text-sm">Development Methodology</p>
+                  <h3 className="text-white font-bold text-base sm:text-lg mb-1">Agile</h3>
+                  <p className="text-gray-400 text-xs sm:text-sm">Development Methodology</p>
                 </div>
               </div>
             </div>

@@ -25,7 +25,7 @@ const SkillCard = ({ technologyName, category, proficiency, description, icon })
       className={`
         relative group cursor-pointer transition-all duration-300 ease-in-out
         ${isHovered ? 'transform scale-105' : 'transform scale-100'}
-        bg-netflixGray/50 backdrop-blur-sm rounded-lg p-6
+        bg-netflixGray/50 backdrop-blur-sm rounded-lg p-4 sm:p-5 md:p-6
         border border-gray-700/50 hover:border-netflixRed/50
         hover:shadow-2xl hover:shadow-netflixRed/10
         ${getCategoryBgColor(category)}
@@ -43,15 +43,15 @@ const SkillCard = ({ technologyName, category, proficiency, description, icon })
       {/* Content */}
       <div className="relative z-10">
         {/* Icon and Technology Name */}
-        <div className="flex items-center space-x-4 mb-4">
+        <div className="flex items-center space-x-3 sm:space-x-4 mb-3 sm:mb-4">
           <div className="flex-shrink-0">
-            {getIcon(icon, 48)}
+            {getIcon(icon, 40)}
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="text-xl font-bold text-white truncate group-hover:text-netflixRed transition-colors duration-200">
+            <h3 className="text-lg sm:text-xl font-bold text-white truncate group-hover:text-netflixRed transition-colors duration-200">
               {technologyName}
             </h3>
-            <p className={`text-sm font-medium ${getCategoryColor(category)}`}>
+            <p className={`text-xs sm:text-sm font-medium ${getCategoryColor(category)}`}>
               {category}
             </p>
           </div>
@@ -59,7 +59,7 @@ const SkillCard = ({ technologyName, category, proficiency, description, icon })
 
         {/* Description */}
         {description && (
-          <p className="text-gray-300 text-sm mb-4 line-clamp-2 group-hover:text-gray-200 transition-colors duration-200">
+          <p className="text-gray-300 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2 group-hover:text-gray-200 transition-colors duration-200">
             {description}
           </p>
         )}
