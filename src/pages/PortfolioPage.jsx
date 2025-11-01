@@ -41,14 +41,12 @@ const PortfolioPage = ({ onBack }) => {
     const container = topPicksRef.current;
     if (!container) return;
 
-    // Set initial scroll to the middle (start of first set) after content renders
+    // Set initial scroll to the left (start) after content renders
     const initScroll = () => {
       const scrollContent = container.querySelector('div');
       if (scrollContent && scrollContent.scrollWidth > 0) {
-        const firstSetWidth = scrollContent.scrollWidth / 2;
-        if (firstSetWidth > 0) {
-          container.scrollLeft = firstSetWidth;
-        }
+        // Start from the left
+        container.scrollLeft = 0;
       }
     };
     
@@ -70,7 +68,7 @@ const PortfolioPage = ({ onBack }) => {
       setTopPicksFadeLeft(scrollLeft > 10);
       setTopPicksFadeRight(scrollLeft < scrollWidth - clientWidth - 10);
 
-      // Loop forward: if scrolled past the end of first set, jump to start
+      // Loop forward: if scrolled past the end of first set, jump back to start
       if (scrollLeft >= halfWidth) {
         topPicksScrollingRef.current = true;
         container.scrollLeft = scrollLeft - halfWidth;
@@ -103,14 +101,12 @@ const PortfolioPage = ({ onBack }) => {
     const container = continueWatchingRef.current;
     if (!container) return;
 
-    // Set initial scroll to the middle (start of first set) after content renders
+    // Set initial scroll to the left (start) after content renders
     const initScroll = () => {
       const scrollContent = container.querySelector('div');
       if (scrollContent && scrollContent.scrollWidth > 0) {
-        const firstSetWidth = scrollContent.scrollWidth / 2;
-        if (firstSetWidth > 0) {
-          container.scrollLeft = firstSetWidth;
-        }
+        // Start from the left
+        container.scrollLeft = 0;
       }
     };
     
