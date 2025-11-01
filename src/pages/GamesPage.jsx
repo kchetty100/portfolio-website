@@ -455,7 +455,7 @@ const GamesPage = ({ onBack, onHome }) => {
         {/* Content Overlay */}
         <div className="absolute bottom-6 left-4 sm:left-6 z-10 max-w-3xl pr-4 text-left">
           <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6">
-            GAMES
+            ARCADE
           </h1>
           <blockquote className="text-lg sm:text-xl md:text-2xl text-gray-200 mb-6 sm:mb-8 max-w-4xl leading-relaxed">
             "We don't stop playing because we grow old;<br />
