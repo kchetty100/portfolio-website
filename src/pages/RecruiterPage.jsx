@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaPlay, FaLinkedin, FaUser, FaCode, FaProjectDiagram, FaBriefcase, FaThumbsUp, FaEnvelope, FaMusic, FaBook, FaBlog, FaPhone } from 'react-icons/fa';
 import ProjectsPage from './ProjectsPage';
 import ExperiencePage from './ExperiencePage';
@@ -12,6 +12,63 @@ import BlogPage from './BlogPage';
 const RecruiterPage = ({ onBack }) => {
   const [currentView, setCurrentView] = useState('recruiter');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const topPicksRef = useRef(null);
+  const continueWatchingRef = useRef(null);
+  const [topPicksFadeLeft, setTopPicksFadeLeft] = useState(false);
+  const [topPicksFadeRight, setTopPicksFadeRight] = useState(true);
+  const [continueFadeLeft, setContinueFadeLeft] = useState(false);
+  const [continueFadeRight, setContinueFadeRight] = useState(true);
+
+  // Handle scroll fade effects for top picks
+  useEffect(() => {
+    const container = topPicksRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const scrollLeft = container.scrollLeft;
+      const scrollWidth = container.scrollWidth;
+      const clientWidth = container.clientWidth;
+      
+      setTopPicksFadeLeft(scrollLeft > 10);
+      setTopPicksFadeRight(scrollLeft < scrollWidth - clientWidth - 10);
+    };
+
+    container.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial state
+
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Handle scroll fade effects for continue watching
+  useEffect(() => {
+    const container = continueWatchingRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const scrollLeft = container.scrollLeft;
+      const scrollWidth = container.scrollWidth;
+      const clientWidth = container.clientWidth;
+      
+      setContinueFadeLeft(scrollLeft > 10);
+      setContinueFadeRight(scrollLeft < scrollWidth - clientWidth - 10);
+    };
+
+    container.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial state
+
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Trigger fade-in animations on mount
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const tiles = document.querySelectorAll('.tile-fade-in');
+      tiles.forEach(tile => {
+        tile.classList.add('visible');
+      });
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [currentView]);
 
   const topPicks = [
     { title: 'Skills', image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&h=800&fit=crop', icon: <FaCode /> },
@@ -262,26 +319,34 @@ const RecruiterPage = ({ onBack }) => {
       <div className="py-6 sm:py-8 md:py-16 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white mb-4 sm:mb-6 md:mb-8">Today's Top Picks for recruiter</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3 md:gap-4">
-            {topPicks.map((item, index) => (
-              <div
-                key={index}
-                onClick={() => handleTileClick(item.title)}
-                className="group cursor-pointer transform transition-all duration-300 hover:scale-105"
-              >
-                <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-800 skill-card-hover">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                  <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 right-2 sm:right-4">
-                    <h3 className="text-white font-bold text-sm sm:text-base md:text-lg">{item.title}</h3>
+          <div 
+            ref={topPicksRef}
+            className={`horizontal-scroll-container ${topPicksFadeLeft ? '' : 'fade-left'} ${topPicksFadeRight ? '' : 'fade-right'}`}
+          >
+            <div className="flex gap-3 sm:gap-4 md:gap-6 pb-2" style={{ display: 'inline-flex', minWidth: 'max-content' }}>
+              {topPicks.map((item, index) => (
+                <div
+                  key={index}
+                  onClick={() => handleTileClick(item.title)}
+                  className="group cursor-pointer transform transition-all duration-300 hover:scale-105 tile-fade-in flex-shrink-0 relative w-[calc(50vw-1.5rem)] sm:w-40 md:w-44 lg:w-48"
+                  style={{ minWidth: '140px', maxWidth: '200px' }}
+                  onMouseEnter={(e) => e.currentTarget.style.zIndex = '20'}
+                  onMouseLeave={(e) => e.currentTarget.style.zIndex = '1'}
+                >
+                  <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-800 skill-card-hover">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 right-2 sm:right-4">
+                      <h3 className="text-white font-bold text-sm sm:text-base md:text-lg">{item.title}</h3>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -290,26 +355,34 @@ const RecruiterPage = ({ onBack }) => {
       <div className="py-6 sm:py-8 md:py-16 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white mb-4 sm:mb-6 md:mb-8">Continue Watching for recruiter</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3 md:gap-4">
-            {continueWatching.map((item, index) => (
-              <div
-                key={index}
-                onClick={() => handleTileClick(item.title)}
-                className="group cursor-pointer transform transition-all duration-300 hover:scale-105"
-              >
-                <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-800 skill-card-hover">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                  <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 right-2 sm:right-4">
-                    <h3 className="text-white font-bold text-sm sm:text-base md:text-lg">{item.title}</h3>
+          <div 
+            ref={continueWatchingRef}
+            className={`horizontal-scroll-container ${continueFadeLeft ? '' : 'fade-left'} ${continueFadeRight ? '' : 'fade-right'}`}
+          >
+            <div className="flex gap-3 sm:gap-4 md:gap-6 pb-2" style={{ display: 'inline-flex', minWidth: 'max-content' }}>
+              {continueWatching.map((item, index) => (
+                <div
+                  key={index}
+                  onClick={() => handleTileClick(item.title)}
+                  className="group cursor-pointer transform transition-all duration-300 hover:scale-105 tile-fade-in flex-shrink-0 relative w-[calc(50vw-1.5rem)] sm:w-40 md:w-44 lg:w-48"
+                  style={{ minWidth: '140px', maxWidth: '200px' }}
+                  onMouseEnter={(e) => e.currentTarget.style.zIndex = '20'}
+                  onMouseLeave={(e) => e.currentTarget.style.zIndex = '1'}
+                >
+                  <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-800 skill-card-hover">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 right-2 sm:right-4">
+                      <h3 className="text-white font-bold text-sm sm:text-base md:text-lg">{item.title}</h3>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -164,3 +164,82 @@ html {
 .fluffy-animation {
   animation: fluffy 3s ease-in-out infinite;
 }
+
+/* Horizontal scroll container with fade edges */
+.horizontal-scroll-container {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scroll-behavior: smooth;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.horizontal-scroll-container::before,
+.horizontal-scroll-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  z-index: 10;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.horizontal-scroll-container::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0));
+}
+
+.horizontal-scroll-container::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0));
+}
+
+.horizontal-scroll-container.fade-left::before {
+  opacity: 0;
+}
+
+.horizontal-scroll-container.fade-right::after {
+  opacity: 0;
+}
+
+/* Fade-in animation for tiles */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tile-fade-in {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.tile-fade-in.visible {
+  opacity: 1;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Stagger animation delays */
+.tile-fade-in:nth-child(1) { animation-delay: 0.1s; }
+.tile-fade-in:nth-child(2) { animation-delay: 0.2s; }
+.tile-fade-in:nth-child(3) { animation-delay: 0.3s; }
+.tile-fade-in:nth-child(4) { animation-delay: 0.4s; }
+.tile-fade-in:nth-child(5) { animation-delay: 0.5s; }
+.tile-fade-in:nth-child(6) { animation-delay: 0.6s; }
+.tile-fade-in:nth-child(7) { animation-delay: 0.7s; }
+.tile-fade-in:nth-child(8) { animation-delay: 0.8s; }

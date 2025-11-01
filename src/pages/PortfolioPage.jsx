@@ -24,6 +24,63 @@ const PortfolioPage = ({ onBack }) => {
 
   const [currentView, setCurrentView] = useState(getInitialView);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const topPicksRef = useRef(null);
+  const continueWatchingRef = useRef(null);
+  const [topPicksFadeLeft, setTopPicksFadeLeft] = useState(false);
+  const [topPicksFadeRight, setTopPicksFadeRight] = useState(true);
+  const [continueFadeLeft, setContinueFadeLeft] = useState(false);
+  const [continueFadeRight, setContinueFadeRight] = useState(true);
+
+  // Handle scroll fade effects for top picks
+  useEffect(() => {
+    const container = topPicksRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const scrollLeft = container.scrollLeft;
+      const scrollWidth = container.scrollWidth;
+      const clientWidth = container.clientWidth;
+      
+      setTopPicksFadeLeft(scrollLeft > 10);
+      setTopPicksFadeRight(scrollLeft < scrollWidth - clientWidth - 10);
+    };
+
+    container.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial state
+
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Handle scroll fade effects for continue watching
+  useEffect(() => {
+    const container = continueWatchingRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const scrollLeft = container.scrollLeft;
+      const scrollWidth = container.scrollWidth;
+      const clientWidth = container.clientWidth;
+      
+      setContinueFadeLeft(scrollLeft > 10);
+      setContinueFadeRight(scrollLeft < scrollWidth - clientWidth - 10);
+    };
+
+    container.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial state
+
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Trigger fade-in animations on mount
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const tiles = document.querySelectorAll('.tile-fade-in');
+      tiles.forEach(tile => {
+        tile.classList.add('visible');
+      });
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [currentView]);
 
   // Handle browser back/forward buttons
   useEffect(() => {
@@ -301,28 +358,36 @@ const PortfolioPage = ({ onBack }) => {
           <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-4 sm:mb-6">
             Today's Top Picks for developers
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3 md:gap-4">
-            {topPicks.map((item, index) => (
-              <div
-                key={index}
-                onClick={() => handleTileClick(item.title)}
-                className="group cursor-pointer transform transition-all duration-300 hover:scale-105"
-              >
-                <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-800 skill-card-hover">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                    <div className="text-center px-2">
-                      <div className="text-white text-xl sm:text-2xl md:text-3xl mb-1 sm:mb-2">{item.icon}</div>
-                      <p className="text-white font-bold text-sm sm:text-base md:text-lg">{item.title}</p>
+          <div 
+            ref={topPicksRef}
+            className={`horizontal-scroll-container ${topPicksFadeLeft ? '' : 'fade-left'} ${topPicksFadeRight ? '' : 'fade-right'}`}
+          >
+            <div className="flex gap-3 sm:gap-4 md:gap-6 pb-2" style={{ display: 'inline-flex', minWidth: 'max-content' }}>
+              {topPicks.map((item, index) => (
+                <div
+                  key={index}
+                  onClick={() => handleTileClick(item.title)}
+                  className="group cursor-pointer transform transition-all duration-300 hover:scale-105 tile-fade-in flex-shrink-0 relative w-[calc(50vw-1.5rem)] sm:w-40 md:w-44 lg:w-48"
+                  style={{ minWidth: '140px', maxWidth: '200px' }}
+                  onMouseEnter={(e) => e.currentTarget.style.zIndex = '20'}
+                  onMouseLeave={(e) => e.currentTarget.style.zIndex = '1'}
+                >
+                  <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-800 skill-card-hover">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                      <div className="text-center px-2">
+                        <div className="text-white text-xl sm:text-2xl md:text-3xl mb-1 sm:mb-2">{item.icon}</div>
+                        <p className="text-white font-bold text-sm sm:text-base md:text-lg">{item.title}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -333,28 +398,36 @@ const PortfolioPage = ({ onBack }) => {
           <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white mb-4 sm:mb-6">
             Continue Watching for developer
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3 md:gap-4">
-            {continueWatching.map((item, index) => (
-              <div
-                key={index}
-                onClick={() => handleTileClick(item.title)}
-                className="group cursor-pointer transform transition-all duration-300 hover:scale-105"
-              >
-                <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-800 skill-card-hover">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                    <div className="text-center px-2">
-                      <div className="text-white text-xl sm:text-2xl md:text-3xl mb-1 sm:mb-2">{item.icon}</div>
-                      <p className="text-white font-bold text-sm sm:text-base md:text-lg">{item.title}</p>
+          <div 
+            ref={continueWatchingRef}
+            className={`horizontal-scroll-container ${continueFadeLeft ? '' : 'fade-left'} ${continueFadeRight ? '' : 'fade-right'}`}
+          >
+            <div className="flex gap-3 sm:gap-4 md:gap-6 pb-2" style={{ display: 'inline-flex', minWidth: 'max-content' }}>
+              {continueWatching.map((item, index) => (
+                <div
+                  key={index}
+                  onClick={() => handleTileClick(item.title)}
+                  className="group cursor-pointer transform transition-all duration-300 hover:scale-105 tile-fade-in flex-shrink-0"
+                  style={{ width: 'calc(50vw - 1.5rem)', minWidth: '140px', maxWidth: '200px' }}
+                  onMouseEnter={(e) => e.currentTarget.style.zIndex = '20'}
+                  onMouseLeave={(e) => e.currentTarget.style.zIndex = '1'}
+                >
+                  <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-800 skill-card-hover">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                      <div className="text-center px-2">
+                        <div className="text-white text-xl sm:text-2xl md:text-3xl mb-1 sm:mb-2">{item.icon}</div>
+                        <p className="text-white font-bold text-sm sm:text-base md:text-lg">{item.title}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
