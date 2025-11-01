@@ -84,7 +84,7 @@ const SkillsSimple = ({ onBack, onHome }) => {
       </nav>
 
       {/* Main Content */}
-      <div className="pt-16 sm:pt-20 px-4 sm:px-6 py-6 sm:py-8 md:py-12">
+      <div className="pt-20 sm:pt-24 px-4 sm:px-6 py-6 sm:py-8 md:py-12">
         <div className="max-w-7xl mx-auto">
           
           {/* Frontend Section */}
@@ -97,9 +97,9 @@ const SkillsSimple = ({ onBack, onHome }) => {
             </div>
             {/* Upside-down pyramid: first row 3, second row 1 (centered) */}
             <div className="flex flex-col items-center gap-4 sm:gap-6">
-              <div className="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-6 w-full">
+              <div className="grid grid-cols-2 sm:flex sm:justify-center gap-3 sm:gap-4 md:gap-6 w-full sm:w-auto">
                 {/* HTML&CSS */}
-                <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48 max-w-[180px] sm:max-w-none">
+                <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48">
                   <div className="flex flex-col items-center text-center">
                     <div className="flex space-x-1 mb-2 sm:mb-3 group-hover:scale-110 transition-transform">
                       <FaHtml5 className="text-netflixRed text-xl sm:text-2xl" />
@@ -110,7 +110,7 @@ const SkillsSimple = ({ onBack, onHome }) => {
                   </div>
                 </div>
                 {/* JavaScript */}
-                <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48 max-w-[180px] sm:max-w-none">
+                <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48">
                   <div className="flex flex-col items-center text-center">
                     <FaJs className="text-netflixRed text-3xl sm:text-4xl mb-2 sm:mb-3 group-hover:scale-110 transition-transform" />
                     <h3 className="text-white font-bold text-base sm:text-lg mb-1">JavaScript</h3>
@@ -118,7 +118,7 @@ const SkillsSimple = ({ onBack, onHome }) => {
                   </div>
                 </div>
                 {/* TypeScript */}
-                <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48 max-w-[180px] sm:max-w-none">
+                <div className="bg-gray-900 p-4 sm:p-5 md:p-6 rounded-lg hover:bg-gray-800 skill-card-hover group w-full sm:w-40 md:w-48 col-span-2 sm:col-span-1">
                   <div className="flex flex-col items-center text-center">
                     <SiTypescript className="text-netflixRed text-3xl sm:text-4xl mb-2 sm:mb-3 group-hover:scale-110 transition-transform" />
                     <h3 className="text-white font-bold text-base sm:text-lg mb-1">TypeScript</h3>
