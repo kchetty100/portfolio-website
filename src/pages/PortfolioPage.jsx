@@ -257,7 +257,8 @@ const PortfolioPage = ({ onBack }) => {
   if (currentView === 'skills') {
     return <SkillsSimple 
       onBack={handleBackToPortfolio} 
-      onHome={() => { if (onBack) onBack(); }} 
+      onHome={() => { if (onBack) onBack(); }}
+      onNavigateToProjects={() => handleViewChange('projects')}
     />;
   }
 

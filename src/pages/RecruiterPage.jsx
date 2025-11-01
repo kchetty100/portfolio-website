@@ -202,7 +202,14 @@ const RecruiterPage = ({ onBack }) => {
 
   // If skills view is selected, show skills page
   if (currentView === 'skills') {
-    return <SkillsSimple onBack={() => setCurrentView('recruiter')} onHome={() => setCurrentView('home')} />;
+    return <SkillsSimple 
+      onBack={() => setCurrentView('recruiter')} 
+      onHome={() => setCurrentView('home')}
+      onNavigateToProjects={() => {
+        setCurrentView('projects');
+        window.scrollTo(0, 0);
+      }}
+    />;
   }
 
   if (currentView === 'projects') {

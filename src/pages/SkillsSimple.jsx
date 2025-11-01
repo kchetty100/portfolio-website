@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaReact, FaJs, FaNodeJs, FaJava, FaDocker, FaAws, FaHtml5, FaCss3Alt } from 'react-icons/fa';
 import { SiRubyonrails, SiPhp, SiSpring, SiKubernetes, SiNetlify, SiHeroku, SiGooglecloud, SiMysql, SiPostgresql, SiTypescript, SiDocker } from 'react-icons/si';
 
-const SkillsSimple = ({ onBack, onHome }) => {
+const SkillsSimple = ({ onBack, onHome, onNavigateToProjects }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
@@ -22,7 +22,7 @@ const SkillsSimple = ({ onBack, onHome }) => {
             <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
               <button onClick={onHome} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Home</button>
               <a href="#" className="text-white font-bold text-lg">Skills</a>
-              <a href="#" className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</a>
+              <button onClick={onNavigateToProjects} className="text-white font-bold text-lg hover:text-gray-300 transition-colors">Projects</button>
               <button 
                 onClick={onBack}
                 className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-red-600 hover:from-orange-400 hover:to-red-500 transition-all duration-300 hover:scale-110 border-2 border-white/20 hover:border-white/40"
@@ -61,9 +61,15 @@ const SkillsSimple = ({ onBack, onHome }) => {
               <a href="#" className="block w-full text-left text-white font-bold text-lg py-2">
                 Skills
               </a>
-              <a href="#" className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2">
+              <button 
+                onClick={() => {
+                  if (onNavigateToProjects) onNavigateToProjects();
+                  setIsMobileMenuOpen(false);
+                }}
+                className="block w-full text-left text-white font-bold text-lg hover:text-gray-300 transition-colors py-2"
+              >
                 Projects
-              </a>
+              </button>
               <div className="pt-4 border-t border-gray-700">
                 <button 
                   onClick={() => {
