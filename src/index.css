@@ -176,6 +176,12 @@ html {
   scroll-behavior: smooth;
   padding-left: 0;
   padding-right: 0;
+  text-align: left;
+}
+
+.horizontal-scroll-container > div {
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .horizontal-scroll-container::-webkit-scrollbar {

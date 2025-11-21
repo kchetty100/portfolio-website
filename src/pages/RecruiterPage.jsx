@@ -347,7 +347,7 @@ const RecruiterPage = ({ onBack }) => {
             ref={topPicksRef}
             className={`horizontal-scroll-container ${topPicksFadeLeft ? '' : 'fade-left'} ${topPicksFadeRight ? '' : 'fade-right'}`}
           >
-            <div className="flex gap-3 sm:gap-4 md:gap-6 pb-2" style={{ display: 'inline-flex', minWidth: 'max-content' }}>
+            <div className="flex gap-3 sm:gap-4 md:gap-6 pb-2" style={{ display: 'inline-flex', minWidth: 'max-content', justifyContent: 'flex-start' }}>
               {topPicks.map((item, index) => (
                 <div
                   key={index}
@@ -383,7 +383,7 @@ const RecruiterPage = ({ onBack }) => {
             ref={continueWatchingRef}
             className={`horizontal-scroll-container ${continueFadeLeft ? '' : 'fade-left'} ${continueFadeRight ? '' : 'fade-right'}`}
           >
-            <div className="flex gap-3 sm:gap-4 md:gap-6 pb-2" style={{ display: 'inline-flex', minWidth: 'max-content' }}>
+            <div className="flex gap-3 sm:gap-4 md:gap-6 pb-2" style={{ display: 'inline-flex', minWidth: 'max-content', justifyContent: 'flex-start' }}>
               {continueWatching.map((item, index) => (
                 <div
                   key={index}
