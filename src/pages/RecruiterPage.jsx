@@ -284,7 +284,7 @@ const RecruiterPage = ({ onBack }) => {
       </nav>
 
       {/* Hero Section */}
-      <div className="relative pt-16 sm:pt-20 min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] lg:min-h-screen flex items-center">
+      <section className="relative pt-16 sm:pt-20 pb-12 sm:pb-16 min-h-[60vh] sm:min-h-[70vh] md:min-h-[75vh] lg:min-h-[85vh]">
         {/* Video Background */}
         <video
           className="absolute inset-0 w-full h-full object-cover z-0"
@@ -316,11 +316,11 @@ const RecruiterPage = ({ onBack }) => {
         ></div>
         <div className="absolute inset-0 bg-black/50"></div>
         
-        <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 z-10 max-w-[calc(100%-2rem)] sm:max-w-3xl pr-4 text-left">
+        <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 z-10 max-w-[calc(100%-2rem)] sm:max-w-3xl pr-4 sm:pr-6 text-left">
           <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight">
             KEEGAN CHETTY - SENIOR FULL STACK DEVELOPER
           </h1>
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-200 mb-4 sm:mb-6 md:mb-8 max-w-4xl leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-200 mb-4 sm:mb-6 md:mb-8 leading-relaxed">
             Experienced Full-Stack Developer skilled in Java (Spring Boot), Angular, React, and cloud-native microservices. 
             Proven ability to modernize legacy systems, automate DevOps pipelines, and deliver secure, scalable enterprise solutions. 
             Passionate about innovation, system optimization, and cybersecurity, with hands-on experience across banking, fintech, 
@@ -337,7 +337,7 @@ const RecruiterPage = ({ onBack }) => {
             </button>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Today's Top Picks for Recruiter */}
       <div className="py-6 sm:py-8 md:py-16">
