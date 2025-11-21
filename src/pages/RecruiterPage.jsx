@@ -14,73 +14,28 @@ const RecruiterPage = ({ onBack }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const topPicksRef = useRef(null);
   const continueWatchingRef = useRef(null);
-  const topPicksScrollingRef = useRef(false);
-  const continueWatchingScrollingRef = useRef(false);
   const [topPicksFadeLeft, setTopPicksFadeLeft] = useState(false);
   const [topPicksFadeRight, setTopPicksFadeRight] = useState(true);
   const [continueFadeLeft, setContinueFadeLeft] = useState(false);
   const [continueFadeRight, setContinueFadeRight] = useState(true);
 
-  // Initialize scroll position and handle infinite loop for top picks
+  // Handle scroll for top picks - manual scrolling only with fade effects
   useEffect(() => {
     const container = topPicksRef.current;
     if (!container) return;
 
-    let isInitializing = true;
-    let initTimeout;
-
-    // Set initial scroll to the left (start) after content renders
-    const initScroll = () => {
-      const scrollContent = container.querySelector('div');
-      if (scrollContent && scrollContent.scrollWidth > 0) {
-        // Start from the left
-        topPicksScrollingRef.current = true;
-        container.scrollLeft = 0;
-        topPicksScrollingRef.current = false;
-      }
-    };
-    
-    // Try immediately and also after a short delay to ensure content is rendered
-    initScroll();
-    initTimeout = setTimeout(() => {
-      initScroll();
-      // Allow loop logic to run after initialization is complete
-      setTimeout(() => {
-        isInitializing = false;
-      }, 200);
-    }, 100);
-
     const handleScroll = () => {
-      if (topPicksScrollingRef.current) return;
-      
       const scrollLeft = container.scrollLeft;
       const scrollWidth = container.scrollWidth;
       const clientWidth = container.clientWidth;
-      const halfWidth = scrollWidth / 2;
       
       // Fade effects
       setTopPicksFadeLeft(scrollLeft > 10);
       setTopPicksFadeRight(scrollLeft < scrollWidth - clientWidth - 10);
-
-      // Only apply loop logic after initialization and when user actually scrolls
-      if (isInitializing) return;
-
-      // Loop forward: if scrolled past the end of first set, jump back to start
-      if (scrollLeft >= halfWidth) {
-        topPicksScrollingRef.current = true;
-        container.scrollLeft = scrollLeft - halfWidth;
-        topPicksScrollingRef.current = false;
-      }
-      // Loop backward: if scrolled before start, jump to end of first set
-      else if (scrollLeft <= 0) {
-        topPicksScrollingRef.current = true;
-        container.scrollLeft = halfWidth + scrollLeft;
-        topPicksScrollingRef.current = false;
-      }
     };
 
     container.addEventListener('scroll', handleScroll);
-    // Only update fade effects on initial call, not loop logic
+    // Set initial fade state
     const scrollLeft = container.scrollLeft;
     const scrollWidth = container.scrollWidth;
     const clientWidth = container.clientWidth;
@@ -88,71 +43,27 @@ const RecruiterPage = ({ onBack }) => {
     setTopPicksFadeRight(scrollLeft < scrollWidth - clientWidth - 10);
 
     return () => {
-      clearTimeout(initTimeout);
       container.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
-  // Initialize scroll position and handle infinite loop for continue watching
+  // Handle scroll for continue watching - manual scrolling only with fade effects
   useEffect(() => {
     const container = continueWatchingRef.current;
     if (!container) return;
 
-    let isInitializing = true;
-    let initTimeout;
-
-    // Set initial scroll to the left (start) after content renders
-    const initScroll = () => {
-      const scrollContent = container.querySelector('div');
-      if (scrollContent && scrollContent.scrollWidth > 0) {
-        // Start from the left
-        continueWatchingScrollingRef.current = true;
-        container.scrollLeft = 0;
-        continueWatchingScrollingRef.current = false;
-      }
-    };
-    
-    // Try immediately and also after a short delay to ensure content is rendered
-    initScroll();
-    initTimeout = setTimeout(() => {
-      initScroll();
-      // Allow loop logic to run after initialization is complete
-      setTimeout(() => {
-        isInitializing = false;
-      }, 200);
-    }, 100);
-
     const handleScroll = () => {
-      if (continueWatchingScrollingRef.current) return;
-      
       const scrollLeft = container.scrollLeft;
       const scrollWidth = container.scrollWidth;
       const clientWidth = container.clientWidth;
-      const halfWidth = scrollWidth / 2;
       
       // Fade effects
       setContinueFadeLeft(scrollLeft > 10);
       setContinueFadeRight(scrollLeft < scrollWidth - clientWidth - 10);
-
-      // Only apply loop logic after initialization and when user actually scrolls
-      if (isInitializing) return;
-
-      // Loop forward: if scrolled past the end of first set, jump to start
-      if (scrollLeft >= halfWidth) {
-        continueWatchingScrollingRef.current = true;
-        container.scrollLeft = scrollLeft - halfWidth;
-        continueWatchingScrollingRef.current = false;
-      }
-      // Loop backward: if scrolled before start, jump to end of first set
-      else if (scrollLeft <= 0) {
-        continueWatchingScrollingRef.current = true;
-        container.scrollLeft = halfWidth + scrollLeft;
-        continueWatchingScrollingRef.current = false;
-      }
     };
 
     container.addEventListener('scroll', handleScroll);
-    // Only update fade effects on initial call, not loop logic
+    // Set initial fade state
     const scrollLeft = container.scrollLeft;
     const scrollWidth = container.scrollWidth;
     const clientWidth = container.clientWidth;
@@ -160,7 +71,6 @@ const RecruiterPage = ({ onBack }) => {
     setContinueFadeRight(scrollLeft < scrollWidth - clientWidth - 10);
 
     return () => {
-      clearTimeout(initTimeout);
       container.removeEventListener('scroll', handleScroll);
     };
   }, []);
@@ -191,9 +101,6 @@ const RecruiterPage = ({ onBack }) => {
     { title: 'Games', image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&h=800&fit=crop', icon: <FaPlay /> }
   ];
 
-  // Duplicate arrays for infinite scroll
-  const topPicksDouble = [...topPicks, ...topPicks];
-  const continueWatchingDouble = [...continueWatching, ...continueWatching];
 
   const handleTileClick = (title) => {
     if (title === 'Skills') {
@@ -441,7 +348,7 @@ const RecruiterPage = ({ onBack }) => {
             className={`horizontal-scroll-container ${topPicksFadeLeft ? '' : 'fade-left'} ${topPicksFadeRight ? '' : 'fade-right'}`}
           >
             <div className="flex gap-3 sm:gap-4 md:gap-6 pb-2" style={{ display: 'inline-flex', minWidth: 'max-content' }}>
-              {topPicksDouble.map((item, index) => (
+              {topPicks.map((item, index) => (
                 <div
                   key={index}
                   onClick={() => handleTileClick(item.title)}
@@ -477,7 +384,7 @@ const RecruiterPage = ({ onBack }) => {
             className={`horizontal-scroll-container ${continueFadeLeft ? '' : 'fade-left'} ${continueFadeRight ? '' : 'fade-right'}`}
           >
             <div className="flex gap-3 sm:gap-4 md:gap-6 pb-2" style={{ display: 'inline-flex', minWidth: 'max-content' }}>
-              {continueWatchingDouble.map((item, index) => (
+              {continueWatching.map((item, index) => (
                 <div
                   key={index}
                   onClick={() => handleTileClick(item.title)}
