@@ -29,7 +29,7 @@ const MusicPage = ({ onBack, onHome }) => {
     { id: 10, title: "Deadmau5 - Strobe", duration: "10:37", artist: "Deadmau5", type: "audio" },
     { id: 11, title: "Skrillex - Bangarang", duration: "3:35", artist: "Skrillex", type: "audio" },
     { id: 12, title: "Madeon - All My Friends", duration: "3:24", artist: "Madeon", type: "audio" },
-    { id: 13, title: "Staind - Outside", duration: "4:52", artist: "Staind", type: "audio" },
+    { id: 13, title: "Staind - Outside", duration: "4:52", artist: "Staind", type: "audio", audioSrc: "/Staind - Outside (Official Video).mp3" },
     { id: 14, title: "Michael Gray - The Weekend", duration: "3:45", artist: "Michael Gray", type: "video", videoSrc: "/Michael Gray - The Weekend (Official Video).mp4" },
     { id: 15, title: "OUR PRICES HAVE NEVER BEEN LOWER!", duration: "0:15", artist: "The Office US", type: "video", videoSrc: "/'OUR PRICES HAVE NEVER BEEN LOWER!' - The Office US.mp4" }
   ];
@@ -50,10 +50,21 @@ const MusicPage = ({ onBack, onHome }) => {
   };
 
   const handlePlayPause = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+    }
     setIsPlaying(!isPlaying);
   };
 
   const handleStop = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
     setIsPlaying(false);
     setCurrentTime(0);
   };
@@ -66,37 +77,62 @@ const MusicPage = ({ onBack, onHome }) => {
       nextIndex = (currentTrack + 1) % playlist.length;
     }
     setCurrentTrack(nextIndex);
+    setCurrentTime(0);
     const track = playlist[nextIndex];
     if (track && track.type === 'video') {
       setShowVideo(true);
     } else {
       setShowVideo(false);
+      if (audioRef.current && track && track.audioSrc) {
+        audioRef.current.load();
+        if (isPlaying) {
+          audioRef.current.play();
+        }
+      }
     }
   };
 
   const handlePrevious = () => {
     const prevIndex = (currentTrack - 1 + playlist.length) % playlist.length;
     setCurrentTrack(prevIndex);
+    setCurrentTime(0);
     const track = playlist[prevIndex];
     if (track && track.type === 'video') {
       setShowVideo(true);
     } else {
       setShowVideo(false);
+      if (audioRef.current && track && track.audioSrc) {
+        audioRef.current.load();
+        if (isPlaying) {
+          audioRef.current.play();
+        }
+      }
     }
   };
 
   const handleTrackSelect = (index) => {
     setCurrentTrack(index);
+    setCurrentTime(0);
     const track = playlist[index];
     if (track && track.type === 'video') {
       setShowVideo(true);
     } else {
       setShowVideo(false);
+      if (audioRef.current && track && track.audioSrc) {
+        audioRef.current.load();
+        if (isPlaying) {
+          audioRef.current.play();
+        }
+      }
     }
   };
 
   const handleVolumeChange = (e) => {
-    setVolume(parseInt(e.target.value));
+    const newVolume = parseInt(e.target.value);
+    setVolume(newVolume);
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume / 100;
+    }
   };
 
   const handleEqBandChange = (index, value) => {
@@ -105,31 +141,88 @@ const MusicPage = ({ onBack, onHome }) => {
     setEqBands(newBands);
   };
 
-  // Simulate time progression
+  // Handle audio time updates and track changes
   useEffect(() => {
-    let interval;
-    if (isPlaying) {
-      interval = setInterval(() => {
-        setCurrentTime((prev) => {
-          const trackDuration = playlist[currentTrack] ? 
-            playlist[currentTrack].duration.split(':').map(Number).reduce((a, b) => a * 60 + b) : 0;
-          if (prev >= trackDuration) {
-            if (repeat) {
-              return 0;
-            } else {
-              handleNext();
-              return 0;
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const updateTime = () => {
+      setCurrentTime(Math.floor(audio.currentTime));
+    };
+
+    const handleEnded = () => {
+      if (repeat) {
+        audio.currentTime = 0;
+        audio.play();
+      } else {
+        // Move to next track
+        let nextIndex;
+        if (shuffle) {
+          nextIndex = Math.floor(Math.random() * playlist.length);
+        } else {
+          nextIndex = (currentTrack + 1) % playlist.length;
+        }
+        setCurrentTrack(nextIndex);
+        setCurrentTime(0);
+        const track = playlist[nextIndex];
+        if (track && track.type === 'video') {
+          setShowVideo(true);
+        } else {
+          setShowVideo(false);
+          if (audio && track && track.audioSrc) {
+            audio.src = track.audioSrc;
+            audio.load();
+            if (isPlaying) {
+              audio.play();
             }
           }
-          return prev + 1;
-        });
-      }, 1000);
+        }
+      }
+    };
+
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+
+    audio.addEventListener('timeupdate', updateTime);
+    audio.addEventListener('ended', handleEnded);
+    audio.addEventListener('play', handlePlay);
+    audio.addEventListener('pause', handlePause);
+
+    return () => {
+      audio.removeEventListener('timeupdate', updateTime);
+      audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener('play', handlePlay);
+      audio.removeEventListener('pause', handlePause);
+    };
+  }, [currentTrack, repeat, shuffle, isPlaying, playlist]);
+
+  // Update audio source when track changes
+  useEffect(() => {
+    const track = playlist[currentTrack];
+    if (audioRef.current && track && track.audioSrc) {
+      audioRef.current.src = track.audioSrc;
+      audioRef.current.load();
+      if (isPlaying) {
+        audioRef.current.play();
+      }
     }
-    return () => clearInterval(interval);
-  }, [isPlaying, currentTrack, repeat]);
+  }, [currentTrack]);
+
+  // Update volume when it changes
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume / 100;
+    }
+  }, [volume]);
 
   return (
     <div className="min-h-screen bg-black text-white">
+      {/* Audio Element */}
+      <audio
+        ref={audioRef}
+        preload="metadata"
+        style={{ display: 'none' }}
+      />
       {/* Navigation Bar */}
       <nav className="fixed top-0 w-full z-50 bg-black">
         <div className="px-4 sm:px-6 py-4">
