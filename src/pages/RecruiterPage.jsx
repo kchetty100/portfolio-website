@@ -340,14 +340,17 @@ const RecruiterPage = ({ onBack }) => {
       </div>
 
       {/* Today's Top Picks for Recruiter */}
-      <div className="py-6 sm:py-8 md:py-16 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white mb-4 sm:mb-6 md:mb-8">Today's Top Picks for recruiter</h2>
-          <div 
-            ref={topPicksRef}
-            className={`horizontal-scroll-container ${topPicksFadeLeft ? '' : 'fade-left'} ${topPicksFadeRight ? '' : 'fade-right'}`}
-          >
-            <div className="flex gap-3 sm:gap-4 md:gap-6 pb-2" style={{ display: 'inline-flex', minWidth: 'max-content', justifyContent: 'flex-start' }}>
+      <div className="py-6 sm:py-8 md:py-16">
+        <div className="px-4 sm:px-6 mb-4 sm:mb-6 md:mb-8">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white">Today's Top Picks for recruiter</h2>
+          </div>
+        </div>
+        <div 
+          ref={topPicksRef}
+          className={`horizontal-scroll-container ${topPicksFadeLeft ? '' : 'fade-left'} ${topPicksFadeRight ? '' : 'fade-right'}`}
+        >
+            <div className="flex gap-3 sm:gap-4 md:gap-6 pb-2 pl-4 sm:pl-6" style={{ display: 'inline-flex', minWidth: 'max-content', justifyContent: 'flex-start' }}>
               {topPicks.map((item, index) => (
                 <div
                   key={index}
@@ -373,19 +376,21 @@ const RecruiterPage = ({ onBack }) => {
                 </div>
               ))}
             </div>
-          </div>
         </div>
       </div>
 
       {/* Continue Watching for Recruiter */}
-      <div className="py-6 sm:py-8 md:py-16 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white mb-4 sm:mb-6 md:mb-8">Continue Watching for recruiter</h2>
-          <div 
-            ref={continueWatchingRef}
-            className={`horizontal-scroll-container ${continueFadeLeft ? '' : 'fade-left'} ${continueFadeRight ? '' : 'fade-right'}`}
-          >
-            <div className="flex gap-3 sm:gap-4 md:gap-6 pb-2" style={{ display: 'inline-flex', minWidth: 'max-content', justifyContent: 'flex-start' }}>
+      <div className="py-6 sm:py-8 md:py-16">
+        <div className="px-4 sm:px-6 mb-4 sm:mb-6 md:mb-8">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white">Continue Watching for recruiter</h2>
+          </div>
+        </div>
+        <div 
+          ref={continueWatchingRef}
+          className={`horizontal-scroll-container ${continueFadeLeft ? '' : 'fade-left'} ${continueFadeRight ? '' : 'fade-right'}`}
+        >
+            <div className="flex gap-3 sm:gap-4 md:gap-6 pb-2 pl-4 sm:pl-6" style={{ display: 'inline-flex', minWidth: 'max-content', justifyContent: 'flex-start' }}>
               {continueWatching.map((item, index) => (
                 <div
                   key={index}
@@ -411,7 +416,6 @@ const RecruiterPage = ({ onBack }) => {
                 </div>
               ))}
             </div>
-          </div>
         </div>
       </div>
     </div>
