@@ -41,20 +41,31 @@ const PortfolioPage = ({ onBack }) => {
     const container = topPicksRef.current;
     if (!container) return;
 
+    let isInitializing = true;
+    let initTimeout1, initTimeout2, initTimeout3;
+
     // Set initial scroll to the left (start) after content renders
     const initScroll = () => {
       const scrollContent = container.querySelector('div');
       if (scrollContent && scrollContent.scrollWidth > 0) {
         // Start from the left
+        topPicksScrollingRef.current = true;
         container.scrollLeft = 0;
+        topPicksScrollingRef.current = false;
       }
     };
     
     // Wait for content to render with multiple attempts
     initScroll();
-    const timeout1 = setTimeout(initScroll, 100);
-    const timeout2 = setTimeout(initScroll, 300);
-    const timeout3 = setTimeout(initScroll, 500);
+    initTimeout1 = setTimeout(initScroll, 100);
+    initTimeout2 = setTimeout(initScroll, 300);
+    initTimeout3 = setTimeout(() => {
+      initScroll();
+      // Allow loop logic to run after initialization is complete
+      setTimeout(() => {
+        isInitializing = false;
+      }, 200);
+    }, 500);
 
     const handleScroll = () => {
       if (topPicksScrollingRef.current) return;
@@ -67,6 +78,9 @@ const PortfolioPage = ({ onBack }) => {
       // Fade effects
       setTopPicksFadeLeft(scrollLeft > 10);
       setTopPicksFadeRight(scrollLeft < scrollWidth - clientWidth - 10);
+
+      // Only apply loop logic after initialization and when user actually scrolls
+      if (isInitializing) return;
 
       // Loop forward: if scrolled past the end of first set, jump back to start
       if (scrollLeft >= halfWidth) {
@@ -83,12 +97,17 @@ const PortfolioPage = ({ onBack }) => {
     };
 
     container.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check initial state
+    // Only update fade effects on initial call, not loop logic
+    const scrollLeft = container.scrollLeft;
+    const scrollWidth = container.scrollWidth;
+    const clientWidth = container.clientWidth;
+    setTopPicksFadeLeft(scrollLeft > 10);
+    setTopPicksFadeRight(scrollLeft < scrollWidth - clientWidth - 10);
 
     return () => {
-      clearTimeout(timeout1);
-      clearTimeout(timeout2);
-      clearTimeout(timeout3);
+      clearTimeout(initTimeout1);
+      clearTimeout(initTimeout2);
+      clearTimeout(initTimeout3);
       container.removeEventListener('scroll', handleScroll);
     };
   }, [currentView]);
@@ -101,20 +120,31 @@ const PortfolioPage = ({ onBack }) => {
     const container = continueWatchingRef.current;
     if (!container) return;
 
+    let isInitializing = true;
+    let initTimeout1, initTimeout2, initTimeout3;
+
     // Set initial scroll to the left (start) after content renders
     const initScroll = () => {
       const scrollContent = container.querySelector('div');
       if (scrollContent && scrollContent.scrollWidth > 0) {
         // Start from the left
+        continueWatchingScrollingRef.current = true;
         container.scrollLeft = 0;
+        continueWatchingScrollingRef.current = false;
       }
     };
     
     // Wait for content to render with multiple attempts
     initScroll();
-    const timeout1 = setTimeout(initScroll, 100);
-    const timeout2 = setTimeout(initScroll, 300);
-    const timeout3 = setTimeout(initScroll, 500);
+    initTimeout1 = setTimeout(initScroll, 100);
+    initTimeout2 = setTimeout(initScroll, 300);
+    initTimeout3 = setTimeout(() => {
+      initScroll();
+      // Allow loop logic to run after initialization is complete
+      setTimeout(() => {
+        isInitializing = false;
+      }, 200);
+    }, 500);
 
     const handleScroll = () => {
       if (continueWatchingScrollingRef.current) return;
@@ -127,6 +157,9 @@ const PortfolioPage = ({ onBack }) => {
       // Fade effects
       setContinueFadeLeft(scrollLeft > 10);
       setContinueFadeRight(scrollLeft < scrollWidth - clientWidth - 10);
+
+      // Only apply loop logic after initialization and when user actually scrolls
+      if (isInitializing) return;
 
       // Loop forward: if scrolled past the end of first set, jump to start
       if (scrollLeft >= halfWidth) {
@@ -143,12 +176,17 @@ const PortfolioPage = ({ onBack }) => {
     };
 
     container.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check initial state
+    // Only update fade effects on initial call, not loop logic
+    const scrollLeft = container.scrollLeft;
+    const scrollWidth = container.scrollWidth;
+    const clientWidth = container.clientWidth;
+    setContinueFadeLeft(scrollLeft > 10);
+    setContinueFadeRight(scrollLeft < scrollWidth - clientWidth - 10);
 
     return () => {
-      clearTimeout(timeout1);
-      clearTimeout(timeout2);
-      clearTimeout(timeout3);
+      clearTimeout(initTimeout1);
+      clearTimeout(initTimeout2);
+      clearTimeout(initTimeout3);
       container.removeEventListener('scroll', handleScroll);
     };
   }, [currentView]);

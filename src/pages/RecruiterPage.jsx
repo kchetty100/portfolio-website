@@ -26,18 +26,29 @@ const RecruiterPage = ({ onBack }) => {
     const container = topPicksRef.current;
     if (!container) return;
 
+    let isInitializing = true;
+    let initTimeout;
+
     // Set initial scroll to the left (start) after content renders
     const initScroll = () => {
       const scrollContent = container.querySelector('div');
       if (scrollContent && scrollContent.scrollWidth > 0) {
         // Start from the left
+        topPicksScrollingRef.current = true;
         container.scrollLeft = 0;
+        topPicksScrollingRef.current = false;
       }
     };
     
     // Try immediately and also after a short delay to ensure content is rendered
     initScroll();
-    const timeout = setTimeout(initScroll, 100);
+    initTimeout = setTimeout(() => {
+      initScroll();
+      // Allow loop logic to run after initialization is complete
+      setTimeout(() => {
+        isInitializing = false;
+      }, 200);
+    }, 100);
 
     const handleScroll = () => {
       if (topPicksScrollingRef.current) return;
@@ -50,6 +61,9 @@ const RecruiterPage = ({ onBack }) => {
       // Fade effects
       setTopPicksFadeLeft(scrollLeft > 10);
       setTopPicksFadeRight(scrollLeft < scrollWidth - clientWidth - 10);
+
+      // Only apply loop logic after initialization and when user actually scrolls
+      if (isInitializing) return;
 
       // Loop forward: if scrolled past the end of first set, jump back to start
       if (scrollLeft >= halfWidth) {
@@ -66,10 +80,15 @@ const RecruiterPage = ({ onBack }) => {
     };
 
     container.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check initial state
+    // Only update fade effects on initial call, not loop logic
+    const scrollLeft = container.scrollLeft;
+    const scrollWidth = container.scrollWidth;
+    const clientWidth = container.clientWidth;
+    setTopPicksFadeLeft(scrollLeft > 10);
+    setTopPicksFadeRight(scrollLeft < scrollWidth - clientWidth - 10);
 
     return () => {
-      clearTimeout(timeout);
+      clearTimeout(initTimeout);
       container.removeEventListener('scroll', handleScroll);
     };
   }, []);
@@ -79,18 +98,29 @@ const RecruiterPage = ({ onBack }) => {
     const container = continueWatchingRef.current;
     if (!container) return;
 
+    let isInitializing = true;
+    let initTimeout;
+
     // Set initial scroll to the left (start) after content renders
     const initScroll = () => {
       const scrollContent = container.querySelector('div');
       if (scrollContent && scrollContent.scrollWidth > 0) {
         // Start from the left
+        continueWatchingScrollingRef.current = true;
         container.scrollLeft = 0;
+        continueWatchingScrollingRef.current = false;
       }
     };
     
     // Try immediately and also after a short delay to ensure content is rendered
     initScroll();
-    const timeout = setTimeout(initScroll, 100);
+    initTimeout = setTimeout(() => {
+      initScroll();
+      // Allow loop logic to run after initialization is complete
+      setTimeout(() => {
+        isInitializing = false;
+      }, 200);
+    }, 100);
 
     const handleScroll = () => {
       if (continueWatchingScrollingRef.current) return;
@@ -103,6 +133,9 @@ const RecruiterPage = ({ onBack }) => {
       // Fade effects
       setContinueFadeLeft(scrollLeft > 10);
       setContinueFadeRight(scrollLeft < scrollWidth - clientWidth - 10);
+
+      // Only apply loop logic after initialization and when user actually scrolls
+      if (isInitializing) return;
 
       // Loop forward: if scrolled past the end of first set, jump to start
       if (scrollLeft >= halfWidth) {
@@ -119,10 +152,15 @@ const RecruiterPage = ({ onBack }) => {
     };
 
     container.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check initial state
+    // Only update fade effects on initial call, not loop logic
+    const scrollLeft = container.scrollLeft;
+    const scrollWidth = container.scrollWidth;
+    const clientWidth = container.clientWidth;
+    setContinueFadeLeft(scrollLeft > 10);
+    setContinueFadeRight(scrollLeft < scrollWidth - clientWidth - 10);
 
     return () => {
-      clearTimeout(timeout);
+      clearTimeout(initTimeout);
       container.removeEventListener('scroll', handleScroll);
     };
   }, []);
