@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaPlay, FaLinkedin, FaUser, FaCode, FaProjectDiagram, FaBriefcase, FaThumbsUp, FaEnvelope, FaMusic, FaBook, FaBlog, FaPhone } from 'react-icons/fa';
+import { FaPlay, FaLinkedin, FaUser, FaCode, FaProjectDiagram, FaBriefcase, FaThumbsUp, FaEnvelope, FaMusic, FaBook, FaBlog, FaPhone, FaCalculator } from 'react-icons/fa';
 import ProjectsPage from './ProjectsPage';
 import ExperiencePage from './ExperiencePage';
 import GamesPage from './GamesPage';
@@ -8,6 +8,7 @@ import BooksPage from './BooksPage';
 import ContactPage from './ContactPage';
 import MusicPage from './MusicPage';
 import BlogPage from './BlogPage';
+import TaxCalculatorPage from './TaxCalculatorPage';
 
 const RecruiterPage = ({ onBack }) => {
   const [currentView, setCurrentView] = useState('recruiter');
@@ -98,6 +99,7 @@ const RecruiterPage = ({ onBack }) => {
     { title: 'Books', image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&h=200&fit=crop', icon: <FaBook /> },
     { title: 'Blogs', image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=200&fit=crop', icon: <FaBlog /> },
     { title: 'Contact Me', image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=300&h=200&fit=crop', icon: <FaPhone /> },
+    { title: 'Tax Calculator', image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=300&h=200&fit=crop', icon: <FaCalculator /> },
     { title: 'Games', image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&h=800&fit=crop', icon: <FaPlay /> }
   ];
 
@@ -143,6 +145,11 @@ const RecruiterPage = ({ onBack }) => {
       window.scrollTo(0, 0);
       return;
     }
+    if (title === 'Tax Calculator') {
+      setCurrentView('taxcalculator');
+      window.scrollTo(0, 0);
+      return;
+    }
   };
 
   // If skills view is selected, show skills page
@@ -183,6 +190,10 @@ const RecruiterPage = ({ onBack }) => {
 
   if (currentView === 'blog') {
     return <BlogPage onBack={() => setCurrentView('recruiter')} onHome={() => setCurrentView('home')} />;
+  }
+
+  if (currentView === 'taxcalculator') {
+    return <TaxCalculatorPage onBack={() => setCurrentView('recruiter')} onHome={() => setCurrentView('home')} />;
   }
 
   return (

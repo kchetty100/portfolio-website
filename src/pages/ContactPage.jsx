@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub, FaTwitter, FaArrowLeft, FaHome, FaPaperPlane, FaUser, FaComment } from 'react-icons/fa';
+import emailjs from '@emailjs/browser';
 
 const ContactPage = ({ onBack, onHome }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -11,6 +12,21 @@ const ContactPage = ({ onBack, onHome }) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  // EmailJS configuration
+  // To set up EmailJS:
+  // 1. Sign up at https://www.emailjs.com/ (free tier available)
+  // 2. Create an email service (Gmail, Outlook, etc.)
+  // 3. Create an email template with variables: {{from_name}}, {{from_email}}, {{subject}}, {{message}}, {{to_email}}
+  // 4. Get your Service ID, Template ID, and Public Key from EmailJS dashboard
+  // 5. Create a .env file in the root directory with:
+  //    VITE_EMAILJS_SERVICE_ID=your_service_id
+  //    VITE_EMAILJS_TEMPLATE_ID=your_template_id
+  //    VITE_EMAILJS_PUBLIC_KEY=your_public_key
+  const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+  const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,14 +39,56 @@ const ContactPage = ({ onBack, onHome }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus('');
+    setErrorMessage('');
     
-    // Simulate form submission
-    setTimeout(() => {
+    // Check if EmailJS is configured
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+      // Fallback: Open mailto link if EmailJS is not configured
+      const mailtoLink = `mailto:backroads317@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+      window.location.href = mailtoLink;
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
+      setTimeout(() => setSubmitStatus(''), 5000);
       setIsSubmitting(false);
-      setTimeout(() => setSubmitStatus(''), 3000);
-    }, 1500);
+      return;
+    }
+    
+    try {
+      // Initialize EmailJS with public key
+      emailjs.init(EMAILJS_PUBLIC_KEY);
+
+      // Prepare template parameters
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        to_email: 'backroads317@gmail.com', // Your email address
+      };
+
+      // Send email using EmailJS
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams
+      );
+
+      // Success
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      setTimeout(() => setSubmitStatus(''), 5000);
+    } catch (error) {
+      console.error('Email sending failed:', error);
+      setSubmitStatus('error');
+      setErrorMessage(error.text || 'Failed to send message. Please try again or contact me directly at backroads317@gmail.com');
+      setTimeout(() => {
+        setSubmitStatus('');
+        setErrorMessage('');
+      }, 5000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -330,6 +388,12 @@ const ContactPage = ({ onBack, onHome }) => {
                 {submitStatus === 'success' && (
                   <div className="bg-green-900/30 border border-green-500 text-green-400 px-4 py-3 rounded-lg text-center">
                     Message sent successfully! I'll get back to you soon.
+                  </div>
+                )}
+                
+                {submitStatus === 'error' && (
+                  <div className="bg-red-900/30 border border-red-500 text-red-400 px-4 py-3 rounded-lg text-center">
+                    {errorMessage || 'Failed to send message. Please try again or contact me directly at backroads317@gmail.com'}
                   </div>
                 )}
               </form>
