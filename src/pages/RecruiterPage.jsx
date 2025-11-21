@@ -342,9 +342,7 @@ const RecruiterPage = ({ onBack }) => {
       {/* Today's Top Picks for Recruiter */}
       <div className="py-6 sm:py-8 md:py-16">
         <div className="px-4 sm:px-6 mb-4 sm:mb-6 md:mb-8">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white">Today's Top Picks for recruiter</h2>
-          </div>
+          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white">Today's Top Picks for recruiter</h2>
         </div>
         <div 
           ref={topPicksRef}
@@ -382,9 +380,7 @@ const RecruiterPage = ({ onBack }) => {
       {/* Continue Watching for Recruiter */}
       <div className="py-6 sm:py-8 md:py-16">
         <div className="px-4 sm:px-6 mb-4 sm:mb-6 md:mb-8">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white">Continue Watching for recruiter</h2>
-          </div>
+          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white">Continue Watching for recruiter</h2>
         </div>
         <div 
           ref={continueWatchingRef}

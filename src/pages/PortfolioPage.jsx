@@ -379,11 +379,9 @@ const PortfolioPage = ({ onBack }) => {
       {/* Today's Top Picks Section */}
       <section className="py-6 sm:py-8 md:py-12">
         <div className="px-4 sm:px-6 mb-4 sm:mb-6">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white">
-              Today's Top Picks for developers
-            </h2>
-          </div>
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white">
+            Today's Top Picks for developers
+          </h2>
         </div>
         <div 
           ref={topPicksRef}
@@ -421,11 +419,9 @@ const PortfolioPage = ({ onBack }) => {
       {/* Continue Watching Section */}
       <section className="py-6 sm:py-8 md:py-12">
         <div className="px-4 sm:px-6 mb-4 sm:mb-6">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white">
-              Continue Watching for developer
-            </h2>
-          </div>
+          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white">
+            Continue Watching for developer
+          </h2>
         </div>
         <div 
           ref={continueWatchingRef}
