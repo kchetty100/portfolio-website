@@ -363,9 +363,11 @@ const RecruiterPage = ({ onBack }) => {
                       alt={item.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                    <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 right-2 sm:right-4">
-                      <h3 className="text-white font-bold text-sm sm:text-base md:text-lg">{item.title}</h3>
+                    <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                      <div className="text-center px-2">
+                        <div className="text-white text-xl sm:text-2xl md:text-3xl mb-1 sm:mb-2">{item.icon}</div>
+                        <p className="text-white font-bold text-sm sm:text-base md:text-lg">{item.title}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -399,9 +401,11 @@ const RecruiterPage = ({ onBack }) => {
                       alt={item.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                    <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 right-2 sm:right-4">
-                      <h3 className="text-white font-bold text-sm sm:text-base md:text-lg">{item.title}</h3>
+                    <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                      <div className="text-center px-2">
+                        <div className="text-white text-xl sm:text-2xl md:text-3xl mb-1 sm:mb-2">{item.icon}</div>
+                        <p className="text-white font-bold text-sm sm:text-base md:text-lg">{item.title}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
