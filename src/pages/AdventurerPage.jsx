@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { FaRocket, FaArrowLeft, FaHome, FaEye, FaEyeSlash } from 'react-icons/fa';
+import React, { useEffect, useState } from 'react';
+import { FaRocket, FaArrowLeft, FaHome, FaEye, FaEyeSlash, FaChartLine, FaChartBar, FaClock, FaExclamationTriangle } from 'react-icons/fa';
 import SkillsSimple from './SkillsSimple';
 import ExperiencePage from './ExperiencePage';
 import ProjectsPage from './ProjectsPage';
@@ -12,6 +12,10 @@ const AdventurerPage = ({ onBack, onHome }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [currentView, setCurrentView] = useState('adventurer');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [visitStats, setVisitStats] = useState({ total: 0, today: 0, unique: 0 });
+  const [statsLoading, setStatsLoading] = useState(true);
+  const [statsError, setStatsError] = useState('');
+  const [lastUpdated, setLastUpdated] = useState(null);
 
   const correctPassword = '0836003411';
 
@@ -33,6 +37,61 @@ const AdventurerPage = ({ onBack, onHome }) => {
     setPassword('');
     setPasswordError('');
   };
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchVisitStats = async () => {
+      try {
+        setStatsLoading(true);
+        setStatsError('');
+
+        const namespace = 'keegan_chetty_portfolio';
+        const todayKey = `adventurer_${new Date().toISOString().slice(0, 10)}`;
+        const visitedKey = 'adventurer_unique_visit';
+
+        const [totalRes, todayRes] = await Promise.all([
+          fetch(`https://api.countapi.xyz/hit/${namespace}/adventurer_total`),
+          fetch(`https://api.countapi.xyz/hit/${namespace}/${todayKey}`)
+        ]);
+
+        const totalData = await totalRes.json();
+        const todayData = await todayRes.json();
+
+        let uniqueData;
+        if (!localStorage.getItem(visitedKey)) {
+          uniqueData = await fetch(`https://api.countapi.xyz/hit/${namespace}/adventurer_unique`).then(res => res.json());
+          localStorage.setItem(visitedKey, 'true');
+        } else {
+          uniqueData = await fetch(`https://api.countapi.xyz/get/${namespace}/adventurer_unique`).then(res => res.json());
+        }
+
+        if (!isMounted) return;
+
+        setVisitStats({
+          total: totalData.value || 0,
+          today: todayData.value || 0,
+          unique: uniqueData.value || 0
+        });
+        setLastUpdated(new Date());
+      } catch (error) {
+        console.error('Failed to fetch visit stats:', error);
+        if (isMounted) {
+          setStatsError('Unable to fetch live traffic metrics right now. Please try again later.');
+        }
+      } finally {
+        if (isMounted) {
+          setStatsLoading(false);
+        }
+      }
+    };
+
+    fetchVisitStats();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   // If home view is selected, go back to landing page
   if (currentView === 'home') {
@@ -237,6 +296,51 @@ const AdventurerPage = ({ onBack, onHome }) => {
             <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto">
               Welcome to the secret adventurer profile! This is where the real journey begins.
             </p>
+          </div>
+
+          {/* Live Usage Metrics */}
+          <div className="max-w-4xl mx-auto mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="bg-gray-900/70 border border-white/5 rounded-xl p-4 shadow-lg">
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-xs uppercase tracking-wide text-gray-400">Total Visits</p>
+                  <FaChartLine className="text-red-400 text-xl" />
+                </div>
+                <p className="text-3xl font-bold text-white">
+                  {statsLoading ? '—' : visitStats.total.toLocaleString()}
+                </p>
+              </div>
+              <div className="bg-gray-900/70 border border-white/5 rounded-xl p-4 shadow-lg">
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-xs uppercase tracking-wide text-gray-400">Today's Visits</p>
+                  <FaChartBar className="text-red-400 text-xl" />
+                </div>
+                <p className="text-3xl font-bold text-white">
+                  {statsLoading ? '—' : visitStats.today.toLocaleString()}
+                </p>
+              </div>
+              <div className="bg-gray-900/70 border border-white/5 rounded-xl p-4 shadow-lg">
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-xs uppercase tracking-wide text-gray-400">Unique Visitors</p>
+                  <FaRocket className="text-red-400 text-xl" />
+                </div>
+                <p className="text-3xl font-bold text-white">
+                  {statsLoading ? '—' : visitStats.unique.toLocaleString()}
+                </p>
+              </div>
+            </div>
+            {statsError && (
+              <div className="mt-4 bg-red-900/30 border border-red-500 text-red-300 px-4 py-3 rounded-lg text-sm flex items-start space-x-2">
+                <FaExclamationTriangle className="mt-0.5" />
+                <span>{statsError}</span>
+              </div>
+            )}
+            {!statsError && lastUpdated && (
+              <div className="mt-3 flex items-center space-x-2 text-xs text-gray-400">
+                <FaClock />
+                <span>Last updated {lastUpdated.toLocaleTimeString()}</span>
+              </div>
+            )}
           </div>
           
           {/* Adventure Stats */}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaPlay, FaLinkedin, FaUser, FaCode, FaProjectDiagram, FaBriefcase, FaThumbsUp, FaEnvelope, FaMusic, FaBook, FaBlog, FaPhone, FaCalculator } from 'react-icons/fa';
+import { FaPlay, FaLinkedin, FaUser, FaCode, FaProjectDiagram, FaBriefcase, FaThumbsUp, FaEnvelope, FaMusic, FaBook, FaBlog, FaPhone, FaCalculator, FaUnlock } from 'react-icons/fa';
 import ProjectsPage from './ProjectsPage';
 import ExperiencePage from './ExperiencePage';
 import GamesPage from './GamesPage';
@@ -9,6 +9,7 @@ import ContactPage from './ContactPage';
 import MusicPage from './MusicPage';
 import BlogPage from './BlogPage';
 import TaxCalculatorPage from './TaxCalculatorPage';
+import UnlockPdfPage from './UnlockPdfPage';
 
 const RecruiterPage = ({ onBack }) => {
   const [currentView, setCurrentView] = useState('recruiter');
@@ -100,6 +101,7 @@ const RecruiterPage = ({ onBack }) => {
     { title: 'Blogs', image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=200&fit=crop', icon: <FaBlog /> },
     { title: 'Contact Me', image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=300&h=200&fit=crop', icon: <FaPhone /> },
     { title: 'Tax Calculator', image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=300&h=200&fit=crop', icon: <FaCalculator /> },
+    { title: 'Unlock PDF', image: 'https://images.unsplash.com/photo-1611262588024-d12430b98920?w=300&h=200&fit=crop', icon: <FaUnlock /> },
     { title: 'Games', image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&h=800&fit=crop', icon: <FaPlay /> }
   ];
 
@@ -150,6 +152,11 @@ const RecruiterPage = ({ onBack }) => {
       window.scrollTo(0, 0);
       return;
     }
+    if (title === 'Unlock PDF') {
+      setCurrentView('unlockpdf');
+      window.scrollTo(0, 0);
+      return;
+    }
   };
 
   // If skills view is selected, show skills page
@@ -194,6 +201,10 @@ const RecruiterPage = ({ onBack }) => {
 
   if (currentView === 'taxcalculator') {
     return <TaxCalculatorPage onBack={() => setCurrentView('recruiter')} onHome={() => setCurrentView('home')} />;
+  }
+
+  if (currentView === 'unlockpdf') {
+    return <UnlockPdfPage onBack={() => setCurrentView('recruiter')} onHome={() => setCurrentView('home')} />;
   }
 
   return (

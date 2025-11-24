@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaPlay, FaLinkedin, FaUser, FaCode, FaProjectDiagram, FaCertificate, FaBriefcase, FaThumbsUp, FaEnvelope, FaMusic, FaBook, FaBlog, FaPhone } from 'react-icons/fa';
+import { FaPlay, FaLinkedin, FaUser, FaCode, FaProjectDiagram, FaCertificate, FaBriefcase, FaThumbsUp, FaEnvelope, FaMusic, FaBook, FaBlog, FaPhone, FaCalculator } from 'react-icons/fa';
 import SkillsSimple from './SkillsSimple';
 import LandingPage from './LandingPage';
 import ExperiencePage from './ExperiencePage';
@@ -7,6 +7,7 @@ import ProjectsPage from './ProjectsPage';
 import GamesPage from './GamesPage';
 import ContactPage from './ContactPage';
 import MusicPage from './MusicPage';
+import TaxCalculatorPage from './TaxCalculatorPage';
 
 const PortfolioPage = ({ onBack }) => {
   // Initialize state from URL hash
@@ -111,7 +112,7 @@ const PortfolioPage = ({ onBack }) => {
       // Check if we're still on developer profile
       if (hash.startsWith('#developer')) {
         const view = hash.replace('#developer/', '').replace('#developer', '').replace('/', '');
-        const views = ['skills', 'projects', 'experience', 'contact', 'games', 'music'];
+        const views = ['skills', 'projects', 'experience', 'contact', 'games', 'music', 'taxcalculator'];
         if (views.includes(view)) {
           setCurrentView(view);
         } else {
@@ -138,6 +139,7 @@ const PortfolioPage = ({ onBack }) => {
   const continueWatching = [
     { title: 'Music', image: 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=1200&h=800&fit=crop', icon: <FaMusic /> },
     { title: 'Contact Me', image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1200&h=800&fit=crop', icon: <FaPhone /> },
+    { title: 'Tax Calculator', image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=300&h=200&fit=crop', icon: <FaCalculator /> },
     { title: 'Projects', image: 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=1200&h=800&fit=crop', icon: <FaProjectDiagram /> },
     { title: 'Games', image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&h=800&fit=crop', icon: <FaPlay /> }
   ];
@@ -173,6 +175,10 @@ const PortfolioPage = ({ onBack }) => {
     }
     if (title === 'Music') {
       handleViewChange('music');
+      return;
+    }
+    if (title === 'Tax Calculator') {
+      handleViewChange('taxcalculator');
       return;
     }
   };
@@ -230,6 +236,13 @@ const PortfolioPage = ({ onBack }) => {
 
   if (currentView === 'music') {
     return <MusicPage 
+      onBack={handleBackToPortfolio} 
+      onHome={() => { if (onBack) onBack(); }} 
+    />;
+  }
+
+  if (currentView === 'taxcalculator') {
+    return <TaxCalculatorPage 
       onBack={handleBackToPortfolio} 
       onHome={() => { if (onBack) onBack(); }} 
     />;
