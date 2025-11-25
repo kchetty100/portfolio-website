@@ -380,10 +380,15 @@ const PortfolioPage = ({ onBack }) => {
               <FaPlay className="text-white text-sm sm:text-base" />
               <span className="text-sm sm:text-base font-medium">Resume</span>
             </button>
-            <button className="bg-black text-white px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 hover:bg-gray-800 active:scale-95 transition-all border border-gray-600 min-h-[44px]">
+            <a 
+              href="https://linkedin.com/in/keegan-c-a4a260192" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="bg-black text-white px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 hover:bg-gray-800 active:scale-95 transition-all border border-gray-600 min-h-[44px]"
+            >
               <FaLinkedin className="text-white text-sm sm:text-base" />
               <span className="text-sm sm:text-base font-medium">LinkedIn</span>
-            </button>
+            </a>
           </div>
         </div>
         {/* Spacer no longer needed because section has a min-height */}

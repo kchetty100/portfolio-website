@@ -110,7 +110,7 @@ const ContactPage = ({ onBack, onHome }) => {
     {
       icon: <FaLinkedin className="text-2xl" />,
       name: 'LinkedIn',
-      url: 'https://linkedin.com/in/keegan-chetty',
+      url: 'https://linkedin.com/in/keegan-c-a4a260192',
       color: 'hover:text-blue-500'
     },
     {

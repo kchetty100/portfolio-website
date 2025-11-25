@@ -353,10 +353,15 @@ const RecruiterPage = ({ onBack }) => {
               <FaPlay className="text-white text-sm sm:text-base" />
               <span className="text-sm sm:text-base md:text-lg font-semibold">Resume</span>
             </button>
-            <button className="bg-black/80 hover:bg-black text-white px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 transition-all duration-300 hover:scale-105 active:scale-95 min-h-[44px]">
+            <a 
+              href="https://linkedin.com/in/keegan-c-a4a260192" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="bg-black/80 hover:bg-black text-white px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg flex items-center justify-center space-x-2 sm:space-x-3 transition-all duration-300 hover:scale-105 active:scale-95 min-h-[44px]"
+            >
               <FaLinkedin className="text-white text-sm sm:text-base" />
               <span className="text-sm sm:text-base md:text-lg font-semibold">LinkedIn</span>
-            </button>
+            </a>
           </div>
         </div>
       </section>
