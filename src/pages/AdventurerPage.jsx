@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { FaRocket, FaArrowLeft, FaHome, FaEye, FaEyeSlash, FaChartLine, FaChartBar, FaClock, FaExclamationTriangle } from 'react-icons/fa';
+import { FaRocket, FaArrowLeft, FaHome, FaEye, FaEyeSlash, FaChartLine, FaChartBar, FaClock, FaExclamationTriangle, FaGlobe, FaMapMarkerAlt, FaDesktop, FaMobile, FaTablet, FaUser, FaNetworkWired } from 'react-icons/fa';
 import SkillsSimple from './SkillsSimple';
 import ExperiencePage from './ExperiencePage';
 import ProjectsPage from './ProjectsPage';
 import ContactPage from './ContactPage';
+import analyticsTracker from '../lib/analytics';
 
 const AdventurerPage = ({ onBack, onHome }) => {
   const [isUnlocked, setIsUnlocked] = useState(false);
@@ -16,6 +17,10 @@ const AdventurerPage = ({ onBack, onHome }) => {
   const [statsLoading, setStatsLoading] = useState(true);
   const [statsError, setStatsError] = useState('');
   const [lastUpdated, setLastUpdated] = useState(null);
+  const [currentVisitData, setCurrentVisitData] = useState(null);
+  const [timeOnSite, setTimeOnSite] = useState({ formatted: '0s', seconds: 0 });
+  const [showDetailedAnalytics, setShowDetailedAnalytics] = useState(false);
+  const [aggregatedStats, setAggregatedStats] = useState(null);
 
   const correctPassword = '0836003411';
 
@@ -92,6 +97,49 @@ const AdventurerPage = ({ onBack, onHome }) => {
       isMounted = false;
     };
   }, []);
+
+  // Track detailed analytics when page is unlocked
+  useEffect(() => {
+    if (!isUnlocked) return;
+
+    let timeUpdateInterval;
+
+    const initializeAnalytics = async () => {
+      // Track page view
+      const visitData = await analyticsTracker.trackPageView('Adventurer Mode');
+      setCurrentVisitData(visitData);
+      setTimeOnSite(visitData.timeOnSite);
+
+      // Update time on site every 5 seconds
+      timeUpdateInterval = setInterval(() => {
+        analyticsTracker.updateTimeOnSite();
+        const updatedTime = analyticsTracker.getTimeOnSite();
+        setTimeOnSite(updatedTime);
+      }, 5000);
+    };
+
+    initializeAnalytics();
+
+    // Cleanup on unmount
+    return () => {
+      if (timeUpdateInterval) {
+        clearInterval(timeUpdateInterval);
+      }
+      analyticsTracker.cleanup();
+    };
+  }, [isUnlocked]);
+
+  // Load aggregated stats when showing detailed analytics
+  useEffect(() => {
+    if (showDetailedAnalytics) {
+      const loadStats = async () => {
+        // Try to fetch from backend first, fallback to local
+        const stats = await analyticsTracker.fetchStatsFromBackend();
+        setAggregatedStats(stats);
+      };
+      loadStats();
+    }
+  }, [showDetailedAnalytics]);
 
   // If home view is selected, go back to landing page
   if (currentView === 'home') {
@@ -303,7 +351,7 @@ const AdventurerPage = ({ onBack, onHome }) => {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="bg-gray-900/70 border border-white/5 rounded-xl p-4 shadow-lg">
                 <div className="flex items-center justify-between mb-2">
-                  <p className="text-xs uppercase tracking-wide text-gray-400">Total Visits</p>
+                  <p className="text-xs uppercase tracking-wide text-gray-400">TOTAL VISITS</p>
                   <FaChartLine className="text-red-400 text-xl" />
                 </div>
                 <p className="text-3xl font-bold text-white">
@@ -312,7 +360,7 @@ const AdventurerPage = ({ onBack, onHome }) => {
               </div>
               <div className="bg-gray-900/70 border border-white/5 rounded-xl p-4 shadow-lg">
                 <div className="flex items-center justify-between mb-2">
-                  <p className="text-xs uppercase tracking-wide text-gray-400">Today's Visits</p>
+                  <p className="text-xs uppercase tracking-wide text-gray-400">TODAY'S VISITS</p>
                   <FaChartBar className="text-red-400 text-xl" />
                 </div>
                 <p className="text-3xl font-bold text-white">
@@ -321,7 +369,7 @@ const AdventurerPage = ({ onBack, onHome }) => {
               </div>
               <div className="bg-gray-900/70 border border-white/5 rounded-xl p-4 shadow-lg">
                 <div className="flex items-center justify-between mb-2">
-                  <p className="text-xs uppercase tracking-wide text-gray-400">Unique Visitors</p>
+                  <p className="text-xs uppercase tracking-wide text-gray-400">UNIQUE VISITORS</p>
                   <FaRocket className="text-red-400 text-xl" />
                 </div>
                 <p className="text-3xl font-bold text-white">
@@ -330,8 +378,8 @@ const AdventurerPage = ({ onBack, onHome }) => {
               </div>
             </div>
             {statsError && (
-              <div className="mt-4 bg-red-900/30 border border-red-500 text-red-300 px-4 py-3 rounded-lg text-sm flex items-start space-x-2">
-                <FaExclamationTriangle className="mt-0.5" />
+              <div className="mt-4 bg-red-900/50 border border-red-600 text-red-200 px-4 py-3 rounded-lg text-sm flex items-center space-x-2 w-full">
+                <FaExclamationTriangle className="text-red-400 flex-shrink-0" />
                 <span>{statsError}</span>
               </div>
             )}
@@ -341,22 +389,205 @@ const AdventurerPage = ({ onBack, onHome }) => {
                 <span>Last updated {lastUpdated.toLocaleTimeString()}</span>
               </div>
             )}
+            
+            {/* Detailed Analytics Toggle */}
+            <div className="mt-6 flex justify-center">
+              <button
+                onClick={() => setShowDetailedAnalytics(!showDetailedAnalytics)}
+                className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors flex items-center space-x-2"
+              >
+                <FaChartLine />
+                <span>{showDetailedAnalytics ? 'Hide' : 'Show'} Detailed Analytics</span>
+              </button>
+            </div>
           </div>
+
+          {/* Detailed Analytics Dashboard */}
+          {showDetailedAnalytics && (
+            <div className="max-w-6xl mx-auto mb-8 mt-8">
+              <div className="bg-gray-900/90 border border-white/10 rounded-xl p-6 shadow-2xl">
+                <h2 className="text-2xl font-bold text-white mb-6 flex items-center space-x-2">
+                  <FaChartLine className="text-red-400" />
+                  <span>Detailed Visitor Analytics</span>
+                </h2>
+
+                {/* Current Session Info */}
+                {currentVisitData && (
+                  <div className="mb-8">
+                    <h3 className="text-xl font-semibold text-white mb-4">Current Session</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      <div className="bg-gray-800/50 rounded-lg p-4 border border-white/5">
+                        <div className="flex items-center space-x-2 mb-2">
+                          <FaClock className="text-red-400" />
+                          <p className="text-sm text-gray-400">Time on Site</p>
+                        </div>
+                        <p className="text-2xl font-bold text-white">{timeOnSite.formatted}</p>
+                      </div>
+                      <div className="bg-gray-800/50 rounded-lg p-4 border border-white/5">
+                        <div className="flex items-center space-x-2 mb-2">
+                          <FaNetworkWired className="text-blue-400" />
+                          <p className="text-sm text-gray-400">IP Address</p>
+                        </div>
+                        <p className="text-lg font-mono text-white break-all">{currentVisitData.visitor.ip}</p>
+                      </div>
+                      <div className="bg-gray-800/50 rounded-lg p-4 border border-white/5">
+                        <div className="flex items-center space-x-2 mb-2">
+                          <FaGlobe className="text-green-400" />
+                          <p className="text-sm text-gray-400">Country</p>
+                        </div>
+                        <p className="text-xl font-bold text-white">{currentVisitData.visitor.country}</p>
+                        <p className="text-sm text-gray-400">{currentVisitData.visitor.city}, {currentVisitData.visitor.region}</p>
+                      </div>
+                      <div className="bg-gray-800/50 rounded-lg p-4 border border-white/5">
+                        <div className="flex items-center space-x-2 mb-2">
+                          <FaDesktop className="text-purple-400" />
+                          <p className="text-sm text-gray-400">Browser</p>
+                        </div>
+                        <p className="text-lg font-bold text-white">{currentVisitData.browser.browser}</p>
+                        <p className="text-xs text-gray-400">{currentVisitData.browser.os}</p>
+                      </div>
+                      <div className="bg-gray-800/50 rounded-lg p-4 border border-white/5">
+                        <div className="flex items-center space-x-2 mb-2">
+                          {currentVisitData.browser.deviceType === 'Mobile' ? (
+                            <FaMobile className="text-yellow-400" />
+                          ) : currentVisitData.browser.deviceType === 'Tablet' ? (
+                            <FaTablet className="text-yellow-400" />
+                          ) : (
+                            <FaDesktop className="text-yellow-400" />
+                          )}
+                          <p className="text-sm text-gray-400">Device</p>
+                        </div>
+                        <p className="text-lg font-bold text-white">{currentVisitData.browser.deviceType}</p>
+                        <p className="text-xs text-gray-400">{currentVisitData.browser.screenWidth}x{currentVisitData.browser.screenHeight}</p>
+                      </div>
+                      <div className="bg-gray-800/50 rounded-lg p-4 border border-white/5">
+                        <div className="flex items-center space-x-2 mb-2">
+                          <FaMapMarkerAlt className="text-orange-400" />
+                          <p className="text-sm text-gray-400">Timezone</p>
+                        </div>
+                        <p className="text-lg font-bold text-white">{currentVisitData.visitor.timezone}</p>
+                        <p className="text-xs text-gray-400">ISP: {currentVisitData.visitor.isp}</p>
+                      </div>
+                    </div>
+                    {currentVisitData.visitor.latitude && currentVisitData.visitor.longitude && (
+                      <div className="mt-4 bg-gray-800/50 rounded-lg p-4 border border-white/5">
+                        <p className="text-sm text-gray-400 mb-1">Location Coordinates</p>
+                        <p className="text-sm font-mono text-white">
+                          {currentVisitData.visitor.latitude}, {currentVisitData.visitor.longitude}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Aggregated Statistics */}
+                {aggregatedStats && aggregatedStats.totalVisits > 0 && (
+                  <div className="border-t border-white/10 pt-6">
+                    <h3 className="text-xl font-semibold text-white mb-4">Aggregated Statistics</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                      <div className="bg-gray-800/50 rounded-lg p-4 border border-white/5">
+                        <p className="text-sm text-gray-400 mb-1">Total Visits Tracked</p>
+                        <p className="text-3xl font-bold text-white">{aggregatedStats.totalVisits}</p>
+                      </div>
+                      <div className="bg-gray-800/50 rounded-lg p-4 border border-white/5">
+                        <p className="text-sm text-gray-400 mb-1">Unique Countries</p>
+                        <p className="text-3xl font-bold text-white">{aggregatedStats.uniqueCountries}</p>
+                      </div>
+                      <div className="bg-gray-800/50 rounded-lg p-4 border border-white/5">
+                        <p className="text-sm text-gray-400 mb-1">Avg. Time on Site</p>
+                        <p className="text-2xl font-bold text-white">{aggregatedStats.averageTimeFormatted}</p>
+                      </div>
+                      <div className="bg-gray-800/50 rounded-lg p-4 border border-white/5">
+                        <p className="text-sm text-gray-400 mb-1">Session ID</p>
+                        <p className="text-xs font-mono text-white break-all">{analyticsTracker.sessionId}</p>
+                      </div>
+                    </div>
+
+                    {/* Top Countries */}
+                    {aggregatedStats.topCountries.length > 0 && (
+                      <div className="mb-6">
+                        <h4 className="text-lg font-semibold text-white mb-3">Top Countries</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                          {aggregatedStats.topCountries.map((item, idx) => (
+                            <div key={idx} className="bg-gray-800/50 rounded-lg p-3 border border-white/5 flex justify-between items-center">
+                              <div className="flex items-center space-x-2">
+                                <FaGlobe className="text-blue-400" />
+                                <span className="text-white font-semibold">{item.country}</span>
+                              </div>
+                              <span className="text-red-400 font-bold">{item.count}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Top Browsers */}
+                    {aggregatedStats.topBrowsers.length > 0 && (
+                      <div className="mb-6">
+                        <h4 className="text-lg font-semibold text-white mb-3">Top Browsers</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                          {aggregatedStats.topBrowsers.map((item, idx) => (
+                            <div key={idx} className="bg-gray-800/50 rounded-lg p-3 border border-white/5 flex justify-between items-center">
+                              <div className="flex items-center space-x-2">
+                                <FaDesktop className="text-purple-400" />
+                                <span className="text-white font-semibold">{item.browser}</span>
+                              </div>
+                              <span className="text-red-400 font-bold">{item.count}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Top Devices */}
+                    {aggregatedStats.topDevices.length > 0 && (
+                      <div>
+                        <h4 className="text-lg font-semibold text-white mb-3">Device Types</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                          {aggregatedStats.topDevices.map((item, idx) => (
+                            <div key={idx} className="bg-gray-800/50 rounded-lg p-3 border border-white/5 flex justify-between items-center">
+                              <div className="flex items-center space-x-2">
+                                {item.device === 'Mobile' ? (
+                                  <FaMobile className="text-yellow-400" />
+                                ) : item.device === 'Tablet' ? (
+                                  <FaTablet className="text-yellow-400" />
+                                ) : (
+                                  <FaDesktop className="text-yellow-400" />
+                                )}
+                                <span className="text-white font-semibold">{item.device}</span>
+                              </div>
+                              <span className="text-red-400 font-bold">{item.count}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {(!aggregatedStats || aggregatedStats.totalVisits === 0) && (
+                  <div className="text-center py-8 text-gray-400">
+                    <p>No historical data available yet. Analytics will be tracked as visitors use the site.</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
           
           {/* Adventure Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-8">
             <div className="bg-gray-800 rounded-xl p-6 shadow-lg">
-              <div className="text-red-500 text-3xl mb-2">🌍</div>
+              <div className="text-blue-400 text-3xl mb-2">🌍</div>
               <h3 className="text-white font-bold text-lg mb-2">Explorations</h3>
               <p className="text-gray-300 text-sm">42 countries visited</p>
             </div>
             <div className="bg-gray-800 rounded-xl p-6 shadow-lg">
-              <div className="text-red-500 text-3xl mb-2">🏔️</div>
+              <div className="text-3xl mb-2">🏔️</div>
               <h3 className="text-white font-bold text-lg mb-2">Peaks Conquered</h3>
               <p className="text-gray-300 text-sm">15 mountains climbed</p>
             </div>
             <div className="bg-gray-800 rounded-xl p-6 shadow-lg">
-              <div className="text-red-500 text-3xl mb-2">⚡</div>
+              <div className="text-orange-400 text-3xl mb-2">⚡</div>
               <h3 className="text-white font-bold text-lg mb-2">Adventures</h3>
               <p className="text-gray-300 text-sm">127 epic experiences</p>
             </div>
@@ -364,7 +595,7 @@ const AdventurerPage = ({ onBack, onHome }) => {
           
           {/* Secret Message */}
           <div className="bg-gradient-to-r from-red-900/30 to-gray-900/30 rounded-xl p-6 max-w-2xl mx-auto border border-red-500/30">
-            <p className="text-gray-200 text-lg leading-relaxed">
+            <p className="text-white text-lg leading-relaxed">
               "The greatest adventure is the one that begins with a single step into the unknown. 
               Every line of code is a new path, every bug a hidden treasure, and every deployment 
               a leap into the digital wilderness. Welcome to the adventure of a lifetime! 🚀"
